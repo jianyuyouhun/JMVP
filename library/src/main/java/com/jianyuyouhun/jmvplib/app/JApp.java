@@ -80,7 +80,7 @@ public abstract class JApp extends Application {
      */
     public abstract void initPresenter(List<BaseJPresenterImpl> presenters);
 
-    public static <P extends BaseJPresenterImpl> JApp getInstance() {
+    public static JApp getInstance() {
         return mInstance;
     }
 

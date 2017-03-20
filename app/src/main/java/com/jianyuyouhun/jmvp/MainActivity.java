@@ -63,7 +63,6 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.onDestroy();
         setIsMainOn(false);
     }
 }

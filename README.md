@@ -1,10 +1,11 @@
-### How to ###
+# READ ME #
+### 用法 ###
 
-To get a Git project into your build:
+在你的build中引入本项目
 
-#### Step 1. Add the JitPack repository to your build file ####
+#### 第一步. 在build 中添加jitpack引用 ####
 
-Add it in your root build.gradle at the end of repositories:
+在你的根目录下的build.gradle中添加下面代码
 
 	allprojects {
 		repositories {
@@ -13,8 +14,11 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 
-Step 2. Add the dependency
+#### 第二部. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
 	        compile 'com.github.jianyuyouhun:JMVP:0.0.3'
 	}
+
+# INTRO #
+

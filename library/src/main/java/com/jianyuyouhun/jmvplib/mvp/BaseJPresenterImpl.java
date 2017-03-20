@@ -17,6 +17,7 @@ public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJVi
     public WeakReference<V> mViewRef;
     private Context context;
 
+    @Override
     public void onCreate(Context context) {
         this.context = context;
     }
@@ -47,6 +48,7 @@ public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJVi
         return context;
     }
 
+    @Override
     public void onDestroy() {
         if (mViewRef != null) {
             mViewRef.clear();

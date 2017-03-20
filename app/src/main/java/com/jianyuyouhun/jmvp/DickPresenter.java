@@ -11,7 +11,7 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  * Created by wangyu on 2017/3/17.
  */
 
-public class DickPresenter extends BaseJPresenterImpl {
+public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
 
     private Handler handler;
 
@@ -22,10 +22,14 @@ public class DickPresenter extends BaseJPresenterImpl {
 
     @Override
     public void beginPresent() {
-        final DickView view = (DickView) getJView();
-        DickModel model = (DickModel) mModel;
+        final DickView view = getJView();
+        if (view != null) {
+            test(view);
+        }
+    }
+    private void test(final DickView view) {
         view.showLoading();
-        model.doRequester(new OnResultListener<String>() {
+        mModel.doRequester(new OnResultListener<String>() {
             @Override
             public void onResult(int result, final String data) {
                 handler.postDelayed(new Runnable() {
@@ -37,5 +41,7 @@ public class DickPresenter extends BaseJPresenterImpl {
                 }, 4000);
             }
         });
+
     }
+
 }

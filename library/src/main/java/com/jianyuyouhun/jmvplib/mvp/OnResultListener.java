@@ -4,7 +4,7 @@ import android.os.Handler;
 
 /**
  * 结果回调
- * Created by wangyu on 2017/3/17.
+ * Created by jianyuyouhun on 2017/3/17.
  */
 
 public interface OnResultListener<Info> {

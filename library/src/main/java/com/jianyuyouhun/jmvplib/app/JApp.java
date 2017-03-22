@@ -64,7 +64,6 @@ public abstract class JApp extends Application {
         initPresenter(presenters);
         for (BaseJPresenterImpl presenter : presenters) {
             long time = System.currentTimeMillis();
-            presenter.onCreate(this);
             presenter.onPresenterCreate(this);
             Class<? extends BaseJPresenterImpl> basePresenterClass = presenter.getClass();
             String name = basePresenterClass.getName();

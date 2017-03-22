@@ -46,6 +46,7 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
             finish();
             return;
         }
+        mPresenter.onCreate(this);
     }
 
     private void initDialog() {

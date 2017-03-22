@@ -1,5 +1,6 @@
 package com.jianyuyouhun.jmvp;
 
+import android.content.Context;
 import android.os.Handler;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
@@ -14,6 +15,11 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
 
     private Handler handler;
+
+    @Override
+    public void onCreate(Context context) {
+        super.onCreate(context);
+    }
 
     @Override
     public void onPresenterCreate(JApp app) {
@@ -41,7 +47,6 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
                 }, 4000);
             }
         });
-
     }
 
 }

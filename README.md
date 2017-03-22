@@ -22,3 +22,4 @@
 
 # INTRO #
 
+   [Android设计模式浅入-（二）](https://jianyuyouhun.com/index.php/archives/75/)

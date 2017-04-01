@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.util.CommonUtils;
 import com.jianyuyouhun.jmvplib.util.Logger;
@@ -51,11 +52,7 @@ public abstract class JApp extends Application {
         }
         mInstance = this;
         String pidName = CommonUtils.getUIPName(this);
-        if (pidName.equals(getPackageName())) {
-            mIsMainProcess = true;
-        } else {
-            mIsMainProcess = false;
-        }
+        mIsMainProcess = pidName.equals(getPackageName());
         initJApp();
     }
 
@@ -83,6 +80,7 @@ public abstract class JApp extends Application {
         return mInstance;
     }
 
+    @SuppressWarnings("unchecked")
     public <P extends BaseJPresenterImpl> P getJPresenter(Class<P> presenter) {
         return (P) presentersMap.get(presenter.getName());
     }

@@ -59,6 +59,7 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
     }
 
     public void showToast(String msg) {
+        if (mIsDestroy) return;
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -97,18 +98,20 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mIsDestroy = true;
+        super.onDestroy();
         mPresenter.onDestroy();
     }
 
     public void showProgressDialog() {
+        if (mIsDestroy) return;
         if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }
 
     public void dismissProgressDialog() {
+        if (mIsDestroy) return;
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }

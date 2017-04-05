@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
@@ -58,6 +60,12 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
             return;
         }
         mPresenter.onCreate(this);
+    }
+
+    @Deprecated
+    @Override
+    public View findViewById(@IdRes int id) {
+        return super.findViewById(id);
     }
 
     private void initDialog() {

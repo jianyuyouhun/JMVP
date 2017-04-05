@@ -1,11 +1,16 @@
 package com.jianyuyouhun.jmvp;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.util.injecter.FindViewById;
 
 public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
+
+    @FindViewById(R.id.textView)
+    private TextView mTextView;
 
     private DickView view = new DickView() {
         @Override
@@ -28,6 +33,7 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
 
         @Override
         public void onDataSuccess(String s) {
+            mTextView.setText(s);
             showToast(s);
         }
     };

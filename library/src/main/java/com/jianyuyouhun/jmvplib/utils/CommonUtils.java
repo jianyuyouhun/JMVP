@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.util;
+package com.jianyuyouhun.jmvplib.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;

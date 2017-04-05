@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.util.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
 
 public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
 

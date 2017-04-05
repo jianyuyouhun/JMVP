@@ -5,10 +5,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
-import com.jianyuyouhun.jmvplib.util.CommonUtils;
-import com.jianyuyouhun.jmvplib.util.Logger;
+import com.jianyuyouhun.jmvplib.utils.CommonUtils;
+import com.jianyuyouhun.jmvplib.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
-import com.jianyuyouhun.jmvplib.util.Logger;
-import com.jianyuyouhun.jmvplib.util.injecter.ViewInjectUtils;
+import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
         mIsDestroy = false;
         mIsFinish = false;
         setContentView(getLayoutResId());
-        ViewInjectUtils.inject(this);
+        ViewInjectUtil.inject(this);
         initDialog();
         mPresenter = getPresenter();
         if (mPresenter == null) {

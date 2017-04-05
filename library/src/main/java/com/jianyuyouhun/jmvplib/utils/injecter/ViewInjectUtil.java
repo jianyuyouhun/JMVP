@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.util.injecter;
+package com.jianyuyouhun.jmvplib.utils.injecter;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
  * Created by wangyu on 2017/4/5.
  */
 
-public class ViewInjectUtils {
+public class ViewInjectUtil {
     /**
      * 注入View和OnClickListener，通常在Fragment和Adapter中使用
      *

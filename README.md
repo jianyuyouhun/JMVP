@@ -17,8 +17,20 @@
 #### 第二部. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.0.4'
+	        compile 'com.github.jianyuyouhun:jmvp:0.0.5'
 	}
+
+### 版本变化 ###
+
+#### v 0.0.1 ####
+
+　　第一次发布，实现基本的mvp思路
+
+#### v 0.0.5 ####
+
+　　增加注解绑定，使用方法：
+
+	ViewInjectUtil.inject(activity);
 
 # INTRO #
 

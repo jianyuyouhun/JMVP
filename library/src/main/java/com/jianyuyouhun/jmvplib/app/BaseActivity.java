@@ -45,7 +45,6 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
         mIsFinish = false;
         setContentView(getLayoutResId());
         ViewInjectUtil.inject(this);
-        initDialog();
         mPresenter = getPresenter();
         if (mPresenter == null) {
             Logger.e(TAG, "请在你的App中初始化对应的Presenter");
@@ -66,11 +65,6 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
     @Override
     public View findViewById(@IdRes int id) {
         return super.findViewById(id);
-    }
-
-    private void initDialog() {
-        mProgressDialog = new ProgressDialog(getContext());
-        mProgressDialog.setCancelable(false);
     }
 
     public void showToast(@StringRes int msgId) {
@@ -124,6 +118,7 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
 
     public void showProgressDialog() {
         if (mIsDestroy) return;
+        initDialog();
         if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
@@ -131,8 +126,16 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
 
     public void dismissProgressDialog() {
         if (mIsDestroy) return;
+        if (mProgressDialog == null) return;
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
+        }
+    }
+
+    private void initDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getContext());
+            mProgressDialog.setCancelable(false);
         }
     }
 

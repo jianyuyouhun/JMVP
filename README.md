@@ -32,6 +32,18 @@
 
 	ViewInjectUtil.inject(activity);
 
+#### v 0.0.6 ####
+
+　　增加异常捕获功能，使用方法：
+
+　　在manifest中添加
+
+        <activity
+            android:name="com.jianyuyouhun.jmvplib.app.ExceptionActivity"
+            android:screenOrientation="portrait" />
+
+　　同时确保japp处于调试模式BuildConfig.IS\_DEBUG = true;
+
 # INTRO #
 
    [Android设计模式浅入-（二）](https://jianyuyouhun.com/index.php/archives/75/)

@@ -53,6 +53,15 @@ public abstract class JApp extends Application {
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initJApp();
+        initDebug();
+    }
+
+    public void initDebug() {
+        if (isDebug) {
+            Thread.UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
+            ExceptionCaughtAdapter exceptionCaughtAdapter = new ExceptionCaughtAdapter(handler);
+            Thread.setDefaultUncaughtExceptionHandler(exceptionCaughtAdapter);
+        }
     }
 
     private void initJApp() {

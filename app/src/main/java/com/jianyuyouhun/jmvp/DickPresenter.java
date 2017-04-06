@@ -30,7 +30,8 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
     public void beginPresent() {
         final DickView view = getJView();
         if (view != null) {
-            test(view);
+//            test(view);
+            testExceptionHandle();
         }
     }
     private void test(final DickView view) {
@@ -47,6 +48,15 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
                 }, 4000);
             }
         });
+    }
+
+    private void testExceptionHandle() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                throw new RuntimeException("这是一个异常");
+            }
+        }, 2000);
     }
 
 }

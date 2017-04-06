@@ -28,8 +28,8 @@ import java.util.List;
  */
 public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJModel> extends AppCompatActivity {
     public static final String TAG = "JApp";
-    public P mPresenter;
-    public M mModel;
+    protected P mPresenter;
+    protected M mModel;
 
     private boolean isMainActivityOn = false;
     private ProgressDialog mProgressDialog;

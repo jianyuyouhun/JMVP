@@ -12,10 +12,10 @@ import java.lang.ref.WeakReference;
  */
 
 public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJView> implements BaseJPresenter{
-    public M mModel;
-    public V mView;
-    public WeakReference<V> mViewRef;
-    private Context context;
+    protected M mModel;
+    protected V mView;
+    protected WeakReference<V> mViewRef;
+    protected Context context;
 
     @Override
     public void onCreate(Context context) {
@@ -32,7 +32,7 @@ public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJVi
         this.mModel = mModel;
     }
 
-    public V getJView() {
+    protected V getJView() {
         if (isAttach()) {
             return mViewRef.get();
         } else {
@@ -40,7 +40,7 @@ public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJVi
         }
     }
 
-    public boolean isAttach() {
+    protected boolean isAttach() {
         return mModel != null && mViewRef.get() != null;
     }
 

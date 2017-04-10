@@ -27,7 +27,6 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
 
         @Override
         public void showError(String error) {
-            dismissProgressDialog();
             showToast(error);
         }
 

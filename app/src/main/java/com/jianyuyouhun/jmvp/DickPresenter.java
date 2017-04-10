@@ -30,10 +30,11 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
     public void beginPresent() {
         final DickView view = getJView();
         if (view != null) {
-//            test(view);
-            testExceptionHandle();
+            test(view);
+//            testExceptionHandle();
         }
     }
+
     private void test(final DickView view) {
         view.showLoading();
         mModel.doRequester(new OnResultListener<String>() {
@@ -42,6 +43,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        view.hideLoading();
                         view.showError(data);
                         view.onDataSuccess("成功啦！");
                     }

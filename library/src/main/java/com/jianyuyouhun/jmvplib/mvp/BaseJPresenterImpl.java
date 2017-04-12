@@ -13,9 +13,9 @@ import java.lang.ref.WeakReference;
 
 public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJView> implements BaseJPresenter{
     protected M mModel;
-    protected V mView;
-    protected WeakReference<V> mViewRef;
-    protected Context context;
+    private V mView;
+    private WeakReference<V> mViewRef;
+    private Context context;
 
     @Override
     public void onCreate(Context context) {

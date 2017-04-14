@@ -79,7 +79,7 @@ public class ViewInjectUtil {
                     continue;
                 } else {
                     int id = findViewById.value();
-                    View view = viewFinder.findViewById(id);
+                    View view = viewFinder.bingView(id);
                     if (view == null) {
                         // 根据注解的ViewID，无法查找到View， 检查控件在对应的XML中的ID是否存在
                         String msg = field.getName() + " 根据ID不能查找到对应的View，请检查XML资源文件中的id属性是否等于注解的ID";

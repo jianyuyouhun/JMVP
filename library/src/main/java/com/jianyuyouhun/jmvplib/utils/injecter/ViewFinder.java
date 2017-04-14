@@ -22,7 +22,7 @@ public abstract class ViewFinder {
         return new DialogViewFinder(dialog);
     }
 
-    public abstract View findViewById(int id);
+    public abstract View bingView(int id);
 
     public static class ActivityViewFinder extends ViewFinder {
         private Activity activity;
@@ -33,7 +33,7 @@ public abstract class ViewFinder {
         }
 
         @Override
-        public View findViewById(int id) {
+        public View bingView(int id) {
             return activity.findViewById(id);
         }
     }
@@ -47,7 +47,7 @@ public abstract class ViewFinder {
         }
 
         @Override
-        public View findViewById(int id) {
+        public View bingView(int id) {
             return view.findViewById(id);
         }
     }
@@ -61,7 +61,7 @@ public abstract class ViewFinder {
         }
 
         @Override
-        public View findViewById(int id) {
+        public View bingView(int id) {
             return dialog.findViewById(id);
         }
     }

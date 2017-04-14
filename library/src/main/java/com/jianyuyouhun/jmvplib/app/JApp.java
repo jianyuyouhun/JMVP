@@ -29,6 +29,12 @@ public abstract class JApp extends Application {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            for (String s : presentersMap.keySet()) {
+                BaseJPresenterImpl presenter = presentersMap.get(s);
+                if (presenter.isOpenHandleMsg() && !presenter.isDestroy()) {
+                    presenter.handleSuperMsg(msg);
+                }
+            }
         }
     };
 

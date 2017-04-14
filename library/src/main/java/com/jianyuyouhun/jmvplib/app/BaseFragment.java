@@ -1,13 +1,16 @@
 package com.jianyuyouhun.jmvplib.app;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 /**
+ * baseFragment类
  * Created by wangyu on 2017/4/5.
  */
 
@@ -15,7 +18,6 @@ public class BaseFragment extends Fragment {
     private Handler mSuperHandler;
     private boolean isDestroy = false;
     private long mInsertDt = System.currentTimeMillis();
-    private boolean mIsSingleReport = false;
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -67,5 +69,13 @@ public class BaseFragment extends Fragment {
             mProgressDialog = new ProgressDialog(getBaseActivity());
             mProgressDialog.setCancelable(false);
         }
+    }
+
+    public Intent getStartActivityIntent(Class<? extends Activity> targetCls) {
+        Intent intent = new Intent(getContext(), targetCls);
+        if (!(getContext() instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        return intent;
     }
 }

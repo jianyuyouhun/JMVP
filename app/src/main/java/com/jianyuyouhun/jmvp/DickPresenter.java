@@ -2,10 +2,12 @@ package com.jianyuyouhun.jmvp;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
+import com.jianyuyouhun.jmvplib.utils.Logger;
 
 /**
  * 测试presenter
@@ -19,6 +21,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
     @Override
     public void onCreate(Context context) {
         super.onCreate(context);
+        openHandleMsg();
     }
 
     @Override
@@ -27,11 +30,22 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
     }
 
     @Override
+    public void handleSuperMsg(Message msg) {
+        super.handleSuperMsg(msg);
+        switch (msg.what) {
+            case 1:
+                Logger.i(TAG, "收到了全局消息");
+                break;
+        }
+    }
+
+    @Override
     public void beginPresent() {
         final DickView view = getJView();
         if (view != null) {
             test(view);
-//            testExceptionHandle();
+        } else {
+            testExceptionHandle();
         }
     }
 
@@ -44,8 +58,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
                     @Override
                     public void run() {
                         view.hideLoading();
-                        view.showError(data);
-                        view.onDataSuccess("成功啦！");
+                        view.onDataSuccess(data);
                     }
                 }, 4000);
             }
@@ -53,12 +66,12 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
     }
 
     private void testExceptionHandle() {
-        handler.postDelayed(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
-                throw new RuntimeException("这是一个异常");
+                throw new RuntimeException("JView 不能为空");
             }
-        }, 2000);
+        });
     }
 
 }

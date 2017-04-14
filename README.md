@@ -44,6 +44,12 @@
 
 　　同时确保japp处于调试模式BuildConfig.IS\_DEBUG = true;
 
+#### v 0.0.7 ####
+
+　　增加全局的superHandler的使用控制
+
+　　在presenter中实现handleSuperMsg(Message msg)方法。在oncreate中调用openHandleMsg();
+
 # INTRO #
 
    [Android设计模式浅入-（二）](https://jianyuyouhun.com/index.php/archives/75/)

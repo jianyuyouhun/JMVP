@@ -10,10 +10,6 @@ import android.os.Message;
 
 public interface BaseJPresenter {
     void onCreate(Context context);
-    void handleSuperMsg(Message msg);
     Context getContext();
-    boolean isOpenHandleMsg();
-    void openHandleMsg();
-    void closeHandleMsg();
     void onDestroy();
 }

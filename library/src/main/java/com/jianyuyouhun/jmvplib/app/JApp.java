@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
@@ -29,14 +30,35 @@ public abstract class JApp extends Application {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            for (String s : presentersMap.keySet()) {
-                BaseJPresenterImpl presenter = presentersMap.get(s);
-                if (presenter.isOpenHandleMsg() && !presenter.isDestroy()) {
-                    presenter.handleSuperMsg(msg);
+            for (String s : modelsMap.keySet()) {
+                BaseJModelImpl model = modelsMap.get(s);
+                if (model.isOpenHandleMsg()) {
+                    model.handleSuperMsg(msg);
                 }
+            }
+            for (OnSuperMsgHandlerListener listener : handlerListeners) {
+                listener.onHandleSuperMsg(msg);
             }
         }
     };
+
+    private List<OnSuperMsgHandlerListener> handlerListeners = new ArrayList<>();
+
+    /**
+     * 增加全局消息监听
+     * @param listener listener
+     */
+    public void addOnSuperMsgHandlerListener(OnSuperMsgHandlerListener listener) {
+        handlerListeners.add(listener);
+    }
+
+    /**
+     * 移除全局消息监听
+     * @param listener listener
+     */
+    public void removeOnSuperMsgHandlerListener(OnSuperMsgHandlerListener listener) {
+        handlerListeners.remove(listener);
+    }
 
     public Handler getSuperHandler() {
         return mSuperHandler;
@@ -46,7 +68,7 @@ public abstract class JApp extends Application {
      */
     private boolean mIsMainProcess = false;
 
-    private HashMap<String, BaseJPresenterImpl> presentersMap = new HashMap<>();
+    private HashMap<String, BaseJModelImpl> modelsMap = new HashMap<>();
 
     @Override
     public void onCreate() {
@@ -71,32 +93,32 @@ public abstract class JApp extends Application {
     }
 
     private void initJApp() {
-        List<BaseJPresenterImpl> presenters = new ArrayList<>();
-        initPresenter(presenters);
-        for (BaseJPresenterImpl presenter : presenters) {
+        List<BaseJModelImpl> models = new ArrayList<>();
+        initModels(models);
+        for (BaseJModelImpl model : models) {
             long time = System.currentTimeMillis();
-            presenter.onPresenterCreate(this);
-            Class<? extends BaseJPresenterImpl> basePresenterClass = presenter.getClass();
-            String name = basePresenterClass.getName();
-            presentersMap.put(name, presenter);
+            model.onModelCreate(this);
+            Class<? extends BaseJModelImpl> baseModelClass = model.getClass();
+            String name = baseModelClass.getName();
+            modelsMap.put(name, model);
             // 打印初始化耗时
             long spendTime = System.currentTimeMillis() - time;
-            Logger.e(TAG, basePresenterClass.getSimpleName() + "启动耗时(毫秒)：" + spendTime);
+            Logger.e(TAG, baseModelClass.getSimpleName() + "启动耗时(毫秒)：" + spendTime);
+        }
+        for (BaseJModelImpl model : models) {
+            model.onAllModelCreate();
         }
     }
 
-    /**
-     * 初始化presenter
-     */
-    public abstract void initPresenter(List<BaseJPresenterImpl> presenters);
+    protected abstract void initModels(List<BaseJModelImpl> models);
 
     public static JApp getInstance() {
         return mInstance;
     }
 
     @SuppressWarnings("unchecked")
-    public <P extends BaseJPresenterImpl> P getJPresenter(Class<P> presenter) {
-        return (P) presentersMap.get(presenter.getName());
+    public <M extends BaseJModelImpl> M getJModel(Class<M> model) {
+        return (M) modelsMap.get(model.getName());
     }
 
     public static boolean isDebug() {

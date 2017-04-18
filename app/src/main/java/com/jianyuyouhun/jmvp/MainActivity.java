@@ -51,12 +51,12 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
 
     @Override
     public DickPresenter getPresenter() {
-        return JApp.getInstance().getJPresenter(DickPresenter.class);
+        return new DickPresenter();
     }
 
     @Override
     protected DickModel initModel() {
-        return new DickModel();
+        return JApp.getInstance().getJModel(DickModel.class);
     }
 
     @Override

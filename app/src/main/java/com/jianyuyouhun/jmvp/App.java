@@ -1,6 +1,7 @@
 package com.jianyuyouhun.jmvp;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class App extends JApp {
     }
 
     @Override
-    public void initPresenter(List<BaseJPresenterImpl> presenters) {
-        presenters.add(new DickPresenter());
+    protected void initModels(List<BaseJModelImpl> models) {
+        models.add(new DickModel());
     }
 }

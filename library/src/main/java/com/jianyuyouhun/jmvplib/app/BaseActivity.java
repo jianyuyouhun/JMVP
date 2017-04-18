@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
@@ -26,7 +27,7 @@ import java.util.List;
  * BaseActivity类
  * Created by jianyuyouhun on 2017/3/17.
  */
-public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJModel> extends AppCompatActivity {
+public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJModelImpl> extends AppCompatActivity {
     public static final String TAG = "JApp";
     protected P mPresenter;
     protected M mModel;
@@ -47,7 +48,7 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
         ViewInjectUtil.inject(this);
         mPresenter = getPresenter();
         if (mPresenter == null) {
-            Logger.e(TAG, "请在你的App中初始化对应的Presenter");
+            Logger.e(TAG, "请初始化对应的Presenter");
             finish();
             return;
         }

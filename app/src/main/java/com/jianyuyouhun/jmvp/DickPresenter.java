@@ -3,11 +3,12 @@ package com.jianyuyouhun.jmvp;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.app.OnSuperMsgHandlerListener;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
-import com.jianyuyouhun.jmvplib.utils.Logger;
 
 /**
  * 测试presenter
@@ -18,25 +19,18 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
 
     private Handler handler;
 
+    private OnSuperMsgHandlerListener handlerListener = new OnSuperMsgHandlerListener() {
+        @Override
+        public void onHandleSuperMsg(Message msg) {
+            Log.i("presenter", "消息" + msg.what);
+        }
+    };
+
     @Override
     public void onCreate(Context context) {
         super.onCreate(context);
-        openHandleMsg();
-    }
-
-    @Override
-    public void onPresenterCreate(JApp app) {
-        handler = app.getSuperHandler();
-    }
-
-    @Override
-    public void handleSuperMsg(Message msg) {
-        super.handleSuperMsg(msg);
-        switch (msg.what) {
-            case 1:
-                Logger.i(TAG, "收到了全局消息");
-                break;
-        }
+        handler = JApp.getInstance().getSuperHandler();
+        JApp.getInstance().addOnSuperMsgHandlerListener(handlerListener);
     }
 
     @Override
@@ -74,4 +68,9 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        JApp.getInstance().removeOnSuperMsgHandlerListener(handlerListener);
+    }
 }

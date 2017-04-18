@@ -17,7 +17,7 @@
 #### 第二部. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.0.6'
+	        compile 'com.github.jianyuyouhun:jmvp:0.1.0'
 	}
 
 ### 版本变化 ###
@@ -50,6 +50,12 @@
 
 　　在presenter中实现handleSuperMsg(Message msg)方法。在oncreate中调用openHandleMsg();
 
+#### v 0.1.0 ####
+
+1. presenter不再是单例，改为model单例。
+2. 全局消息监听使用方法修改，presenter的原用法移到model，新用法则见[Android 设计模式浅入 - MVP（三）](https://jianyuyouhun.com/index.php/archives/79/)
+3. model可以不是单例，具体使用见上链接。
+
 # INTRO #
 
-   [Android设计模式浅入-（二）](https://jianyuyouhun.com/index.php/archives/75/)
+   [Android设计模式浅入-MVP（二）](https://jianyuyouhun.com/index.php/archives/75/)

@@ -1,12 +1,11 @@
 package com.jianyuyouhun.jmvp;
 
 import android.os.Message;
-import android.util.Log;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
+import com.jianyuyouhun.jmvplib.utils.Logger;
 
 /**
  * 测试model
@@ -24,7 +23,7 @@ public class DickModel extends BaseJModelImpl {
     @Override
     public void handleSuperMsg(Message msg) {
         super.handleSuperMsg(msg);
-        Log.i("model", "消息" + msg.what);
+        Logger.i("model", "消息" + msg.what);
     }
 
     public void doRequester(OnResultListener<String> listener) {

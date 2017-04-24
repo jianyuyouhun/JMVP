@@ -3,12 +3,12 @@ package com.jianyuyouhun.jmvp;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.app.OnSuperMsgHandlerListener;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
+import com.jianyuyouhun.jmvplib.utils.Logger;
 
 /**
  * 测试presenter
@@ -22,7 +22,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
     private OnSuperMsgHandlerListener handlerListener = new OnSuperMsgHandlerListener() {
         @Override
         public void onHandleSuperMsg(Message msg) {
-            Log.i("presenter", "消息" + msg.what);
+            Logger.i("presenter", "消息" + msg.what);
         }
     };
 

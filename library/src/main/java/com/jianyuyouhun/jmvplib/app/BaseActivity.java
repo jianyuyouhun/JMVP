@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
@@ -77,10 +78,11 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    public abstract int getLayoutResId();
-    public abstract P getPresenter();
+    @LayoutRes
+    protected abstract int getLayoutResId();
+    protected abstract P getPresenter();
     protected abstract M initModel();
-    public abstract boolean bindModelAndView();
+    protected abstract boolean bindModelAndView();
 
     public boolean isMainActivityOn() {
         return isMainActivityOn;

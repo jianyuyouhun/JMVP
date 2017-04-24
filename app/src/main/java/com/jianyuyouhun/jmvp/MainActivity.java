@@ -61,12 +61,12 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
     }
 
     @Override
-    public int getLayoutResId() {
+    protected int getLayoutResId() {
         return R.layout.activity_main;
     }
 
     @Override
-    public DickPresenter getPresenter() {
+    protected DickPresenter getPresenter() {
         return new DickPresenter();
     }
 
@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
     }
 
     @Override
-    public boolean bindModelAndView() {
+    protected boolean bindModelAndView() {
         mPresenter.onBindModelView(mModel, view);
         return true;
     }

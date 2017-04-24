@@ -1,16 +1,26 @@
 package com.jianyuyouhun.jmvp;
 
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jianyuyouhun.jmvp.adapter.DemoListAdapter;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
 
     @FindViewById(R.id.textView)
     private TextView mTextView;
+
+    @FindViewById(R.id.listView)
+    private ListView mListView;
+
+    private DemoListAdapter adapter;
 
     private DickView view = new DickView() {
         @Override
@@ -33,7 +43,7 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
         @Override
         public void onDataSuccess(String s) {
             mTextView.setText(s);
-            showToast(s);
+            initList(s);
         }
     };
 
@@ -41,7 +51,13 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setIsMainOn(true);
+        initView();
         mPresenter.beginPresent();
+    }
+
+    private void initView() {
+        adapter = new DemoListAdapter(getContext());
+        mListView.setAdapter(adapter);
     }
 
     @Override
@@ -63,6 +79,14 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
     public boolean bindModelAndView() {
         mPresenter.onBindModelView(mModel, view);
         return true;
+    }
+
+    private void initList(String s) {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            list.add(String.valueOf(s.charAt(i)));
+        }
+        adapter.setData(list);
     }
 
     @Override

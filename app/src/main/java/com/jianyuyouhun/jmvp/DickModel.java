@@ -27,7 +27,7 @@ public class DickModel extends BaseJModelImpl {
     }
 
     public void doRequester(OnResultListener<String> listener) {
-        listener.onResult(OnResultListener.RESULT_SUCCESS, "aaaa");
+        listener.onResult(OnResultListener.RESULT_SUCCESS, "success");
         getSuperHandler().sendEmptyMessageDelayed(1, 1000);
     }
 }

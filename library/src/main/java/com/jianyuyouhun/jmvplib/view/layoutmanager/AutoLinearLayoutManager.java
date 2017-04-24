@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.layoutmanager;
+package com.jianyuyouhun.jmvplib.view.layoutmanager;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

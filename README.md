@@ -56,6 +56,14 @@
 2. 全局消息监听使用方法修改，presenter的原用法移到model，新用法则见[Android 设计模式浅入 - MVP（三）](https://jianyuyouhun.com/index.php/archives/79/)
 3. model可以不是单例，具体使用见上链接。
 
+#### v 0.1.1 ####
+
+　　增加两个封装好的baseAdapter。其中simpleBaseAdapter模仿了recyclerview并且集成了注解绑定ViewInjectUtil
+
+　　增加两个layoutManager，用于滑动控件嵌套recyclerview。
+
+　　增加ScrollGridView，用于滑动控件嵌套gridView。
+
 # INTRO #
 
    [Android设计模式浅入-MVP（二）](https://jianyuyouhun.com/index.php/archives/75/)

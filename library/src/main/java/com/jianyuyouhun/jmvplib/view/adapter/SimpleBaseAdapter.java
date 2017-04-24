@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.adapter;
+package com.jianyuyouhun.jmvplib.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

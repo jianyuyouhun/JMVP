@@ -12,7 +12,7 @@ import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> {
+public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> implements DickView {
 
     @FindViewById(R.id.textView)
     private TextView mTextView;
@@ -21,32 +21,6 @@ public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> {
     private ListView mListView;
 
     private DemoListAdapter adapter;
-
-    private DickView view = new DickView() {
-        @Override
-        public void showLoading() {
-            showProgressDialog();
-            showToast("showLoading");
-        }
-
-        @Override
-        public void hideLoading() {
-            dismissProgressDialog();
-            showToast("hideLoading");
-        }
-
-        @Override
-        public void showError(String error) {
-            showToast(error);
-            logE(error);
-        }
-
-        @Override
-        public void onDataSuccess(String s) {
-            mTextView.setText(s);
-            initList(s);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +52,17 @@ public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> {
 
     @Override
     protected boolean bindModelAndView() {
-        mPresenter.onBindModelView(mModel, view);
+        mPresenter.onBindModelView(mModel, this);
         return true;
     }
 
     private void initList(String s) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
-            list.add(String.valueOf(s.charAt(i)));
+            String str = String.valueOf(s.charAt(i));
+            if (!str.equals(" ")) {
+                list.add(String.valueOf(s.charAt(i)));
+            }
         }
         adapter.setData(list);
     }
@@ -94,5 +71,29 @@ public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> {
     protected void onDestroy() {
         super.onDestroy();
         setIsMainOn(false);
+    }
+
+    @Override
+    public void showLoading() {
+        showProgressDialog();
+        showToast("showLoading");
+    }
+
+    @Override
+    public void hideLoading() {
+        dismissProgressDialog();
+        showToast("hideLoading");
+    }
+
+    @Override
+    public void showError(String error) {
+        showToast(error);
+        logE(error);
+    }
+
+    @Override
+    public void onDataSuccess(String s) {
+        mTextView.setText(s);
+        initList(s);
     }
 }

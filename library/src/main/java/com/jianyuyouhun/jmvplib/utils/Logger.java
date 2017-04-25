@@ -17,17 +17,17 @@ public class Logger {
     }
     public static void i(String tag, String msg) {
         if (JApp.isDebug()) {
-            Log.e(tag, msg);
+            Log.i(tag, msg);
         }
     }
     public static void d(String tag, String msg) {
         if (JApp.isDebug()) {
-            Log.e(tag, msg);
+            Log.d(tag, msg);
         }
     }
     public static void w(String tag, String msg) {
         if (JApp.isDebug()) {
-            Log.e(tag, msg);
+            Log.w(tag, msg);
         }
     }
 }

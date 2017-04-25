@@ -6,7 +6,8 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
+import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
@@ -94,6 +95,7 @@ public abstract class JApp extends Application {
 
     private void initJApp() {
         List<BaseJModelImpl> models = new ArrayList<>();
+        initCommonModels(models);
         initModels(models);
         for (BaseJModelImpl model : models) {
             long time = System.currentTimeMillis();
@@ -110,6 +112,19 @@ public abstract class JApp extends Application {
         }
     }
 
+    /**
+     * 初始化通用model
+     * @param models models
+     */
+    public void initCommonModels(List<BaseJModelImpl> models) {
+        models.add(new CacheModel());               // 缓存model
+        models.add(new TimeCountDownModel());       // 倒计时model
+    }
+
+    /**
+     * 初始化功能model
+     * @param models models
+     */
     protected abstract void initModels(List<BaseJModelImpl> models);
 
     public static JApp getInstance() {

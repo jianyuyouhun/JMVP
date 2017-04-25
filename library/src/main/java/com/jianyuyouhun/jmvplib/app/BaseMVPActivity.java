@@ -11,7 +11,6 @@ import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
  * Created by jianyuyouhun on 2017/3/17.
  */
 public abstract class BaseMVPActivity<P extends BaseJPresenterImpl, M extends BaseJModelImpl> extends BaseActivity {
-    public static final String TAG = "BaseMVPActivity";
 
     protected P mPresenter;
     protected M mModel;

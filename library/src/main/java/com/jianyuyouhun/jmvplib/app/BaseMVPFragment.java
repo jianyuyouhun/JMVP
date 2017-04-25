@@ -12,7 +12,7 @@ import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
  */
 
 public abstract class BaseMVPFragment<P extends BaseJPresenterImpl, M extends BaseJModelImpl> extends BaseFragment {
-    public static final String TAG = "BaseMVPFragment";
+
     protected P mPresenter;
     protected M mModel;
 

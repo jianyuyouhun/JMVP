@@ -50,8 +50,15 @@ public class CacheModel extends BaseJModelImpl {
      * 设置用户id
      * @param userId    userId
      */
-    public void setUserId(String userId) {
+    public void onUserLogin(String userId) {
         this.uId = userId;
+    }
+
+    /**
+     * 用户登出
+     */
+    public void onUserLogout() {
+        this.uId = "";
     }
 
     /**

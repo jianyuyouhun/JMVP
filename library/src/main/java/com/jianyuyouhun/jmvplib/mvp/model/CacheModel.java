@@ -7,7 +7,14 @@ import android.text.TextUtils;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.utils.json.JsonUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,6 +74,82 @@ public class CacheModel extends BaseJModelImpl {
             key = key + "_" + guestId;
         }
         return key;
+    }
+
+    /**
+     * 缓存实体
+     * @param key       key
+     * @param object    object
+     */
+    public void putObject(String key, Object object) {
+        JSONObject jsonObject = JsonUtil.toJSONObject(object);
+        putString(key, jsonObject.toString());
+    }
+
+    /**
+     * 取出缓存实体
+     * @param key       key
+     * @param cls       cls类型
+     * @param <T>       泛型
+     * @return  返回实体
+     */
+    public <T> T getObject(String key, Class<T> cls) {
+        String jsonStr = getString(key, "");
+        if ("".equals(jsonStr)) {
+            return null;
+        }
+        T t;
+        try {
+            t = JsonUtil.toObject(new JSONObject(jsonStr), cls);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            t = null;
+        }
+        return t;
+    }
+
+    /**
+     * 缓存实体列表
+     * @param key       key
+     * @param list      list
+     * @param <T>       泛型
+     */
+    public <T> void putList(String key, List<T> list) {
+        if (list == null) {
+            return;
+        }
+        JSONArray jsonArray = new JSONArray();
+        for (T t : list) {
+            JSONObject jsonObject = JsonUtil.toJSONObject(t);
+            if (jsonObject != null) {
+                jsonArray.put(jsonObject);
+            }
+        }
+        putString(key, jsonArray.toString());
+    }
+
+    /**
+     * 取出缓存实体列表
+     * @param key       key
+     * @param cls       实体类
+     * @param <T>       泛型
+     * @return  list
+     */
+    @NonNull
+    public <T> List<T> getList(String key, Class<T> cls) {
+        List<T> list = new ArrayList<>();
+        String jsonStr = getString(key, "");
+        if ("".equals(jsonStr)) {
+            return list;
+        }
+
+        try {
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            list = JsonUtil.toList(jsonArray, cls);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     /**

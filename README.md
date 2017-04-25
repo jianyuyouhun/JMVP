@@ -64,6 +64,12 @@
 
 　　增加ScrollGridView，用于滑动控件嵌套gridView。
 
+#### v 0.1.2 ####
+
+　　修复了Logger的日志打印bug，之前只会打印为error类型。
+
+　　提供非mvp模式的BaseActivity和BaseFragment。简单逻辑何必增加代码量。
+
 # INTRO #
 
    [Android设计模式浅入-MVP（二）](https://jianyuyouhun.com/index.php/archives/75/)

@@ -54,7 +54,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
                         view.hideLoading();
                         view.onDataSuccess(data);
                     }
-                }, 4000);
+                }, 1000);
             }
         });
     }

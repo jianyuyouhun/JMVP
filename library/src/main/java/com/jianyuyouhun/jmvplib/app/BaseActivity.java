@@ -16,23 +16,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
 
 import java.util.List;
 
 /**
- * BaseActivity类
- * Created by jianyuyouhun on 2017/3/17.
+ * Activity基类
+ * Created by wangyu on 2017/4/25.
  */
-public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJModelImpl> extends AppCompatActivity {
-    public static final String TAG = "JApp";
-    protected P mPresenter;
-    protected M mModel;
 
+public abstract class BaseActivity extends AppCompatActivity {
     private boolean isMainActivityOn = false;
     private ProgressDialog mProgressDialog;
     private boolean mIsDestroy;
@@ -47,21 +41,10 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
         mIsFinish = false;
         setContentView(getLayoutResId());
         ViewInjectUtil.inject(this);
-        mPresenter = getPresenter();
-        if (mPresenter == null) {
-            Logger.e(TAG, "请初始化对应的Presenter");
-            finish();
-            return;
-        }
-        mModel = initModel();
-        boolean isPresenterBindFinish = bindModelAndView();
-        if (!isPresenterBindFinish) {
-            Logger.e(TAG, "请为" + mPresenter.getClass().getName() + "绑定数据");
-            finish();
-            return;
-        }
-        mPresenter.onCreate(this);
     }
+
+    @LayoutRes
+    protected abstract int getLayoutResId();
 
     @Deprecated
     @Override
@@ -77,12 +60,6 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
         if (mIsDestroy) return;
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
-
-    @LayoutRes
-    protected abstract int getLayoutResId();
-    protected abstract P getPresenter();
-    protected abstract M initModel();
-    protected abstract boolean bindModelAndView();
 
     public boolean isMainActivityOn() {
         return isMainActivityOn;
@@ -114,9 +91,8 @@ public abstract class BaseActivity<P extends BaseJPresenterImpl, M extends BaseJ
 
     @Override
     protected void onDestroy() {
-        mIsDestroy = true;
         super.onDestroy();
-        mPresenter.onDestroy();
+        mIsDestroy = true;
     }
 
     public void showProgressDialog() {

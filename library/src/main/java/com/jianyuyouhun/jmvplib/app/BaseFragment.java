@@ -10,12 +10,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 /**
- * baseFragment类
+ * Fragment基类
  * Created by wangyu on 2017/4/5.
  */
 
 public class BaseFragment extends Fragment {
-    private Handler mSuperHandler;
     private boolean isDestroy = false;
     private long mInsertDt = System.currentTimeMillis();
     private ProgressDialog mProgressDialog;
@@ -23,7 +22,6 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSuperHandler = JApp.getInstance().getSuperHandler();
         isDestroy = false;
     }
 

@@ -5,14 +5,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jianyuyouhun.jmvp.adapter.DemoListAdapter;
-import com.jianyuyouhun.jmvplib.app.BaseActivity;
+import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
+public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> {
 
     @FindViewById(R.id.textView)
     private TextView mTextView;
@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity<DickPresenter, DickModel> {
         @Override
         public void showError(String error) {
             showToast(error);
+            logE(error);
         }
 
         @Override

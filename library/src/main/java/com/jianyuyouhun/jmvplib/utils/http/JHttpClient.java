@@ -20,6 +20,7 @@ import java.util.zip.GZIPInputStream;
  */
 
 public class JHttpClient {
+
     private JHttpRequest httpRequest;
     private HttpURLConnection httpURLConnection;
     private JHttpResultListener listener;
@@ -55,9 +56,8 @@ public class JHttpClient {
             httpURLConnection.connect();
             parseResult();
         } catch (IOException e) {
-            e.printStackTrace();
             if (listener != null) {
-                listener.onError(e);
+                listener.onError(OnHttpResultListener.RESULT_CANNOT_OPEN_CONNECTION, e);
             }
         } finally {
             if (httpURLConnection != null)
@@ -100,7 +100,7 @@ public class JHttpClient {
             inputStream.close();
             listener.onResult(code, data);
         } catch (IOException e) {
-            listener.onError(e);
+            listener.onError(OnHttpResultListener.RESULT_CANNOT_PARSE_RESPONSE, e);
         }
     }
 

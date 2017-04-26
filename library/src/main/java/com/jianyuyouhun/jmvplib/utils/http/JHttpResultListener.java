@@ -22,10 +22,10 @@ public abstract class JHttpResultListener implements OnHttpResultListener {
                 onResult(result);
                 Logger.i(TAG, "HTTP_STATUS: " + code + "\n" + result);
             } else {
-                onError(new Exception("HTTP CODE IS NOT 200"));
+                onError(code, new Exception("HTTP CODE IS NOT 200"));
             }
         } catch (UnsupportedEncodingException e) {
-            onError(e);
+            onError(code, e);
         }
     }
 

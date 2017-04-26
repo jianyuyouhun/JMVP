@@ -31,7 +31,12 @@ public class JHttpClient {
         this.httpRequest = request;
     }
 
-    public JHttpClient(@NonNull JHttpResultListener listener) {
+    public JHttpClient(@NonNull JHttpRequest request, @NonNull JHttpResultListener listener) {
+        this(request);
+        setJHttpResultListener(listener);
+    }
+
+    public void setJHttpResultListener(@NonNull JHttpResultListener listener) {
         this.listener = listener;
     }
 

@@ -1,18 +1,22 @@
-package com.jianyuyouhun.jmvp;
+package com.jianyuyouhun.jmvp.activitys;
 
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.adapter.DemoListAdapter;
+import com.jianyuyouhun.jmvp.app.App;
+import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
+import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestPresenter;
+import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> implements DickView {
+public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, AdapterTestModel> implements AdapterTestView {
 
     @FindViewById(R.id.textView)
     private TextView mTextView;
@@ -25,7 +29,6 @@ public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> impl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setIsMainOn(true);
         initView();
         mPresenter.beginPresent();
     }
@@ -37,17 +40,17 @@ public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> impl
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_main;
+        return R.layout.activity_adapter_test;
     }
 
     @Override
-    protected DickPresenter getPresenter() {
-        return new DickPresenter();
+    protected AdapterTestPresenter getPresenter() {
+        return new AdapterTestPresenter();
     }
 
     @Override
-    protected DickModel initModel() {
-        return JApp.getInstance().getJModel(DickModel.class);
+    protected AdapterTestModel initModel() {
+        return App.getInstance().getJModel(AdapterTestModel.class);
     }
 
     @Override
@@ -70,7 +73,6 @@ public class MainActivity extends BaseMVPActivity<DickPresenter, DickModel> impl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        setIsMainOn(false);
     }
 
     @Override

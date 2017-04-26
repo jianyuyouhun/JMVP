@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvp;
+package com.jianyuyouhun.jmvp.mvp.adaptertest;
 
 import android.content.Context;
 import android.os.Handler;
@@ -15,7 +15,7 @@ import com.jianyuyouhun.jmvplib.utils.Logger;
  * Created by wangyu on 2017/3/17.
  */
 
-public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
+public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, AdapterTestView> {
 
     private Handler handler;
 
@@ -35,7 +35,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
 
     @Override
     public void beginPresent() {
-        final DickView view = getJView();
+        final AdapterTestView view = getJView();
         if (view != null) {
             test(view);
         } else {
@@ -43,7 +43,7 @@ public class DickPresenter extends BaseJPresenterImpl<DickModel, DickView> {
         }
     }
 
-    private void test(final DickView view) {
+    private void test(final AdapterTestView view) {
         view.showLoading();
         mModel.doRequester(new OnResultListener<String>() {
             @Override

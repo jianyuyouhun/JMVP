@@ -1,8 +1,9 @@
-package com.jianyuyouhun.jmvp;
+package com.jianyuyouhun.jmvp.app;
 
+import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
+import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class App extends JApp {
 
     @Override
     protected void initModels(List<BaseJModelImpl> models) {
-        models.add(new DickModel());
+        models.add(new AdapterTestModel());
+        models.add(new HttpTestModel());
     }
 }

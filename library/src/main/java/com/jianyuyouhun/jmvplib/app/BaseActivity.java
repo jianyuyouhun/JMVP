@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean mIsDestroy;
     private boolean mIsFinish;
     private long mLastClickTime;
-    protected static final boolean IS_DEBUG_MODE = BuildConfig.IS_DEBUG;
+    protected static final boolean IS_DEBUG_MODE = BuildConfig.isDebug();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

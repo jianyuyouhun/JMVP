@@ -22,7 +22,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     public static void showException(Throwable throwable) {
         JApp applicationContext = JApp.getInstance();
-        if (applicationContext != null && BuildConfig.IS_DEBUG) {
+        if (applicationContext != null && BuildConfig.isDebug()) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             throwable.printStackTrace(new PrintStream(byteArrayOutputStream));
             String msg = new String(byteArrayOutputStream.toByteArray());

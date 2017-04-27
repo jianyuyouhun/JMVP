@@ -6,5 +6,11 @@ package com.jianyuyouhun.jmvplib.app;
  */
 
 public class BuildConfig {
-    public static boolean IS_DEBUG = true;
+    private static boolean IS_DEBUG = true;
+    public static void setIsDebug(boolean isDebug) {
+        IS_DEBUG = isDebug;
+    }
+    public static boolean isDebug() {
+        return IS_DEBUG;
+    }
 }

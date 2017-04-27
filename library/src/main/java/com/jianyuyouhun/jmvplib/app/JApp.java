@@ -25,7 +25,7 @@ public abstract class JApp extends Application {
 
     private static JApp mInstance;
 
-    private static boolean isDebug = BuildConfig.IS_DEBUG;
+    private static boolean isDebug;
 
     private Handler mSuperHandler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -78,11 +78,20 @@ public abstract class JApp extends Application {
             mInstance = this;
             return;
         }
+        BuildConfig.setIsDebug(setDebugMode());
+        isDebug = BuildConfig.isDebug();
         mInstance = this;
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initJApp();
         initDebug();
+    }
+
+    /**
+     * 设置调试模式
+     */
+    public boolean setDebugMode() {
+        return true;
     }
 
     public void initDebug() {

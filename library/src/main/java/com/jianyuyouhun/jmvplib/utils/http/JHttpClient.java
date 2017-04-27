@@ -1,16 +1,11 @@
 package com.jianyuyouhun.jmvplib.utils.http;
 
-import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.jianyuyouhun.jmvplib.utils.FileUtils;
 import com.jianyuyouhun.jmvplib.utils.IOUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
-import com.jianyuyouhun.jmvplib.utils.OnProgressCallback;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.FileInputStream;

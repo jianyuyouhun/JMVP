@@ -2,11 +2,9 @@ package com.jianyuyouhun.jmvplib.utils.http;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
-import java.net.HttpURLConnection;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -20,14 +18,23 @@ public class JHttpTask {
     private Handler mMainHandler = new Handler(Looper.getMainLooper());
     private Executor executor = Executors.newCachedThreadPool();
     private JHttpClient client;
-    private OnResultListener<String> listener;
+    private OnResultListener<String> onResultListener;
+    private OnProgressChangeListener onProgressChangeListener;
     private Runnable httpRunnable;
-    public JHttpTask(JHttpClient client, OnResultListener<String> listener) {
+    public JHttpTask(JHttpClient client, OnResultListener<String> onResultListener) {
         this.client = client;
-        this.listener = listener;
+        this.onResultListener = onResultListener;
         client.setJHttpResultListener(jHttpResultListener);
         initHttpRunnable();
     }
+
+    public JHttpTask(JHttpClient client, OnProgressChangeListener onProgressChangeListener) {
+        this.client = client;
+        this.onProgressChangeListener = onProgressChangeListener;
+        client.setOnProgressChangeListener(onThreadProgressChangeListener);
+        initHttpRunnable();
+    }
+
 
     private void initHttpRunnable() {
         httpRunnable = new Runnable() {
@@ -48,7 +55,7 @@ public class JHttpTask {
             mMainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    listener.onResult(OnResultListener.RESULT_SUCCESS, result);
+                    onResultListener.onResult(OnResultListener.RESULT_SUCCESS, result);
                 }
             });
         }
@@ -58,7 +65,49 @@ public class JHttpTask {
             mMainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    listener.onResult(OnResultListener.RESULT_FAILED, e.getMessage());
+                    onResultListener.onResult(OnResultListener.RESULT_FAILED, e.getMessage());
+                }
+            });
+        }
+    };
+
+    private OnProgressChangeListener onThreadProgressChangeListener = new OnProgressChangeListener() {
+        @Override
+        public void onStart() {
+            mMainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onProgressChangeListener.onStart();
+                }
+            });
+        }
+
+        @Override
+        public void onProgressChanged(final int current, final int total) {
+            mMainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onProgressChangeListener.onProgressChanged(current, total);
+                }
+            });
+        }
+
+        @Override
+        public void onFinish(final String result) {
+            mMainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onProgressChangeListener.onFinish(result);
+                }
+            });
+        }
+
+        @Override
+        public void onError(final int code, final Exception e) {
+            mMainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onProgressChangeListener.onError(code, e);
                 }
             });
         }
@@ -74,6 +123,7 @@ public class JHttpTask {
         private int readTimeout = 5000;
         private int connectTimeout = 10000;
         private JHttpRequest jHttpRequest;
+        private String filePath;
         public ClientBuilder() {
             if (jHttpRequest == null) {
                 jHttpRequest = new JHttpRequest();
@@ -104,6 +154,10 @@ public class JHttpTask {
             this.connectTimeout = connectTimeout;
             return this;
         }
+        public ClientBuilder setFilePath(String filePath) {
+            this.filePath = filePath;
+            return this;
+        }
         public JHttpClient build() {
             JHttpRequest request = new JHttpRequest();
             request.setUrl(url);
@@ -113,6 +167,7 @@ public class JHttpTask {
             request.setMethod(method);
             request.setReadTimeout(readTimeout);
             request.setConnectTimeout(connectTimeout);
+            request.setFilePath(filePath);
             return new JHttpClient(request);
         }
     }

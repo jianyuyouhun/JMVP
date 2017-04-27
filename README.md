@@ -17,7 +17,7 @@
 #### 第二部. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.1.2'
+	        compile 'com.github.jianyuyouhun:jmvp:0.1.3'
 	}
 
 ### 版本变化 ###
@@ -46,6 +46,8 @@
 
 #### v 0.0.7 ####
 
+　　该使用方法已过期，请参考v 0.1.0
+
 　　增加全局的superHandler的使用控制
 
 　　在presenter中实现handleSuperMsg(Message msg)方法。在oncreate中调用openHandleMsg();
@@ -69,6 +71,56 @@
 　　修复了Logger的日志打印bug，之前只会打印为error类型。
 
 　　提供非mvp模式的BaseActivity和BaseFragment。简单逻辑何必增加代码量。
+
+#### v 0.1.3 ####
+
+　　增加http网络请求处理，支持get，post和post上传文件。
+
+　　使用方式：
+
+　　get
+
+        JHttpClient client = new JHttpTask.ClientBuilder()
+                .setUrl("https://jianyuyouhun.com")
+                .setMethod(JHttpRequest.METHOD_GET)
+                .build();
+        new JHttpTask(client, new OnResultListener<String>() {
+            @Override
+            public void onResult(int result, String data) {
+                listener.onResult(result, data);
+            }
+        }).execute();
+
+　　post和get相似，略。
+
+　　upload：
+
+        JHttpClient client = new JHttpTask.ClientBuilder()
+                .setUrl("https://jianyuyouhun.com")
+                .setMethod(JHttpRequest.METHOD_UPLOAD)
+                .setFilePath("...")
+                .build();
+        new JHttpTask(client, new OnProgressChangeListener() {
+            @Override
+            public void onStart() {
+                
+            }
+
+            @Override
+            public void onProgressChanged(int current, int total) {
+
+            }
+
+            @Override
+            public void onFinish(String result) {
+
+            }
+
+            @Override
+            public void onError(int code, Exception e) {
+
+            }
+        }).execute();
 
 # INTRO #
 

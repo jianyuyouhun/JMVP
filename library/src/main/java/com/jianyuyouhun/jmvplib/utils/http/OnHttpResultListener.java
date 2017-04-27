@@ -6,6 +6,7 @@ package com.jianyuyouhun.jmvplib.utils.http;
  */
 
 public interface OnHttpResultListener {
+    String TAG = "HTTP_LISTENER";
     int RESULT_CANNOT_OPEN_CONNECTION = -100;
     int RESULT_CANNOT_PARSE_RESPONSE = -101;
     void onResult(int code, byte[] data);

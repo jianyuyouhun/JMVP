@@ -13,8 +13,8 @@ public class JHttpRequest {
 
     public static final int METHOD_GET = 1;
     public static final int METHOD_POST = 2;
-
-    @IntDef({METHOD_GET, METHOD_POST})
+    public static final int METHOD_UPLOAD = 3;
+    @IntDef({METHOD_GET, METHOD_POST, METHOD_UPLOAD})
     public @interface HttpMethod {}
 
     private String url;
@@ -23,9 +23,9 @@ public class JHttpRequest {
     private int method = METHOD_GET;
     private int readTimeout = 5000;
     private int connectTimeout = 10000;
-    private String contentType = "application/x-www-form-urlencoded; charset=UTF-8";// 拉取数据的时候默认, 上传时为application/octet-stream
     private Map<String, String> params;
     private Map<String, String> headers;
+    private String filePath;
 
     public String getUrl() {
         if (extra != null) {
@@ -71,14 +71,6 @@ public class JHttpRequest {
         this.connectTimeout = connectTimeout;
     }
 
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
     public Map<String, String> getParams() {
         return params;
     }
@@ -94,4 +86,13 @@ public class JHttpRequest {
     public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
     }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
 }

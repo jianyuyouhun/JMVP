@@ -73,7 +73,6 @@ public class JHttpTask {
         private int method = JHttpRequest.METHOD_GET;
         private int readTimeout = 5000;
         private int connectTimeout = 10000;
-        private String contentType;
         private JHttpRequest jHttpRequest;
         public ClientBuilder() {
             if (jHttpRequest == null) {
@@ -105,10 +104,6 @@ public class JHttpTask {
             this.connectTimeout = connectTimeout;
             return this;
         }
-        public ClientBuilder setContentType(String contentType) {
-            this.contentType = contentType;
-            return this;
-        }
         public JHttpClient build() {
             JHttpRequest request = new JHttpRequest();
             request.setUrl(url);
@@ -118,9 +113,6 @@ public class JHttpTask {
             request.setMethod(method);
             request.setReadTimeout(readTimeout);
             request.setConnectTimeout(connectTimeout);
-            if (!TextUtils.isEmpty(contentType)) {
-                request.setContentType(contentType);
-            }
             return new JHttpClient(request);
         }
     }

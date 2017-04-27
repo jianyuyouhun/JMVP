@@ -1,9 +1,18 @@
 package com.jianyuyouhun.jmvplib.utils.http;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
+import com.jianyuyouhun.jmvplib.utils.FileUtils;
 import com.jianyuyouhun.jmvplib.utils.IOUtils;
+import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.OnProgressCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -24,6 +33,7 @@ public class JHttpClient {
     private JHttpRequest httpRequest;
     private HttpURLConnection httpURLConnection;
     private JHttpResultListener listener;
+    private OnProgressChangeListener onProgressChangeListener;
 
     private JHttpClient() {}
 
@@ -36,8 +46,9 @@ public class JHttpClient {
         setJHttpResultListener(listener);
     }
 
-    public void setJHttpResultListener(@NonNull JHttpResultListener listener) {
-        this.listener = listener;
+    public JHttpClient(@NonNull JHttpRequest request, @NonNull OnProgressChangeListener onProgressChangeListener) {
+        this(request);
+        setOnProgressChangeListener(onProgressChangeListener);
     }
 
     public void execute() {
@@ -47,6 +58,9 @@ public class JHttpClient {
                 break;
             case JHttpRequest.METHOD_POST:
                 doPost();
+                break;
+            case JHttpRequest.METHOD_UPLOAD:
+                doUpload();
                 break;
         }
     }
@@ -63,6 +77,8 @@ public class JHttpClient {
         } catch (IOException e) {
             if (listener != null) {
                 listener.onError(OnHttpResultListener.RESULT_CANNOT_OPEN_CONNECTION, e);
+            } else {
+                Logger.e(OnHttpResultListener.TAG, "网络请求回调监听为空");
             }
         } finally {
             if (httpURLConnection != null)
@@ -79,14 +95,17 @@ public class JHttpClient {
             httpURLConnection.setConnectTimeout(httpRequest.getConnectTimeout());
             httpURLConnection.setReadTimeout(httpRequest.getReadTimeout());
             httpURLConnection.setDefaultUseCaches(false);
-            httpURLConnection.addRequestProperty("Content-Type", httpRequest.getContentType());
-            httpURLConnection.addRequestProperty("Accept-Encoding", "gzip");
+            httpURLConnection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             appendHeaders(httpURLConnection, httpRequest.getHeaders());
             httpURLConnection.connect();
             appendParams(httpURLConnection, httpRequest.getParams());
             parseResult();
         } catch (IOException e) {
-            e.printStackTrace();
+            if (listener != null) {
+                listener.onError(OnHttpResultListener.RESULT_CANNOT_OPEN_CONNECTION, e);
+            } else {
+                Logger.e(OnHttpResultListener.TAG, "网络请求回调监听为空");
+            }
         } finally {
             if (httpURLConnection != null) {
                 httpURLConnection.disconnect();
@@ -94,8 +113,85 @@ public class JHttpClient {
         }
     }
 
+    private void doUpload() {
+        if (onProgressChangeListener == null) {
+            Logger.e(OnHttpResultListener.TAG, "进度监听为空");
+            return;
+        }
+        onProgressChangeListener.onStart();
+        String filePath = httpRequest.getFilePath();
+        if (TextUtils.isEmpty(filePath)) {
+            onProgressChangeListener.onError(OnHttpResultListener.RESULT_CANNOT_OPEN_CONNECTION,
+                    new UploadException("filePath为空！"));
+        } else {
+            try {
+                String url = httpRequest.getUrl();
+                httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setUseCaches(false);
+                httpURLConnection.setConnectTimeout(httpRequest.getConnectTimeout());
+                httpURLConnection.setReadTimeout(httpRequest.getReadTimeout());
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setRequestProperty("Connection", "Keep-Live");
+                httpURLConnection.setRequestProperty("Charset", "UTF-8");
+                httpURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
+                httpURLConnection.setRequestProperty("Accept-Encoding", "gzip");
+                DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
+                FileInputStream fStream = new FileInputStream(filePath);
+                byte[] fileByte = new byte[1024];
+                int length = -1;
+                int totalLength = httpURLConnection.getContentLength();
+                int currentSize = 0;
+                long lastNotify = System.currentTimeMillis();
+                while ((length = fStream.read(fileByte)) != -1) {
+                    outStream.write(fileByte, 0, length);
+                    currentSize+=length;
+                    if ((System.currentTimeMillis() - lastNotify) > 300) {
+                        onProgressChangeListener.onProgressChanged(currentSize, totalLength);
+                        lastNotify = System.currentTimeMillis();
+                    }
+                }
+                fStream.close();
+                outStream.flush();
+                outStream.close();
+                parseUploadResult();
+            } catch (IOException e) {
+                onProgressChangeListener.onError(OnHttpResultListener.RESULT_CANNOT_OPEN_CONNECTION, e);
+            } finally {
+                if (httpURLConnection != null) {
+                    httpURLConnection.disconnect();
+                }
+            }
+        }
+    }
+
+    private void parseUploadResult() {
+        try {
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                String m_strResult = null;
+                InputStream iStream = null;
+                iStream = httpURLConnection.getInputStream();
+                String m_strContentEncoding = httpURLConnection.getContentEncoding();
+                if (m_strContentEncoding != null && m_strContentEncoding.contains("gzip")) {
+                    GZIPInputStream gzipIs = new GZIPInputStream(iStream);
+                    m_strResult = FileUtils.getStringBySream(gzipIs);
+                } else {
+                    m_strResult = FileUtils.getStringBySream(iStream);
+                }
+                onProgressChangeListener.onFinish(m_strResult);
+            } else {
+                onProgressChangeListener.onError(httpURLConnection.getResponseCode(),
+                        new UploadException("上传结果异常"));
+            }
+        } catch (IOException e) {
+            onProgressChangeListener.onError(OnHttpResultListener.RESULT_CANNOT_PARSE_RESPONSE, e);
+        }
+    }
+
     private void parseResult() {
         if (listener == null) {
+            Logger.e(OnHttpResultListener.TAG, "网络请求回调监听为空");
             return;
         }
         try {
@@ -154,5 +250,13 @@ public class JHttpClient {
             }
         }
         return stringBuilder.toString();
+    }
+
+    public void setJHttpResultListener(@NonNull JHttpResultListener listener) {
+        this.listener = listener;
+    }
+
+    public void setOnProgressChangeListener(@NonNull OnProgressChangeListener onProgressChangeListener) {
+        this.onProgressChangeListener = onProgressChangeListener;
     }
 }

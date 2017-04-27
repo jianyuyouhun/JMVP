@@ -2,6 +2,8 @@ package com.jianyuyouhun.jmvplib.utils.http;
 
 import android.support.annotation.IntDef;
 
+import com.jianyuyouhun.jmvplib.utils.Logger;
+
 import java.util.Map;
 
 /**
@@ -31,6 +33,7 @@ public class JHttpRequest {
         if (extra != null) {
             url = url + "?" + extra;
         }
+        Logger.i("http", "url = " + url);
         return url;
     }
 

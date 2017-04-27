@@ -1,5 +1,6 @@
 package com.jianyuyouhun.jmvplib.utils.http;
 
+import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -39,16 +40,6 @@ public class JHttpClient {
 
     public JHttpClient(@NonNull JHttpRequest request) {
         this.httpRequest = request;
-    }
-
-    public JHttpClient(@NonNull JHttpRequest request, @NonNull JHttpResultListener listener) {
-        this(request);
-        setJHttpResultListener(listener);
-    }
-
-    public JHttpClient(@NonNull JHttpRequest request, @NonNull OnProgressChangeListener onProgressChangeListener) {
-        this(request);
-        setOnProgressChangeListener(onProgressChangeListener);
     }
 
     public void execute() {
@@ -252,10 +243,20 @@ public class JHttpClient {
         return stringBuilder.toString();
     }
 
+    /**
+     * 该步骤位于子线程，请使用HttpTask来操作
+     * @param listener          回调监听
+     */
+    @Deprecated
     public void setJHttpResultListener(@NonNull JHttpResultListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * 该步骤位于子线程，请使用HttpTask来操作
+     * @param onProgressChangeListener      进度回调
+     */
+    @Deprecated
     public void setOnProgressChangeListener(@NonNull OnProgressChangeListener onProgressChangeListener) {
         this.onProgressChangeListener = onProgressChangeListener;
     }

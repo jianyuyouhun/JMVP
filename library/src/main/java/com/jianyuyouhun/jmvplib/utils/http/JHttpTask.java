@@ -21,6 +21,10 @@ public class JHttpTask {
     private OnResultListener<String> onResultListener;
     private OnProgressChangeListener onProgressChangeListener;
     private Runnable httpRunnable;
+
+    public JHttpTask(JHttpClient client) {
+        this.client = client;
+    }
     public JHttpTask(JHttpClient client, OnResultListener<String> onResultListener) {
         this.client = client;
         this.onResultListener = onResultListener;

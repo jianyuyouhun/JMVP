@@ -22,6 +22,13 @@ public class JHttpTask {
     private OnProgressChangeListener onProgressChangeListener;
     private Runnable httpRunnable;
 
+    /**
+     * 自己给client添加的回调执行位于子线程，
+     * 请使用{@link #JHttpTask(JHttpClient, OnProgressChangeListener)}
+     * 或者{@link #JHttpTask(JHttpClient, OnResultListener)}
+     * @param client
+     */
+    @Deprecated
     public JHttpTask(JHttpClient client) {
         this.client = client;
     }

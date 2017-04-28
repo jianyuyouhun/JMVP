@@ -1,10 +1,6 @@
 package com.jianyuyouhun.jmvplib.mvp;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-
-import com.jianyuyouhun.jmvplib.app.JApp;
 
 import java.lang.ref.WeakReference;
 

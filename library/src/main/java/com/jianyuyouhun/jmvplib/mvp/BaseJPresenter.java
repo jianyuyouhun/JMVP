@@ -1,7 +1,6 @@
 package com.jianyuyouhun.jmvplib.mvp;
 
 import android.content.Context;
-import android.os.Message;
 
 /**
  * BaseJPresenter接口

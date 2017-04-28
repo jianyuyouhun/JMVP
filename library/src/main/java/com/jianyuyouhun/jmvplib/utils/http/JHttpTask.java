@@ -12,18 +12,20 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  */
 
 public class JHttpTask implements Runnable {
-    private Handler mMainHandler = new Handler(Looper.getMainLooper());
+    private Handler mMainHandler;
     private JHttpClient client;
     private OnResultListener<String> onResultListener;
     private OnProgressChangeListener onProgressChangeListener;
 
-    public JHttpTask(JHttpClient client, @NonNull OnResultListener<String> onResultListener) {
+    public JHttpTask(Handler handler, JHttpClient client, @NonNull OnResultListener<String> onResultListener) {
+        this.mMainHandler = handler;
         this.client = client;
         this.onResultListener = onResultListener;
         this.client.setJHttpResultListener(jHttpResultListener);
     }
 
-    public JHttpTask(JHttpClient client, @NonNull OnProgressChangeListener onProgressChangeListener) {
+    public JHttpTask(Handler handler, JHttpClient client, @NonNull OnProgressChangeListener onProgressChangeListener) {
+        this.mMainHandler = handler;
         this.client = client;
         this.onProgressChangeListener = onProgressChangeListener;
         this.client.setOnProgressChangeListener(onThreadProgressChangeListener);

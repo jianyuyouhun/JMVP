@@ -1,5 +1,8 @@
 package com.jianyuyouhun.jmvplib.utils.http;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
 import java.util.HashMap;
@@ -26,6 +29,7 @@ public class JHttpFactory {
 
     private static JHttpFactory jHttpFactory;
 
+    private Handler mainHandler;
     private Executor executor;
 
     private static boolean hasInited = false;
@@ -33,6 +37,7 @@ public class JHttpFactory {
 
     private JHttpFactory() {
         hasInited = true;
+        mainHandler = new Handler(Looper.getMainLooper());
         executor = Executors.newCachedThreadPool();
     }
 
@@ -52,7 +57,7 @@ public class JHttpFactory {
         if (!hasInited) {
             throw new JHttpException();
         }
-        JHttpTask task = new JHttpTask(client, onResultListener);
+        JHttpTask task = new JHttpTask(mainHandler, client, onResultListener);
         executor.execute(task);
     }
 
@@ -60,7 +65,7 @@ public class JHttpFactory {
         if (!hasInited) {
             throw new JHttpException();
         }
-        JHttpTask task = new JHttpTask(client, onProgressChangeListener);
+        JHttpTask task = new JHttpTask(mainHandler, client, onProgressChangeListener);
         executor.execute(task);
     }
 

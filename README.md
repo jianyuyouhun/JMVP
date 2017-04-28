@@ -122,6 +122,45 @@
             }
         }).execute();
 
+#### v 0.1.4 ####
+
+　　修复http请求bug，新用法如下：
+
+	App的onCreate中初始化
+
+	JHttpFactory.init();
+
+	使用方式：
+
+	JHttpFactory.getInstance().execute(client, new OnResultListener<String>() {
+            @Override
+            public void onResult(int result, String data) {
+                ...
+            }
+        });
+
+	JHttpFactory.getInstance().execute(client, new OnProgressChangeListener() {
+            @Override
+            public void onStart() {
+                
+            }
+
+            @Override
+            public void onProgressChanged(int current, int total) {
+
+            }
+
+            @Override
+            public void onFinish(String result) {
+
+            }
+
+            @Override
+            public void onError(int code, Exception e) {
+
+            }
+        });
+
 # INTRO #
 
    [Android设计模式浅入-MVP（二）](https://jianyuyouhun.com/index.php/archives/75/)

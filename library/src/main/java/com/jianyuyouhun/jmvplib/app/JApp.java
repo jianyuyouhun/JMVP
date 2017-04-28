@@ -10,6 +10,7 @@ import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,9 +79,10 @@ public abstract class JApp extends Application {
             mInstance = this;
             return;
         }
+        mInstance = this;
         BuildConfig.setIsDebug(setDebugMode());
         isDebug = BuildConfig.isDebug();
-        mInstance = this;
+        JHttpFactory.init();
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initJApp();

@@ -2,62 +2,36 @@ package com.jianyuyouhun.jmvplib.utils.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
-import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 /**
- * 网络请求运行环境
- * Created by jianyuyouhun on 2017/4/26.
+ * http请求runnable
+ * Created by wangyu on 2017/4/28.
  */
 
-public class JHttpTask {
+public class JHttpTask implements Runnable {
     private Handler mMainHandler = new Handler(Looper.getMainLooper());
-    private Executor executor = Executors.newCachedThreadPool();
     private JHttpClient client;
     private OnResultListener<String> onResultListener;
     private OnProgressChangeListener onProgressChangeListener;
-    private Runnable httpRunnable;
 
-    /**
-     * 自己给client添加的回调执行位于子线程，
-     * 请使用{@link #JHttpTask(JHttpClient, OnProgressChangeListener)}
-     * 或者{@link #JHttpTask(JHttpClient, OnResultListener)}
-     * @param client
-     */
-    @Deprecated
-    public JHttpTask(JHttpClient client) {
-        this.client = client;
-    }
-    public JHttpTask(JHttpClient client, OnResultListener<String> onResultListener) {
+    public JHttpTask(JHttpClient client, @NonNull OnResultListener<String> onResultListener) {
         this.client = client;
         this.onResultListener = onResultListener;
-        client.setJHttpResultListener(jHttpResultListener);
-        initHttpRunnable();
+        this.client.setJHttpResultListener(jHttpResultListener);
     }
 
-    public JHttpTask(JHttpClient client, OnProgressChangeListener onProgressChangeListener) {
+    public JHttpTask(JHttpClient client, @NonNull OnProgressChangeListener onProgressChangeListener) {
         this.client = client;
         this.onProgressChangeListener = onProgressChangeListener;
-        client.setOnProgressChangeListener(onThreadProgressChangeListener);
-        initHttpRunnable();
+        this.client.setOnProgressChangeListener(onThreadProgressChangeListener);
     }
 
-
-    private void initHttpRunnable() {
-        httpRunnable = new Runnable() {
-            @Override
-            public void run() {
-                client.execute();
-            }
-        };
-    }
-
-    public void execute() {
-        executor.execute(httpRunnable);
+    @Override
+    public void run() {
+        client.execute();
     }
 
     private JHttpResultListener jHttpResultListener = new JHttpResultListener() {
@@ -124,62 +98,4 @@ public class JHttpTask {
         }
     };
 
-    public static class ClientBuilder {
-        private String url;
-        private String extra;
-        private Map<String, String> headers;
-        private Map<String, String> params;
-        @JHttpRequest.HttpMethod
-        private int method = JHttpRequest.METHOD_GET;
-        private int readTimeout = 5000;
-        private int connectTimeout = 10000;
-        private JHttpRequest jHttpRequest;
-        private String filePath;
-        public ClientBuilder() {
-            if (jHttpRequest == null) {
-                jHttpRequest = new JHttpRequest();
-            }
-        }
-        public ClientBuilder setUrl(String url) {
-            this.url = url;
-            return this;
-        }
-        public ClientBuilder setExtra(String extra) {
-            this.extra = extra;
-            return this;
-        }
-        public ClientBuilder setMethod(@JHttpRequest.HttpMethod int method) {
-            this.method = method;
-            return this;
-        }
-        public ClientBuilder setHeaders(Map<String, String> headers) {
-            this.headers = headers;
-            return this;
-        }
-        public ClientBuilder setParams(Map<String, String> params) {
-            this.params = params;
-            return this;
-        }
-        public ClientBuilder setTimeOut(int readTimeout, int connectTimeout) {
-            this.readTimeout = readTimeout;
-            this.connectTimeout = connectTimeout;
-            return this;
-        }
-        public ClientBuilder setFilePath(String filePath) {
-            this.filePath = filePath;
-            return this;
-        }
-        public JHttpClient build() {
-            JHttpRequest request = new JHttpRequest();
-            request.setUrl(url);
-            request.setExtra(extra);
-            request.setHeaders(headers);
-            request.setParams(params);
-            request.setMethod(method);
-            request.setReadTimeout(readTimeout);
-            request.setConnectTimeout(connectTimeout);
-            request.setFilePath(filePath);
-            return new JHttpClient(request);
-        }
-    }
 }

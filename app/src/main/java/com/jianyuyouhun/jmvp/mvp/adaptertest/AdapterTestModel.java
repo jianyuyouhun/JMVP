@@ -6,9 +6,6 @@ import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
-import com.jianyuyouhun.jmvplib.utils.http.JHttpClient;
-import com.jianyuyouhun.jmvplib.utils.http.JHttpRequest;
-import com.jianyuyouhun.jmvplib.utils.http.JHttpTask;
 
 /**
  * 测试model

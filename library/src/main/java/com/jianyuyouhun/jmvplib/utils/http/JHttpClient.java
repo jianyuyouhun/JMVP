@@ -123,6 +123,9 @@ public class JHttpClient {
                 httpURLConnection.setRequestProperty("Charset", "UTF-8");
                 httpURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
                 httpURLConnection.setRequestProperty("Accept-Encoding", "gzip");
+                appendHeaders(httpURLConnection, httpRequest.getHeaders());
+                httpURLConnection.connect();
+                appendParams(httpURLConnection, httpRequest.getParams());
                 DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
                 FileInputStream fStream = new FileInputStream(filePath);
                 byte[] fileByte = new byte[1024];

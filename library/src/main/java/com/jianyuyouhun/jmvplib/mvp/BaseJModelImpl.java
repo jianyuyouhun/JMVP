@@ -25,6 +25,7 @@ public class BaseJModelImpl implements BaseJModel {
     @Override
     public void onModelDestroy() {}
 
+    @Override
     public void onAllModelCreate() {}
 
     public <M extends BaseJModelImpl> M getModel(Class<M> model) {

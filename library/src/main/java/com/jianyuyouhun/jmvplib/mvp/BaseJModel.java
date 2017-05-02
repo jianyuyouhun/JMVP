@@ -11,6 +11,7 @@ import com.jianyuyouhun.jmvplib.app.JApp;
 
 public interface BaseJModel {
     void onModelCreate(JApp app);
+    void onAllModelCreate();
     void handleSuperMsg(Message msg);
     void onModelDestroy();
 }

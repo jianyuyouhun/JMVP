@@ -23,4 +23,8 @@ public class App extends JApp {
         models.add(new AdapterTestModel());
         models.add(new HttpTestModel());
     }
+
+    public static App getApp() {
+        return (App) getInstance();
+    }
 }

@@ -49,6 +49,13 @@ public class PermissionRequester {
         setContentText(title, message, R.string.permission_ok, R.string.permission_cancel);
     }
 
+    /**
+     *
+     * @param title                 标题
+     * @param message               消息
+     * @param positiveButtonText    积极按钮文本
+     * @param negativeButtonText    消极按钮文本
+     */
     public void setContentText(@StringRes int title, @StringRes int message, @StringRes int positiveButtonText, @StringRes int negativeButtonText) {
         this.title = title;
         this.message = message;
@@ -60,6 +67,13 @@ public class PermissionRequester {
         requestPermission(activity, permissionName, permission, 1);
     }
 
+    /**
+     * 请求权限
+     * @param activity          activity
+     * @param permissionName    权限名称
+     * @param permission        权限
+     * @param code              请求码
+     */
     public void requestPermission(final Activity activity, final String permissionName, final String permission,
                                   int code) {
         this.permission = permission;
@@ -92,6 +106,12 @@ public class PermissionRequester {
         }
     }
 
+    /**
+     * 处理申请结果
+     * @param requestCode       请求码
+     * @param permissions       权限
+     * @param grantResults      状态
+     */
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         if (requestCode == this.requestCode) {
             if (grantResults.length == 0) {
@@ -106,6 +126,10 @@ public class PermissionRequester {
         }
     }
 
+    /**
+     * 设置权限申请监听器
+     * @param onPermissionRequestListener   回调
+     */
     public void setOnPermissionRequestListener(@NonNull PermissionRequestListener onPermissionRequestListener) {
         this.onPermissionRequestListener = onPermissionRequestListener;
     }

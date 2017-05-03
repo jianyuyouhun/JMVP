@@ -17,7 +17,7 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.1.4'
+	        compile 'com.github.jianyuyouhun:jmvp:0.1.5'
 	}
 
 ### 版本变化 ###
@@ -160,6 +160,28 @@
 
             }
         });
+
+#### v 0.1.5 ####
+
+　　增加动态权限处理。目前仅封装了单次一个权限申请，如要多个则需要手动多次调用，**并发请求将无法生效**。
+
+　　使用方法：先设置请求回调监听器
+
+        permissionRequester.setOnPermissionRequestListener(new PermissionRequestListener() {
+            @Override
+            public void onRequestSuccess(String permission, String permissionName) {
+                
+            }
+
+            @Override
+            public void onRequestFailed(String permission, String permissionName) {
+
+            }
+        });
+
+　　然后开始请求权限：
+
+         permissionRequester.requestPermission(getActivity(), "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 # INTRO #
 

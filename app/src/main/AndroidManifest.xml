@@ -3,6 +3,9 @@
     package="com.jianyuyouhun.jmvp">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +30,9 @@
         <activity
             android:name="com.jianyuyouhun.jmvplib.app.ExceptionActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitys.RequestPermissionActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

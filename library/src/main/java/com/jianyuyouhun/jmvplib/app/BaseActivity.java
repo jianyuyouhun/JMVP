@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
 import java.util.List;
 
@@ -33,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean mIsFinish;
     private long mLastClickTime;
     protected static final boolean IS_DEBUG_MODE = BuildConfig.isDebug();
+    protected PermissionRequester permissionRequester;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mIsFinish = false;
         setContentView(getLayoutResId());
         ViewInjectUtil.inject(this);
+        permissionRequester = new PermissionRequester();
     }
 
     @LayoutRes
@@ -93,6 +97,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mIsDestroy = true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        permissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void showProgressDialog() {

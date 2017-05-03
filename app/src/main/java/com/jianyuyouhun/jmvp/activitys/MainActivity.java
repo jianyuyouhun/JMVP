@@ -22,6 +22,9 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.http_test)
     private Button httpButton;
 
+    @FindViewById(R.id.permission_test)
+    private Button permissionButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 startActivity(HttpTestActivity.class);
+            }
+        });
+        permissionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(RequestPermissionActivity.class);
             }
         });
     }

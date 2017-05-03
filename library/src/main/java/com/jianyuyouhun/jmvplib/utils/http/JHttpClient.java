@@ -164,9 +164,9 @@ public class JHttpClient {
                 String m_strContentEncoding = httpURLConnection.getContentEncoding();
                 if (m_strContentEncoding != null && m_strContentEncoding.contains("gzip")) {
                     GZIPInputStream gzipIs = new GZIPInputStream(iStream);
-                    m_strResult = FileUtils.getStringBySream(gzipIs);
+                    m_strResult = FileUtils.getStringByStream(gzipIs);
                 } else {
-                    m_strResult = FileUtils.getStringBySream(iStream);
+                    m_strResult = FileUtils.getStringByStream(iStream);
                 }
                 onProgressChangeListener.onFinish(m_strResult);
             } else {

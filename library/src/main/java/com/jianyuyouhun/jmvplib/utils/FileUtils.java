@@ -21,7 +21,7 @@ public class FileUtils {
         return fileName.replace(".jpg", "").replace(".amr", "").replace(".txt", "").replace(".mp4", "");
     }
 
-    public static String getStringBySream(InputStream is) {
+    public static String getStringByStream(InputStream is) {
         if (is == null)
             return "";
         BufferedReader br = new BufferedReader(new InputStreamReader(is));

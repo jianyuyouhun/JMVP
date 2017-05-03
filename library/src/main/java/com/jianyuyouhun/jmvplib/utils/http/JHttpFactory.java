@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 网络请求运行环境
@@ -38,7 +41,8 @@ public class JHttpFactory {
     private JHttpFactory() {
         hasInited = true;
         mainHandler = new Handler(Looper.getMainLooper());
-        executor = Executors.newCachedThreadPool();
+        executor = new ThreadPoolExecutor(0, 5, 60L, TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>());
     }
 
     public static void init() {

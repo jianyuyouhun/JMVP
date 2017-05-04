@@ -128,6 +128,8 @@ public class PermissionRequester {
                     } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
                         permissionModel.putPermissionRecord(permission, true);
                         onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                    } else {
+                        onPermissionRequestListener.onRequestFailed(permission, permissionName);
                     }
                 }
             }

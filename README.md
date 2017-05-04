@@ -17,7 +17,7 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.1.5'
+	        compile 'com.github.jianyuyouhun:jmvp:0.1.6'
 	}
 
 ### 版本变化 ###
@@ -182,6 +182,10 @@
 　　然后开始请求权限：
 
          permissionRequester.requestPermission(getActivity(), "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+#### v 0.1.6 ####
+
+　　动态权限请求逻辑优化，使用方式无需改变。
 
 # INTRO #
 

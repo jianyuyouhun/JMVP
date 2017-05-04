@@ -1,14 +1,18 @@
 package com.jianyuyouhun.jmvplib.utils.permission;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 
 import com.jianyuyouhun.jmvplib.R;
+import com.jianyuyouhun.jmvplib.app.BaseActivity;
+import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
+import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 
 /**
  * 动态权限处理
@@ -20,6 +24,7 @@ public class PermissionRequester {
     @StringRes private int message;
     @StringRes private int negativeButtonText;
     @StringRes private int positiveButtonText;
+    private PermissionModel permissionModel;
 
     private String permission;
     private int requestCode;
@@ -39,6 +44,7 @@ public class PermissionRequester {
 
     public PermissionRequester() {
         setContentText();
+        permissionModel = JApp.getInstance().getJModel(PermissionModel.class);
     }
 
     private void setContentText() {
@@ -63,7 +69,7 @@ public class PermissionRequester {
         this.negativeButtonText = negativeButtonText;
     }
 
-    public void requestPermission(final Activity activity, final String permissionName, final String permission) {
+    public void requestPermission(final BaseActivity activity, final String permissionName, final String permission) {
         requestPermission(activity, permissionName, permission, 1);
     }
 
@@ -74,7 +80,7 @@ public class PermissionRequester {
      * @param permission        权限
      * @param code              请求码
      */
-    public void requestPermission(final Activity activity, final String permissionName, final String permission,
+    public void requestPermission(final BaseActivity activity, final String permissionName, final String permission,
                                   int code) {
         this.permission = permission;
         this.permissionName = permissionName;
@@ -82,27 +88,7 @@ public class PermissionRequester {
         if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
             onPermissionRequestListener.onRequestSuccess(permission, permissionName);
         } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setTitle(title);
-                builder.setMessage(activity.getResources().getString(message, permissionName));
-                builder.setPositiveButton(positiveButtonText, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
-                    }
-                });
-                builder.setNegativeButton(negativeButtonText, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        onPermissionRequestListener.onRequestFailed(permission, permissionName);
-                    }
-                });
-                builder.show();
-            } else {
-                ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
-            }
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
         }
     }
 
@@ -112,7 +98,7 @@ public class PermissionRequester {
      * @param permissions       权限
      * @param grantResults      状态
      */
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+    public void onRequestPermissionsResult(final BaseActivity activity, final int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         if (requestCode == this.requestCode) {
             if (grantResults.length == 0) {
                 onPermissionRequestListener.onRequestFailed(permission, permissionName);
@@ -120,8 +106,39 @@ public class PermissionRequester {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     onPermissionRequestListener.onRequestSuccess(permission, permissionName);
                 } else {
-                    onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                    if (permissionModel.getPermissionRecord(permission)) {//如果被禁止不在询问
+                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                        builder.setTitle(title);
+                        builder.setMessage(activity.getResources().getString(message, permissionName));
+                        builder.setPositiveButton(positiveButtonText, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                activity.startSystemSettingActivity(requestCode);
+                            }
+                        });
+                        builder.setNegativeButton(negativeButtonText, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                            }
+                        });
+                        builder.show();
+                    } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                        permissionModel.putPermissionRecord(permission, true);
+                        onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                    }
                 }
+            }
+        }
+    }
+
+    public void onActivityResult(BaseActivity activity, int requestCode, int resultCode, Intent data) {
+        if (requestCode == this.requestCode) {
+            if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
+                onPermissionRequestListener.onRequestSuccess(permission, permissionName);
+            } else {
+                onPermissionRequestListener.onRequestFailed(permission, permissionName);
             }
         }
     }

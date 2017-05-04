@@ -2,6 +2,6 @@
     <string name="app_name">Library</string>
     <string name="permission_title">提示</string>
     <string name="permission_message">该应用需要获取你的%s权限</string>
-    <string name="permission_ok">确认</string>
+    <string name="permission_ok">去设置页面开启</string>
     <string name="permission_cancel">取消</string>
 </resources>

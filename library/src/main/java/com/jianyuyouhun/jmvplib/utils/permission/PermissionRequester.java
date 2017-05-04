@@ -88,6 +88,7 @@ public class PermissionRequester {
         if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
             onPermissionRequestListener.onRequestSuccess(permission, permissionName);
         } else {
+            //没有权限的时候直接尝试获取权限
             ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
         }
     }
@@ -133,6 +134,13 @@ public class PermissionRequester {
         }
     }
 
+    /**
+     *
+     * @param activity      activity
+     * @param requestCode   请求码
+     * @param resultCode    结果
+     * @param data          intent
+     */
     public void onActivityResult(BaseActivity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == this.requestCode) {
             if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {

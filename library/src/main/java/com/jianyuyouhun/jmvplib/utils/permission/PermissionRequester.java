@@ -145,6 +145,7 @@ public class PermissionRequester {
     public void onActivityResult(BaseActivity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == this.requestCode) {
             if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
+                permissionModel.putPermissionRecord(permission, false);
                 onPermissionRequestListener.onRequestSuccess(permission, permissionName);
             } else {
                 onPermissionRequestListener.onRequestFailed(permission, permissionName);

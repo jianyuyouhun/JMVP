@@ -11,7 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import com.jianyuyouhun.jmvplib.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
 import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 
 /**

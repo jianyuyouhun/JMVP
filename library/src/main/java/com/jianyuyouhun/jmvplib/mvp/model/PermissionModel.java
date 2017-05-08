@@ -2,9 +2,12 @@ package com.jianyuyouhun.jmvplib.mvp.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+
+import java.util.Map;
 
 /**
  * 权限记录
@@ -32,7 +35,7 @@ public class PermissionModel extends BaseJModelImpl {
      * @param permission    权限
      * @param isIgnore      是否不再提示
      */
-    public void putPermissionRecord(String permission, boolean isIgnore) {
+    synchronized public void putPermissionRecord(String permission, boolean isIgnore) {
         spEditor.putBoolean(permission, isIgnore).apply();
     }
 
@@ -43,5 +46,13 @@ public class PermissionModel extends BaseJModelImpl {
      */
     public boolean getPermissionRecord(String permission) {
         return sp.getBoolean(permission, false);
+    }
+
+    /**
+     * 获取所有权限禁用记录
+     * @return  权限记录map
+     */
+    public Map<String, Boolean> getAllPermissionMap() {
+        return (Map<String, Boolean>) sp.getAll();
     }
 }

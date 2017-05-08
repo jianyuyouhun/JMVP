@@ -13,6 +13,8 @@ import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 
+import java.util.Map;
+
 /**
  * 动态权限处理
  * Created by wangyu on 2017/5/3.
@@ -149,6 +151,26 @@ public class PermissionRequester {
                 onPermissionRequestListener.onRequestSuccess(permission, permissionName);
             } else {
                 onPermissionRequestListener.onRequestFailed(permission, permissionName);
+            }
+            synchronizePermissionsState(activity, permission);
+        }
+    }
+
+    /**
+     * 同步其他权限禁用记录
+     * @param ignoredPermission      当前权限不处理
+     */
+    private void synchronizePermissionsState(BaseActivity activity, String ignoredPermission) {
+        Map<String, Boolean> allPermissionMap = permissionModel.getAllPermissionMap();
+        if (allPermissionMap == null) {//取不到缓存
+            return;
+        }
+        if (ignoredPermission == null) ignoredPermission = "";
+        for (String permission : allPermissionMap.keySet()) {
+            if (!permission.equals(ignoredPermission)) {//判断其他权限授权是否在跳往设置页面时被修改
+                if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
+                    permissionModel.putPermissionRecord(permission, false);//授予的权限都将禁用记录置空
+                }
             }
         }
     }

@@ -170,6 +170,10 @@ public class PermissionRequester {
             if (!permission.equals(ignoredPermission)) {//判断其他权限授权是否在跳往设置页面时被修改
                 if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
                     permissionModel.putPermissionRecord(permission, false);//授予的权限都将禁用记录置空
+                } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                    permissionModel.putPermissionRecord(permission, true);//用户喜欢在设置页面点来点去的时候就是这里了
+                } else {
+                    permissionModel.putPermissionRecord(permission, false);//怕出错，加上这行保险
                 }
             }
         }

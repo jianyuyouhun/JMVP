@@ -11,10 +11,10 @@ import java.lang.ref.WeakReference;
  * Created by jianyuyouhun on 2017/3/17.
  */
 
-public abstract class BaseJPresenterImpl<MainManager extends BaseJModel, MainView extends BaseJView> implements BaseJPresenter{
-    protected MainManager mModel;
-    private MainView mView;
-    private WeakReference<MainView> mViewRef;
+public abstract class BaseJPresenterImpl<MajorManager extends BaseJModel, MajorView extends BaseJView> implements BaseJPresenter{
+    protected MajorManager mModel;
+    private MajorView mView;
+    private WeakReference<MajorView> mViewRef;
     private Context context;
     private boolean isDestroy = false;
 
@@ -28,13 +28,13 @@ public abstract class BaseJPresenterImpl<MainManager extends BaseJModel, MainVie
 
     public abstract void beginPresent();
 
-    public void onBindModelView(MainManager mModel, MainView mView) {
+    public void onBindModelView(MajorManager mModel, MajorView mView) {
         mViewRef = new WeakReference<>(mView);
         this.mView = mViewRef.get();
         this.mModel = mModel;
     }
 
-    protected MainView getJView() {
+    protected MajorView getJView() {
         if (isAttach()) {
             return mViewRef.get();
         } else {

@@ -17,7 +17,7 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.1.6'
+	        compile 'com.github.jianyuyouhun:jmvp:0.1.7'
 	}
 
 ### 版本变化 ###
@@ -186,6 +186,10 @@
 #### v 0.1.6 ####
 
 　　动态权限请求逻辑优化，使用方式无需改变。
+
+#### v 0.1.7 ####
+
+　　修复bug
 
 # INTRO #
 

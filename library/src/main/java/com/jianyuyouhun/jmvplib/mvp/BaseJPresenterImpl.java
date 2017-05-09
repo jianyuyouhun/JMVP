@@ -2,6 +2,8 @@ package com.jianyuyouhun.jmvplib.mvp;
 
 import android.content.Context;
 
+import com.jianyuyouhun.jmvplib.app.JApp;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -9,10 +11,10 @@ import java.lang.ref.WeakReference;
  * Created by jianyuyouhun on 2017/3/17.
  */
 
-public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJView> implements BaseJPresenter{
-    protected M mModel;
-    private V mView;
-    private WeakReference<V> mViewRef;
+public abstract class BaseJPresenterImpl<MainManager extends BaseJModel, MainView extends BaseJView> implements BaseJPresenter{
+    protected MainManager mModel;
+    private MainView mView;
+    private WeakReference<MainView> mViewRef;
     private Context context;
     private boolean isDestroy = false;
 
@@ -26,13 +28,13 @@ public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJVi
 
     public abstract void beginPresent();
 
-    public void onBindModelView(M mModel, V mView) {
-        mViewRef = new WeakReference<V>(mView);
+    public void onBindModelView(MainManager mModel, MainView mView) {
+        mViewRef = new WeakReference<>(mView);
         this.mView = mViewRef.get();
         this.mModel = mModel;
     }
 
-    protected V getJView() {
+    protected MainView getJView() {
         if (isAttach()) {
             return mViewRef.get();
         } else {
@@ -60,5 +62,9 @@ public abstract class BaseJPresenterImpl<M extends BaseJModel, V extends BaseJVi
 
     public boolean isDestroy() {
         return isDestroy;
+    }
+
+    public <MinorModel extends BaseJModelImpl> MinorModel getModel(Class<MinorModel> model) {
+        return JApp.getInstance().getJModel(model);
     }
 }

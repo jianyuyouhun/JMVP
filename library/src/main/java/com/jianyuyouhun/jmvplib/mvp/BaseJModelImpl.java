@@ -28,7 +28,7 @@ public class BaseJModelImpl implements BaseJModel {
     @Override
     public void onAllModelCreate() {}
 
-    public <M extends BaseJModelImpl> M getModel(Class<M> model) {
+    public <MinorModel extends BaseJModelImpl> MinorModel getModel(Class<MinorModel> model) {
         return JApp.getInstance().getJModel(model);
     }
 

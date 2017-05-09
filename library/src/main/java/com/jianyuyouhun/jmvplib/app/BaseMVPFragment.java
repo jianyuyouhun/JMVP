@@ -11,10 +11,10 @@ import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
  * Created by wangyu on 2017/4/25.
  */
 
-public abstract class BaseMVPFragment<P extends BaseJPresenterImpl, M extends BaseJModelImpl> extends BaseFragment {
+public abstract class BaseMVPFragment<MainPresenter extends BaseJPresenterImpl, MainModel extends BaseJModelImpl> extends BaseFragment {
 
-    protected P mPresenter;
-    protected M mModel;
+    protected MainPresenter mPresenter;
+    protected MainModel mModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public abstract class BaseMVPFragment<P extends BaseJPresenterImpl, M extends Ba
         mPresenter.onCreate(getBaseActivity());
     }
 
-    protected abstract P getPresenter();
-    protected abstract M initModel();
+    protected abstract MainPresenter getPresenter();
+    protected abstract MainModel initModel();
     protected abstract boolean bindModelAndView();
 
     @Override

@@ -145,8 +145,8 @@ public abstract class JApp extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public <M extends BaseJModelImpl> M getJModel(Class<M> model) {
-        return (M) modelsMap.get(model.getName());
+    public <Model extends BaseJModelImpl> Model getJModel(Class<Model> model) {
+        return (Model) modelsMap.get(model.getName());
     }
 
     public static boolean isDebug() {

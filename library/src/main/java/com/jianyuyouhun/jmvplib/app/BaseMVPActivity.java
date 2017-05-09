@@ -10,10 +10,10 @@ import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
  * MVPActivity基类
  * Created by jianyuyouhun on 2017/3/17.
  */
-public abstract class BaseMVPActivity<P extends BaseJPresenterImpl, M extends BaseJModelImpl> extends BaseActivity {
+public abstract class BaseMVPActivity<MainPresenter extends BaseJPresenterImpl, MainModel extends BaseJModelImpl> extends BaseActivity {
 
-    protected P mPresenter;
-    protected M mModel;
+    protected MainPresenter mPresenter;
+    protected MainModel mModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,8 +30,8 @@ public abstract class BaseMVPActivity<P extends BaseJPresenterImpl, M extends Ba
         mPresenter.onCreate(this);
     }
 
-    protected abstract P getPresenter();
-    protected abstract M initModel();
+    protected abstract MainPresenter getPresenter();
+    protected abstract MainModel initModel();
     protected abstract boolean bindModelAndView();
 
     @Override

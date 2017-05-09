@@ -54,21 +54,18 @@ public class JHttpFactory {
     }
 
     public static JHttpFactory getInstance() {
+        if (!hasInited) {
+            throw new JHttpException();
+        }
         return jHttpFactory;
     }
 
     public void execute(JHttpClient client, OnResultListener<String> onResultListener) {
-        if (!hasInited) {
-            throw new JHttpException();
-        }
         JHttpTask task = new JHttpTask(mainHandler, client, onResultListener);
         executor.execute(task);
     }
 
     public void execute(JHttpClient client, OnProgressChangeListener onProgressChangeListener) {
-        if (!hasInited) {
-            throw new JHttpException();
-        }
         JHttpTask task = new JHttpTask(mainHandler, client, onProgressChangeListener);
         executor.execute(task);
     }

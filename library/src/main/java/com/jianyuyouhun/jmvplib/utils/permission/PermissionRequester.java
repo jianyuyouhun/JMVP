@@ -27,6 +27,8 @@ public class PermissionRequester {
     @StringRes private int positiveButtonText;
     private PermissionModel permissionModel;
 
+    public static final int REQUEST_PERMISSION_CODE_DEFAULT = 0x0001;
+
     private String permission;
     private int requestCode;
     private String permissionName;
@@ -71,7 +73,7 @@ public class PermissionRequester {
     }
 
     public void requestPermission(final BaseActivity activity, final String permissionName, final String permission) {
-        requestPermission(activity, permissionName, permission, 1);
+        requestPermission(activity, permissionName, permission, REQUEST_PERMISSION_CODE_DEFAULT);
     }
 
     /**

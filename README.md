@@ -191,6 +191,10 @@
 
 　　修复bug
 
+#### v 0.1.8 ####
+
+　　增加源码打包
+
 # INTRO #
 
    [Android设计模式浅入-MVP（二）](https://jianyuyouhun.com/index.php/archives/75/)

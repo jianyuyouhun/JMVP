@@ -31,7 +31,7 @@ public class PermissionRequester {
     private int requestCode;
     private String permissionName;
 
-    private PermissionRequestListener onPermissionRequestListener = new PermissionRequestListener() {
+    private OnRequestPermissionResultListener onRequestPermissionResultListener = new OnRequestPermissionResultListener() {
         @Override
         public void onRequestFailed(String permission, String permissionName) {
 
@@ -87,7 +87,7 @@ public class PermissionRequester {
         this.permissionName = permissionName;
         this.requestCode = code;
         if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
-            onPermissionRequestListener.onRequestSuccess(permission, permissionName);
+            onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
         } else {
             //没有权限的时候直接尝试获取权限
             ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
@@ -103,10 +103,10 @@ public class PermissionRequester {
     public void onRequestPermissionsResult(final BaseActivity activity, final int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         if (requestCode == this.requestCode) {
             if (grantResults.length == 0) {
-                onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
             } else {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    onPermissionRequestListener.onRequestSuccess(permission, permissionName);
+                    onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
                 } else {
                     if (permissionModel.getPermissionRecord(permission)) {//如果被禁止不在询问
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -122,15 +122,15 @@ public class PermissionRequester {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                                onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
                             }
                         });
                         builder.show();
                     } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
                         permissionModel.putPermissionRecord(permission, true);
-                        onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                        onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
                     } else {
-                        onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                        onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
                     }
                 }
             }
@@ -148,9 +148,9 @@ public class PermissionRequester {
         if (requestCode == this.requestCode) {
             if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
                 permissionModel.putPermissionRecord(permission, false);
-                onPermissionRequestListener.onRequestSuccess(permission, permissionName);
+                onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
             } else {
-                onPermissionRequestListener.onRequestFailed(permission, permissionName);
+                onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
             }
             synchronizePermissionsState(activity, permission);
         }
@@ -181,9 +181,9 @@ public class PermissionRequester {
 
     /**
      * 设置权限申请监听器
-     * @param onPermissionRequestListener   回调
+     * @param onRequestPermissionResultListener   回调
      */
-    public void setOnPermissionRequestListener(@NonNull PermissionRequestListener onPermissionRequestListener) {
-        this.onPermissionRequestListener = onPermissionRequestListener;
+    public void setOnRequestPermissionResultListener(@NonNull OnRequestPermissionResultListener onRequestPermissionResultListener) {
+        this.onRequestPermissionResultListener = onRequestPermissionResultListener;
     }
 }

@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
-import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequestListener;
+import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
 
 /**
  * 动态权限demo
@@ -27,7 +27,7 @@ public class RequestPermissionActivity extends BaseActivity {
     @FindViewById(R.id.phone)
     private Button phone;
 
-    private PermissionRequestListener requestListener = new PermissionRequestListener() {
+    private OnRequestPermissionResultListener requestListener = new OnRequestPermissionResultListener() {
         @Override
         public void onRequestSuccess(String permission, String permissionName) {
             showToast("成功获取" + permissionName + "权限");
@@ -42,7 +42,7 @@ public class RequestPermissionActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        permissionRequester.setOnPermissionRequestListener(requestListener);
+        permissionRequester.setOnRequestPermissionResultListener(requestListener);
         setListener();
     }
 

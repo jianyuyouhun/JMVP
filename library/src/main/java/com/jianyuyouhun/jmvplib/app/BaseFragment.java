@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
 /**
  * Fragment基类
@@ -26,11 +28,13 @@ public abstract class BaseFragment extends Fragment {
     private boolean isDestroy = false;
     private long mInsertDt = System.currentTimeMillis();
     private ProgressDialog mProgressDialog;
+    protected PermissionRequester permissionRequester;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isDestroy = false;
+        permissionRequester = new PermissionRequester();
     }
 
     /**
@@ -112,5 +116,17 @@ public abstract class BaseFragment extends Fragment {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         return intent;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        permissionRequester.onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        permissionRequester.onActivityResult(getBaseActivity(), requestCode, resultCode, data);
     }
 }

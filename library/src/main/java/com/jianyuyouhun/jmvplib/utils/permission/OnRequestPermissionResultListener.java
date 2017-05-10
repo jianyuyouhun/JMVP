@@ -5,7 +5,7 @@ package com.jianyuyouhun.jmvplib.utils.permission;
  * Created by wangyu on 2017/5/3.
  */
 
-public interface PermissionRequestListener {
+public interface OnRequestPermissionResultListener {
     void onRequestSuccess(String permission, String permissionName);
     void onRequestFailed(String permission, String permissionName);
 }

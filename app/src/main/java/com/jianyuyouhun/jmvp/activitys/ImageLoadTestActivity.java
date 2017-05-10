@@ -6,13 +6,18 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.jianyuyouhun.jmvp.R;
-import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
+import com.jianyuyouhun.jmvp.adapter.TestBannerAdapter;
+import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.library.AutoBannerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 图片加载测试
@@ -24,14 +29,23 @@ public class ImageLoadTestActivity extends BaseActivity {
     @FindViewById(R.id.imageView)
     private ImageView mImageView;
 
-    private SdcardModel sdcardModel = JApp.getInstance().getJModel(SdcardModel.class);
+    @FindViewById(R.id.autobanner)
+    private AutoBannerView autoBannerView;
+
+    private SdcardModel sdcardModel = App.getApp().getJModel(SdcardModel.class);
+
+    private ImageLoader imageLoader = ImageLoader.getInstance();
+
+    private TestBannerAdapter adapter;
 
     String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494412663941&di=1a6f92aa75f9f3a83a6ea50e15a7ed72&imgtype=0&src=http%3A%2F%2Fpic.qiantucdn.com%2F58pic%2F18%2F69%2F88%2F564ec350569c1_1024.jpg";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new TestBannerAdapter(getContext());
         loadImage();
+        loadBanner();
     }
 
     private void loadImage() {
@@ -39,7 +53,7 @@ public class ImageLoadTestActivity extends BaseActivity {
         ImageLoadOptions.Builder builder = new ImageLoadOptions.Builder(sdcardModel.getImgPath(url));
         builder.setUrl(url);
         builder.bindImageView(mImageView);
-        ImageLoader.getInstance().loadImage(builder.build(), new ImageLoadListener.SimpleImageLoadListener(){
+        imageLoader.loadImage(builder.build(), new ImageLoadListener.SimpleImageLoadListener(){
             @Override
             public void onLoadFailed(String reason) {
                 super.onLoadFailed(reason);
@@ -51,6 +65,16 @@ public class ImageLoadTestActivity extends BaseActivity {
                 mImageView.setImageBitmap(bitmap);
             }
         });
+    }
+
+    private void loadBanner() {
+        List<String> list = new ArrayList<>();
+        list.add("http://img3.imgtn.bdimg.com/it/u=1749061261,2462112140&fm=21&gp=0.jpg");
+        list.add("http://img5.imgtn.bdimg.com/it/u=1949438216,3782070973&fm=23&gp=0.jpg");
+        list.add("http://imgs.91danji.com/Upload/201419/2014191037351347278.jpg");
+        list.add("http://img.newyx.net/newspic/image/201410/14/90ea74d5b0.jpg");
+        adapter.changeItems(list);
+        autoBannerView.setAdapter(adapter);
     }
 
     @Override

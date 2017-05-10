@@ -1,5 +1,7 @@
 package com.jianyuyouhun.jmvplib.utils.imageloader;
 
+import android.widget.ImageView;
+
 import com.jianyuyouhun.jmvplib.utils.Encoder;
 
 /**
@@ -85,6 +87,16 @@ public class ImageLoadOptions {
 
             imageLoadOptions.imageLoadSize = imageLoadSize;
             return this;
+        }
+
+        public Builder bindImageView(ImageView imageView) {
+            if (imageView == null) {
+                throw new NullPointerException("imageView == null");
+            }
+            int width = imageView.getWidth() * 2;
+            int height = imageView.getHeight() * 2;
+            ImageLoadSize imageLoadSize = new ImageLoadSize(width, height, ImageScaleType.FIT_INSIDE);
+            return setImageLoadSize(imageLoadSize);
         }
 
         /**

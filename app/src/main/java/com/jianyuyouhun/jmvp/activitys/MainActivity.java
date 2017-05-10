@@ -25,6 +25,9 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.permission_test)
     private Button permissionButton;
 
+    @FindViewById(R.id.image_load_test)
+    private Button imageButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(RequestPermissionActivity.class);
+            }
+        });
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ImageLoadTestActivity.class);
             }
         });
     }

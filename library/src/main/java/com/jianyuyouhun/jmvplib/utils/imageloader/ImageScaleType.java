@@ -8,6 +8,8 @@ public enum ImageScaleType {
     /** 缩放图片，压缩xy，使图片适应width和width */
     FIT_XY("fit_xy"),
 
+    FIT_INSIDE("fit_inside"),
+
     /** 裁剪图片 */
     CENTER_CROP("center_crop"),
 

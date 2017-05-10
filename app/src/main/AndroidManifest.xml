@@ -33,6 +33,9 @@
         <activity
             android:name=".activitys.RequestPermissionActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activitys.ImageLoadTestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

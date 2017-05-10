@@ -113,11 +113,27 @@ public class BitmapUtils {
         float newHeight;
 
         switch (imageScaleType) {
+            case FIT_INSIDE:
+                if (srcWidth / srcHeight > (float) reqWidth / reqHeight) {
+                    scaleX = (float) reqHeight / srcHeight;//原图比例更宽
+                } else {
+                    scaleX = (float) reqWidth / srcWidth;//原图比例更高
+                }
+                if (scaleX > 1.0f) {
+                    newWidth = reqWidth / scaleX;
+                    newHeight = reqHeight / scaleX;
+                    scaleY = scaleX = 1.0f;
+                } else {
+                    scaleY = scaleX;
+                    newWidth = reqWidth;
+                    newHeight = reqHeight;
+                }
+                break;
             case CENTER_CROP:
                 if (srcWidth / srcHeight > (float) reqWidth / reqHeight) {
-                    scaleY = (float) reqHeight / srcHeight;
+                    scaleY = (float) reqHeight / srcHeight;//原图比例更宽
                 } else {
-                    scaleY = (float) reqWidth / srcWidth;
+                    scaleY = (float) reqWidth / srcWidth;//原图比例更高
                 }
                 if (scaleY > 1.0f) {
                     newWidth = reqWidth / scaleY;
@@ -129,7 +145,6 @@ public class BitmapUtils {
                     newHeight = reqHeight;
                 }
                 break;
-
             case CENTER_INSIDE:
                 if (srcWidth / srcHeight < (float) reqWidth / reqHeight) {
                     scaleY = (float) reqHeight / srcHeight;

@@ -8,6 +8,7 @@ import android.os.Message;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
 import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
+import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
@@ -132,6 +133,7 @@ public abstract class JApp extends Application {
         models.add(new CacheModel());               // 缓存model
         models.add(new TimeCountDownModel());       // 倒计时model
         models.add(new PermissionModel());          // 权限忽略记录
+        models.add(new SdcardModel());              // sd管理model
     }
 
     /**

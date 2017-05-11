@@ -195,6 +195,10 @@
 
 　　增加源码打包
 
+#### v 0.1.9 ####
+
+　　修复动态权限处理bug
+
 # INTRO #
 
    [Android设计模式浅入-MVP（二）](https://jianyuyouhun.com/index.php/archives/75/)

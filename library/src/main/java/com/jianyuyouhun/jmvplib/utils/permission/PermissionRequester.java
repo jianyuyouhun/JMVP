@@ -92,6 +92,9 @@ public class PermissionRequester {
             onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
         } else {
             //没有权限的时候直接尝试获取权限
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                permissionModel.putPermissionRecord(permission, false);
+            }
             ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
         }
     }
@@ -149,34 +152,30 @@ public class PermissionRequester {
     public void onActivityResult(BaseActivity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == this.requestCode) {
             if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
-                permissionModel.putPermissionRecord(permission, false);
                 onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
             } else {
                 onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
             }
-            synchronizePermissionsState(activity, permission);
+            synchronizePermissionsState(activity);
         }
     }
 
     /**
      * 同步其他权限禁用记录
-     * @param ignoredPermission      当前权限不处理
+     *
      */
-    private void synchronizePermissionsState(BaseActivity activity, String ignoredPermission) {
+    public void synchronizePermissionsState(BaseActivity activity) {
         Map<String, Boolean> allPermissionMap = permissionModel.getAllPermissionMap();
         if (allPermissionMap == null) {//取不到缓存
             return;
         }
-        if (ignoredPermission == null) ignoredPermission = "";
         for (String permission : allPermissionMap.keySet()) {
-            if (!permission.equals(ignoredPermission)) {//判断其他权限授权是否在跳往设置页面时被修改
-                if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
-                    permissionModel.putPermissionRecord(permission, false);//授予的权限都将禁用记录置空
-                } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-                    permissionModel.putPermissionRecord(permission, true);//用户喜欢在设置页面点来点去的时候就是这里了
-                } else {
-                    permissionModel.putPermissionRecord(permission, false);//怕出错，加上这行保险
-                }
+            if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
+                permissionModel.putPermissionRecord(permission, false);//授予的权限都将禁用记录置空
+            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                permissionModel.putPermissionRecord(permission, true);//用户喜欢在设置页面点来点去的时候就是这里了
+            } else {
+                permissionModel.putPermissionRecord(permission, false);//怕出错，加上这行保险
             }
         }
     }

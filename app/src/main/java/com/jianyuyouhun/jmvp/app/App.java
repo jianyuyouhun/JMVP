@@ -6,6 +6,7 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 
 import java.util.List;
@@ -16,11 +17,6 @@ import java.util.List;
  */
 
 public class App extends JApp {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        ImageLoader.getInstance().init(this);
-    }
 
     @Override
     protected void initModels(List<BaseJModelImpl> models) {
@@ -31,5 +27,12 @@ public class App extends JApp {
 
     public static App getApp() {
         return (App) getInstance();
+    }
+
+    @Override
+    protected void initDependencies() {
+        super.initDependencies();
+        JHttpFactory.init();
+        ImageLoader.getInstance().init(this);
     }
 }

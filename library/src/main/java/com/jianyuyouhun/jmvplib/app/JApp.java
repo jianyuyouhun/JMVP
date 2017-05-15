@@ -84,12 +84,17 @@ public abstract class JApp extends Application {
         mInstance = this;
         BuildConfig.setIsDebug(setDebugMode());
         isDebug = BuildConfig.isDebug();
-        JHttpFactory.init();
+        initDependencies();
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initJApp();
         initDebug();
     }
+
+    /**
+     * 初始化第三方库（比如imageLoader等）
+     */
+    protected void initDependencies() {}
 
     /**
      * 设置调试模式

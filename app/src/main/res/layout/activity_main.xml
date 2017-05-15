@@ -25,4 +25,9 @@
         android:text="图片加载测试"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/login_test"
+        android:text="登录测试"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

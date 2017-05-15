@@ -1,6 +1,7 @@
 package com.jianyuyouhun.jmvp.activitys;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,20 +44,23 @@ public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, A
         return R.layout.activity_adapter_test;
     }
 
+    @NonNull
     @Override
     protected AdapterTestPresenter getPresenter() {
         return new AdapterTestPresenter();
     }
 
+    @NonNull
     @Override
     protected AdapterTestModel initModel() {
         return App.getInstance().getJModel(AdapterTestModel.class);
     }
 
+    @NonNull
     @Override
-    protected boolean bindModelAndView() {
+    protected AdapterTestPresenter bindModelAndView() {
         mPresenter.onBindModelView(mModel, this);
-        return true;
+        return mPresenter;
     }
 
     private void initList(String s) {

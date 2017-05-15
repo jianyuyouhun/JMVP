@@ -1,6 +1,7 @@
 package com.jianyuyouhun.jmvp.app;
 
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
+import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
@@ -25,6 +26,7 @@ public class App extends JApp {
     protected void initModels(List<BaseJModelImpl> models) {
         models.add(new AdapterTestModel());
         models.add(new HttpTestModel());
+        models.add(new LoginTestModel());
     }
 
     public static App getApp() {

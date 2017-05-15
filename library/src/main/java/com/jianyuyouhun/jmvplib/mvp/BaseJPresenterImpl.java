@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 
 public abstract class BaseJPresenterImpl<MajorManager extends BaseJModel, MajorView extends BaseJView> implements BaseJPresenter{
     protected MajorManager mModel;
-    private MajorView mView;
+    protected MajorView mView;
     private WeakReference<MajorView> mViewRef;
     private Context context;
     private boolean isDestroy = false;

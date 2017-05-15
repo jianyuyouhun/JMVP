@@ -1,6 +1,7 @@
 package com.jianyuyouhun.jmvplib.app;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
@@ -23,16 +24,19 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenterImpl,
             throw new InitPresenterException();
         }
         mModel = initModel();
-        boolean isPresenterBindFinish = bindModelAndView();
-        if (!isPresenterBindFinish) {
-            throw new InitPresenterException("请为" + mPresenter.getClass().getName() + "绑定数据");
+        mPresenter = bindModelAndView();
+        if (mPresenter == null) {
+            throw new InitPresenterException("请为presenter绑定数据");
         }
         mPresenter.onCreate(this);
     }
 
+    @NonNull
     protected abstract MajorPresenter getPresenter();
+    @NonNull
     protected abstract MajorModel initModel();
-    protected abstract boolean bindModelAndView();
+    @NonNull
+    protected abstract MajorPresenter bindModelAndView();
 
     @Override
     protected void onDestroy() {

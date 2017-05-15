@@ -28,6 +28,9 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.image_load_test)
     private Button imageButton;
 
+    @FindViewById(R.id.login_test)
+    private Button loginButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(ImageLoadTestActivity.class);
+            }
+        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(LoginTestActivity.class);
             }
         });
     }

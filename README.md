@@ -201,7 +201,7 @@
 
 #### v 0.2.2 ####
 
-　　全局消息机制进行封装，改到LightBroadcast中，使用方式见
+　　全局消息机制进行封装，改到LightBroadcast中，使用方式见[LightBroadcast注释](https://github.com/jianyuyouhun/JMVP/blob/master/library/src/main/java/com/jianyuyouhun/jmvplib/app/broadcast/LightBroadcast.java)
 
 # INTRO #
 

@@ -17,60 +17,84 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.2.1'
+	        compile 'com.github.jianyuyouhun:jmvp:0.2.2'
 	}
 
 ### 版本变化 ###
 
-#### v 0.0.1 ####
+#### v 0.2.2 ####
 
-　　第一次发布，实现基本的mvp思路
+　　全局消息机制进行封装，改到LightBroadcast中，使用方式见[LightBroadcast注释](https://github.com/jianyuyouhun/JMVP/blob/master/library/src/main/java/com/jianyuyouhun/jmvplib/app/broadcast/LightBroadcast.java)
 
-#### v 0.0.5 ####
+#### v 0.2.0 ####
 
-　　增加注解绑定，使用方法：
+　　修复动态权限处理bug
 
-	ViewInjectUtil.inject(activity);
+#### v 0.1.8 ####
 
-#### v 0.0.6 ####
+　　增加源码打包
 
-　　增加异常捕获功能，使用方法：
+#### v 0.1.5 ####
 
-　　在manifest中添加
+　　增加动态权限处理。目前仅封装了单次一个权限申请，如要多个则需要手动多次调用，**并发请求将无法生效**。
 
-        <activity
-            android:name="com.jianyuyouhun.jmvplib.app.exception.ExceptionActivity"
-            android:screenOrientation="portrait" />
+　　使用方法：先设置请求回调监听器
 
-　　同时确保japp处于调试模式BuildConfig.IS\_DEBUG = true;
+        permissionRequester.setOnPermissionRequestListener(new PermissionRequestListener() {
+            @Override
+            public void onRequestSuccess(String permission, String permissionName) {
+                
+            }
 
-#### v 0.0.7 ####
+            @Override
+            public void onRequestFailed(String permission, String permissionName) {
 
-　　该使用方法已过期，请参考v 0.1.0
+            }
+        });
 
-　　增加全局的superHandler的使用控制
+　　然后开始请求权限：
 
-　　在presenter中实现handleSuperMsg(Message msg)方法。在oncreate中调用openHandleMsg();
+         permissionRequester.requestPermission(getActivity(), "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-#### v 0.1.0 ####
 
-1. presenter不再是单例，改为model单例。
-2. 全局消息监听使用方法修改，presenter的原用法移到model，新用法则见[Android 设计模式浅入 - MVP（三）](https://jianyuyouhun.com/index.php/archives/79/)
-3. model可以不是单例，具体使用见上链接。
+#### v 0.1.4 ####
 
-#### v 0.1.1 ####
+　　修复http请求bug，新用法如下：
 
-　　增加两个封装好的baseAdapter。其中simpleBaseAdapter模仿了recyclerview并且集成了注解绑定ViewInjectUtil
+	App的onCreate中初始化
 
-　　增加两个layoutManager，用于滑动控件嵌套recyclerview。
+	JHttpFactory.init();
 
-　　增加ScrollGridView，用于滑动控件嵌套gridView。
+	使用方式：
 
-#### v 0.1.2 ####
+	JHttpFactory.getInstance().execute(client, new OnResultListener<String>() {
+            @Override
+            public void onResult(int result, String data) {
+                ...
+            }
+        });
 
-　　修复了Logger的日志打印bug，之前只会打印为error类型。
+	JHttpFactory.getInstance().execute(client, new OnProgressChangeListener() {
+            @Override
+            public void onStart() {
+                
+            }
 
-　　提供非mvp模式的BaseActivity和BaseFragment。简单逻辑何必增加代码量。
+            @Override
+            public void onProgressChanged(int current, int total) {
+
+            }
+
+            @Override
+            public void onFinish(String result) {
+
+            }
+
+            @Override
+            public void onError(int code, Exception e) {
+
+            }
+        });
 
 #### v 0.1.3 ####
 
@@ -122,86 +146,43 @@
             }
         }).execute();
 
-#### v 0.1.4 ####
+#### v 0.1.1 ####
 
-　　修复http请求bug，新用法如下：
+　　增加两个封装好的baseAdapter。其中simpleBaseAdapter模仿了recyclerview并且集成了注解绑定ViewInjectUtil
 
-	App的onCreate中初始化
+　　增加两个layoutManager，用于滑动控件嵌套recyclerview。
 
-	JHttpFactory.init();
+　　增加ScrollGridView，用于滑动控件嵌套gridView。
 
-	使用方式：
+#### v 0.1.0 ####
 
-	JHttpFactory.getInstance().execute(client, new OnResultListener<String>() {
-            @Override
-            public void onResult(int result, String data) {
-                ...
-            }
-        });
+1. presenter不再是单例，改为model单例。
+2. 全局消息监听使用方法修改，presenter的原用法移到model，新用法则见[Android 设计模式浅入 - MVP（三）](https://jianyuyouhun.com/index.php/archives/79/)
+3. model可以不是单例，具体使用见上链接。
 
-	JHttpFactory.getInstance().execute(client, new OnProgressChangeListener() {
-            @Override
-            public void onStart() {
-                
-            }
+> 5/27/2017 11:43:21 AM 最新用法见v 0.2.2
 
-            @Override
-            public void onProgressChanged(int current, int total) {
+#### v 0.0.6 ####
 
-            }
+　　增加异常捕获功能，使用方法：
 
-            @Override
-            public void onFinish(String result) {
+　　在manifest中添加
 
-            }
+        <activity
+            android:name="com.jianyuyouhun.jmvplib.app.exception.ExceptionActivity"
+            android:screenOrientation="portrait" />
 
-            @Override
-            public void onError(int code, Exception e) {
+　　同时确保japp处于调试模式BuildConfig.IS\_DEBUG = true;
 
-            }
-        });
+#### v 0.0.5 ####
 
-#### v 0.1.5 ####
+　　增加注解绑定，使用方法：
 
-　　增加动态权限处理。目前仅封装了单次一个权限申请，如要多个则需要手动多次调用，**并发请求将无法生效**。
+	ViewInjectUtil.inject(activity);
 
-　　使用方法：先设置请求回调监听器
+#### v 0.0.1 ####
 
-        permissionRequester.setOnPermissionRequestListener(new PermissionRequestListener() {
-            @Override
-            public void onRequestSuccess(String permission, String permissionName) {
-                
-            }
-
-            @Override
-            public void onRequestFailed(String permission, String permissionName) {
-
-            }
-        });
-
-　　然后开始请求权限：
-
-         permissionRequester.requestPermission(getActivity(), "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-#### v 0.1.6 ####
-
-　　动态权限请求逻辑优化，使用方式无需改变。
-
-#### v 0.1.7 ####
-
-　　修复bug
-
-#### v 0.1.8 ####
-
-　　增加源码打包
-
-#### v 0.2.0 ####
-
-　　修复动态权限处理bug
-
-#### v 0.2.2 ####
-
-　　全局消息机制进行封装，改到LightBroadcast中，使用方式见[LightBroadcast注释](https://github.com/jianyuyouhun/JMVP/blob/master/library/src/main/java/com/jianyuyouhun/jmvplib/app/broadcast/LightBroadcast.java)
+　　第一次发布，实现基本的mvp思路
 
 # INTRO #
 

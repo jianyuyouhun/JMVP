@@ -1,8 +1,7 @@
 package com.jianyuyouhun.jmvp.mvp.logintest;
 
-import android.os.Handler;
-
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
@@ -13,12 +12,12 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
 public class LoginTestModel extends BaseJModelImpl {
 
-    private Handler handler;
+    private LightBroadcast handler;
 
     @Override
     public void onModelCreate(JApp app) {
         super.onModelCreate(app);
-        handler = app.getSuperHandler();
+        handler = LightBroadcast.getInstance();
     }
 
     public void doLogin(String userName, String password, final OnResultListener<String> listener) {

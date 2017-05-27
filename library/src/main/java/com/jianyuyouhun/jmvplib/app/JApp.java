@@ -1,10 +1,9 @@
 package com.jianyuyouhun.jmvplib.app;
 
 import android.app.Application;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 
+import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
+import com.jianyuyouhun.jmvplib.app.exception.ExceptionCaughtAdapter;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
 import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
@@ -12,7 +11,6 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
-import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +18,24 @@ import java.util.List;
 
 /**
  * app基类
+ *
+ * {@link #setDebugMode()}
+ *
+ * 设置调试模式，用于Logger打印日志的控制以及异常捕获页面的开启
+ *
+ * {@link #initDependencies()}
+ * 初始化第三方框架
+ *
+ * {@link #initCommonModels(List)}
+ * 初始化通用model
+ *
+ * {@link #initModels(List)}
+ * 初始化业务需求model
+ *
+ * {@link #initDebug()}
+ * 初始化异常捕获页面，若有引入第三方日志统计，如bugly，
+ * 请重写该方法并对{@link #isDebug}进行判断，建议不要在调试模式下开启统计
+ *
  * Created by jianyuyouhun on 2017/3/17.
  */
 
@@ -30,43 +46,6 @@ public abstract class JApp extends Application {
 
     private static boolean isDebug;
 
-    private Handler mSuperHandler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            for (String s : modelsMap.keySet()) {
-                BaseJModelImpl model = modelsMap.get(s);
-                if (model.isOpenHandleMsg()) {
-                    model.handleSuperMsg(msg);
-                }
-            }
-            for (OnSuperMsgHandlerListener listener : handlerListeners) {
-                listener.onHandleSuperMsg(msg);
-            }
-        }
-    };
-
-    private List<OnSuperMsgHandlerListener> handlerListeners = new ArrayList<>();
-
-    /**
-     * 增加全局消息监听
-     * @param listener listener
-     */
-    public void addOnSuperMsgHandlerListener(OnSuperMsgHandlerListener listener) {
-        handlerListeners.add(listener);
-    }
-
-    /**
-     * 移除全局消息监听
-     * @param listener listener
-     */
-    public void removeOnSuperMsgHandlerListener(OnSuperMsgHandlerListener listener) {
-        handlerListeners.remove(listener);
-    }
-
-    public Handler getSuperHandler() {
-        return mSuperHandler;
-    }
     /**
      * 是否是在主线程中
      */
@@ -88,6 +67,7 @@ public abstract class JApp extends Application {
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initJApp();
+        initLightBroadCast();
         initDebug();
     }
 
@@ -146,6 +126,14 @@ public abstract class JApp extends Application {
      * @param models models
      */
     protected abstract void initModels(List<BaseJModelImpl> models);
+
+    /**
+     * 初始化轻量级广播
+     */
+    private void initLightBroadCast() {
+        LightBroadcast.init();
+        LightBroadcast.getInstance().registerModels(modelsMap);
+    }
 
     public static JApp getInstance() {
         return mInstance;

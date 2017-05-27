@@ -28,7 +28,7 @@
             android:name=".activitys.HttpTestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.jianyuyouhun.jmvplib.app.ExceptionActivity"
+            android:name="com.jianyuyouhun.jmvplib.app.exception.ExceptionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.RequestPermissionActivity"

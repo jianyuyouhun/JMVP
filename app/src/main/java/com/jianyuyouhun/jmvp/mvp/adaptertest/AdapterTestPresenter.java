@@ -1,11 +1,10 @@
 package com.jianyuyouhun.jmvp.mvp.adaptertest;
 
 import android.content.Context;
-import android.os.Handler;
 import android.os.Message;
 
-import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.app.OnSuperMsgHandlerListener;
+import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
+import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
@@ -17,11 +16,11 @@ import com.jianyuyouhun.jmvplib.utils.Logger;
 
 public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, AdapterTestView> {
 
-    private Handler handler;
+    private LightBroadcast handler;
 
-    private OnSuperMsgHandlerListener handlerListener = new OnSuperMsgHandlerListener() {
+    private OnGlobalMsgReceiveListener handlerListener = new OnGlobalMsgReceiveListener() {
         @Override
-        public void onHandleSuperMsg(Message msg) {
+        public void onReceiveGlobalMsg(Message msg) {
             Logger.i("presenter", "消息" + msg.what);
         }
     };
@@ -29,8 +28,8 @@ public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, A
     @Override
     public void onCreate(Context context) {
         super.onCreate(context);
-        handler = JApp.getInstance().getSuperHandler();
-        JApp.getInstance().addOnSuperMsgHandlerListener(handlerListener);
+        handler = LightBroadcast.getInstance();
+        handler.addOnGlobalMsgReceiveListener(handlerListener);
     }
 
     @Override
@@ -71,6 +70,6 @@ public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, A
     @Override
     public void onDestroy() {
         super.onDestroy();
-        JApp.getInstance().removeOnSuperMsgHandlerListener(handlerListener);
+        handler.removeOnGlobalMsgReceiveListener(handlerListener);
     }
 }

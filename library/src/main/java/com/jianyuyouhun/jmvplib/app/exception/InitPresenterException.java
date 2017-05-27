@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.app;
+package com.jianyuyouhun.jmvplib.app.exception;
 
 /**
  * 获取presenter异常捕获

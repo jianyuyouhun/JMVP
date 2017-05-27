@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.app;
+package com.jianyuyouhun.jmvplib.app.exception;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.jianyuyouhun.jmvplib.app.BuildConfig;
+import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
 import java.io.ByteArrayOutputStream;

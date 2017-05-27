@@ -39,7 +39,7 @@
 　　在manifest中添加
 
         <activity
-            android:name="com.jianyuyouhun.jmvplib.app.ExceptionActivity"
+            android:name="com.jianyuyouhun.jmvplib.app.exception.ExceptionActivity"
             android:screenOrientation="portrait" />
 
 　　同时确保japp处于调试模式BuildConfig.IS\_DEBUG = true;
@@ -198,6 +198,10 @@
 #### v 0.2.0 ####
 
 　　修复动态权限处理bug
+
+#### v 0.2.2 ####
+
+　　全局消息机制进行封装，改到LightBroadcast中，使用方式见
 
 # INTRO #
 

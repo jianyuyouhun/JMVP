@@ -3,6 +3,7 @@ package com.jianyuyouhun.jmvplib.app;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.jianyuyouhun.jmvplib.app.exception.InitPresenterException;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 

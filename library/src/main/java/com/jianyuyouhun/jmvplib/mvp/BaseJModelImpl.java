@@ -1,9 +1,9 @@
 package com.jianyuyouhun.jmvplib.mvp;
 
-import android.os.Handler;
 import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 
 /**
  * model基类
@@ -11,12 +11,12 @@ import com.jianyuyouhun.jmvplib.app.JApp;
  */
 
 public class BaseJModelImpl implements BaseJModel {
-    private Handler superHandler;
+    private LightBroadcast superHandler;
     private boolean isOpenHandleMsg = false;
 
     @Override
     public void onModelCreate(JApp app) {
-        superHandler = app.getSuperHandler();
+        superHandler = LightBroadcast.getInstance();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class BaseJModelImpl implements BaseJModel {
         isOpenHandleMsg = false;
     }
 
-    protected Handler getSuperHandler() {
+    protected LightBroadcast getSuperHandler() {
         return superHandler;
     }
 }

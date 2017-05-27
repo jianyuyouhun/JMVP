@@ -26,7 +26,7 @@
 
 　　全局消息机制进行封装，改到LightBroadcast中，使用方式见[LightBroadcast注释](https://github.com/jianyuyouhun/JMVP/blob/master/library/src/main/java/com/jianyuyouhun/jmvplib/app/broadcast/LightBroadcast.java)
 
-　　增加最大高度限制的视图MaxHeightLinearLayout
+　　增加最大高度限制的视图MaxHeightLinearLayout和可控制滑动的NestScrollViewPager
 
 #### v 0.2.0 ####
 

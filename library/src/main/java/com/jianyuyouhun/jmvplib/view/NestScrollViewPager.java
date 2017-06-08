@@ -10,7 +10,6 @@ import android.view.MotionEvent;
  * Created by WangYu on 2016/10/22.
  */
 public class NestScrollViewPager extends ViewPager {
-
     private boolean isScrollAble = true;//是否可滑动
 
     public NestScrollViewPager(Context context, AttributeSet attrs) {
@@ -23,32 +22,12 @@ public class NestScrollViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        try {
-            return super.onInterceptTouchEvent(ev);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return isScrollAble && super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (isScrollAble) {
-            return super.onTouchEvent(ev);
-        } else {
-            return true;
-        }
-    }
-
-    @Override
-    public void scrollTo(int x, int y) {
-        if (isScrollAble) {
-            super.scrollTo(x, y);
-        } else {
-            super.scrollTo(0, 0);
-        }
+        return isScrollAble && super.onTouchEvent(ev);
     }
 
     public boolean isScrollAble() {

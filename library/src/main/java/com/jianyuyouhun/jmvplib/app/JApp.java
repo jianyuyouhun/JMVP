@@ -66,8 +66,8 @@ public abstract class JApp extends Application {
         initDependencies();
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
-        initJApp();
         initLightBroadCast();
+        initJApp();
         initDebug();
     }
 
@@ -108,6 +108,7 @@ public abstract class JApp extends Application {
         for (BaseJModelImpl model : models) {
             model.onAllModelCreate();
         }
+        LightBroadcast.getInstance().registerModels(modelsMap);
     }
 
     /**
@@ -132,7 +133,6 @@ public abstract class JApp extends Application {
      */
     private void initLightBroadCast() {
         LightBroadcast.init();
-        LightBroadcast.getInstance().registerModels(modelsMap);
     }
 
     public static JApp getInstance() {

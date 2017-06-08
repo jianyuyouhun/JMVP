@@ -17,12 +17,12 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.2.2'
+	        compile 'com.github.jianyuyouhun:jmvp:0.2.3'
 	}
 
 ### 版本变化 ###
 
-#### v 0.2.2 ####
+#### v 0.2.3 ####
 
 　　全局消息机制进行封装，改到LightBroadcast中，使用方式见[LightBroadcast注释](https://github.com/jianyuyouhun/JMVP/blob/master/library/src/main/java/com/jianyuyouhun/jmvplib/app/broadcast/LightBroadcast.java)
 

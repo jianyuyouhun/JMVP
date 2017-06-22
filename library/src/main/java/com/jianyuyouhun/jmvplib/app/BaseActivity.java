@@ -30,7 +30,7 @@ import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private boolean isMainActivityOn = false;
-    private ProgressDialog mProgressDialog;
+    protected ProgressDialog mProgressDialog;
     private boolean mIsDestroy;
     private boolean mIsFinish;
     private long mLastClickTime;
@@ -42,13 +42,42 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mIsDestroy = false;
         mIsFinish = false;
-        setContentView(getLayoutResId());
-        ViewInjectUtil.inject(this);
         permissionRequester = new PermissionRequester();
+        int layoutId = getLayoutResId();
+        if (layoutId != 0) {
+            setContentView(getLayoutResId());
+        } else {
+            View view = buildLayoutView();
+            if (view != null) {
+                setContentView(view);
+            }
+        }
+        ViewInjectUtil.inject(this);
     }
 
     @LayoutRes
     protected abstract int getLayoutResId();
+
+    /**
+     * 不想用layoutId的时候可以重写此方法返回一个View
+     *
+     * @return view
+     */
+    protected View buildLayoutView() {
+        return null;
+    }
+
+    @Deprecated
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+    }
+
+    @Deprecated
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+    }
 
     @Deprecated
     @Override
@@ -72,6 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setIsMainOn(boolean flag) {
         isMainActivityOn = flag;
     }
+
     /**
      * DIP 转 PX
      */
@@ -113,7 +143,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showProgressDialog() {
         if (mIsDestroy) return;
-        initDialog();
+        initProgressDialog();
         if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
@@ -127,7 +157,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void initDialog() {
+    protected void initProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(getContext());
             mProgressDialog.setCancelable(false);

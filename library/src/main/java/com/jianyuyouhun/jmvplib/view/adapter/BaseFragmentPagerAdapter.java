@@ -15,21 +15,27 @@ import com.jianyuyouhun.jmvplib.app.BaseFragment;
 public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private FragmentManager manager;
+    private ViewGroup viewGroup;
 
     public BaseFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         this.manager = fm;
     }
 
+    @Override
+    public void startUpdate(ViewGroup container) {
+        super.startUpdate(container);
+        this.viewGroup = container;
+    }
+
     /**
      * 获取当前fragment实例
      *
-     * @param container ViewPager对象
      * @param position  指定位置
      * @return 指定位置的fragment对象
      */
-    protected BaseFragment getCurrentFragment(ViewGroup container, int position) {
-        String name = makeFragmentName(container.getId(), position);
+    protected BaseFragment getFragmentByPosition(int position) {
+        String name = makeFragmentName(viewGroup.getId(), position);
         Fragment fragment = manager.findFragmentByTag(name);
         return (BaseFragment) fragment;
     }

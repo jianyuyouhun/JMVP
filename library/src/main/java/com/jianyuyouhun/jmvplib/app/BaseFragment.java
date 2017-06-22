@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
@@ -27,7 +25,7 @@ public abstract class BaseFragment extends Fragment {
 
     private boolean isDestroy = false;
     private long mInsertDt = System.currentTimeMillis();
-    private ProgressDialog mProgressDialog;
+    protected ProgressDialog mProgressDialog;
     protected PermissionRequester permissionRequester;
 
     @Override
@@ -49,7 +47,13 @@ public abstract class BaseFragment extends Fragment {
     @Deprecated
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutResId(), container, false);
+        View view;
+        int layoutId = getLayoutResId();
+        if (layoutId == 0) {
+            view = buildLayoutView();
+        } else {
+            view = inflater.inflate(getLayoutResId(), container, false);
+        }
         ViewInjectUtil.inject(this, view);
         onCreateView(view, container, savedInstanceState);
         return view;
@@ -57,6 +61,14 @@ public abstract class BaseFragment extends Fragment {
 
     @LayoutRes
     protected abstract int getLayoutResId();
+
+    /**
+     * 不想用layoutId的时候可以重写此方法返回一个View
+     * @return view
+     */
+    protected View buildLayoutView() {
+        return null;
+    }
 
     /**
      * 绑定好layoutId之后的onCreateView
@@ -90,7 +102,7 @@ public abstract class BaseFragment extends Fragment {
 
     public void showProgressDialog() {
         if (isDestroy) return;
-        initDialog();
+        initProgressDialog();
         if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
@@ -103,7 +115,7 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    private void initDialog() {
+    protected void initProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(getBaseActivity());
             mProgressDialog.setCancelable(false);
@@ -116,6 +128,10 @@ public abstract class BaseFragment extends Fragment {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         return intent;
+    }
+
+    public void startActivity(Class<? extends Activity> cls) {
+        startActivity(new Intent(getBaseActivity(), cls));
     }
 
     @Override

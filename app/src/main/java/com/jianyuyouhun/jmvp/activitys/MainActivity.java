@@ -31,9 +31,6 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.login_test)
     private Button loginButton;
 
-    @FindViewById(R.id.support_test)
-    private Button supportDesign;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +67,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(LoginTestActivity.class);
-            }
-        });
-        supportDesign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(SupportDesignActivity.class);
             }
         });
     }

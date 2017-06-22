@@ -30,20 +30,4 @@ public class HttpTestModel extends BaseJModelImpl {
             }
         });
     }
-
-    public void postTest(final OnResultListener<String> listener) {
-        Map<String, String> params = new HashMap<>();
-        params.put("json", "{\"op_type\":2002,\"task_id\":\"\",\"pid\":5,\"sid\":\"c3395dd46c34fa7fd8d729d8cf88b7a8\",\"user_id\":1003087,\"c_type\":1,\"gender\":3,\"c_ver\":5009,\"doc_id\":\"1004613\"}\n");
-        JHttpClient client = new JHttpFactory.ClientBuilder()
-                .setUrl(" https://test-bj.guijk.com/inquiry/index.php")
-                .setMethod(JHttpRequest.METHOD_POST)
-                .setParams(params)
-                .build();
-        JHttpFactory.getInstance().execute(client, new OnResultListener<String>() {
-            @Override
-            public void onResult(int result, String data) {
-                listener.onResult(result, data);
-            }
-        });
-    }
 }

@@ -12,6 +12,8 @@
     <com.jianyuyouhun.library.AutoBannerView
         android:layout_marginTop="12dp"
         android:id="@+id/autobanner"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:dotMargin="5dp"
         android:layout_width="match_parent"
         android:layout_height="220dp"/>
 </LinearLayout>

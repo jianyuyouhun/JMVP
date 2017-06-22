@@ -11,7 +11,7 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
-import com.jianyuyouhun.library.AutoBannerView;
+import com.jianyuyouhun.library.AutoBannerAdapter;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * Created by wangyu on 2017/5/10.
  */
 
-public class TestBannerAdapter implements AutoBannerView.AutoBannerAdapter {
+public class TestBannerAdapter extends AutoBannerAdapter {
 
     private ImageLoader imageLoader = ImageLoader.getInstance();
     private List<String> urls;
@@ -34,11 +34,17 @@ public class TestBannerAdapter implements AutoBannerView.AutoBannerAdapter {
 
     public void changeItems(@NonNull List<String> urls) {
         this.urls = urls;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
         return urls == null ? 0 : urls.size();
+    }
+
+    @Override
+    protected Object getItem(int position) {
+        return urls.get(position);
     }
 
     @Override

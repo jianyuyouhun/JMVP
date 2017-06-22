@@ -1,5 +1,6 @@
 package com.jianyuyouhun.jmvp.activitys;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
 import com.jianyuyouhun.library.AutoBannerView;
 
 import java.util.ArrayList;
@@ -40,10 +42,28 @@ public class ImageLoadTestActivity extends BaseActivity {
 
     String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494412663941&di=1a6f92aa75f9f3a83a6ea50e15a7ed72&imgtype=0&src=http%3A%2F%2Fpic.qiantucdn.com%2F58pic%2F18%2F69%2F88%2F564ec350569c1_1024.jpg";
 
+    private OnRequestPermissionResultListener onRequestPermissionResultListener = new OnRequestPermissionResultListener() {
+        @Override
+        public void onRequestSuccess(String permission, String permissionName) {
+            go();
+        }
+
+        @Override
+        public void onRequestFailed(String permission, String permissionName) {
+            showToast("你没有获取" + permissionName + "权限");
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        permissionRequester.setOnRequestPermissionResultListener(onRequestPermissionResultListener);
         adapter = new TestBannerAdapter(getContext());
+        autoBannerView.setAdapter(adapter);
+        permissionRequester.requestPermission(this, "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    private void go() {
         loadImage();
         loadBanner();
     }
@@ -74,7 +94,6 @@ public class ImageLoadTestActivity extends BaseActivity {
         list.add("http://imgs.91danji.com/Upload/201419/2014191037351347278.jpg");
         list.add("http://img.newyx.net/newspic/image/201410/14/90ea74d5b0.jpg");
         adapter.changeItems(list);
-        autoBannerView.setAdapter(adapter);
     }
 
     @Override

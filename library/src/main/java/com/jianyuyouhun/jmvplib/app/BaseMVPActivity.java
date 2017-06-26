@@ -30,7 +30,7 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenterImpl,
             throw new InitPresenterException();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            throw new InitPresenterException("请确保presenter拥有public的无参构造函数");
+            throw new InitPresenterException("请确保" + majorPresenterCls.getSimpleName() + "拥有public的无参构造函数");
         }
         mModel = initModel();
         bindModelAndView(mPresenter);

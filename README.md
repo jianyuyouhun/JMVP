@@ -162,7 +162,7 @@
 2. 全局消息监听使用方法修改，presenter的原用法移到model，新用法则见[Android 设计模式浅入 - MVP（三）](https://jianyuyouhun.com/index.php/archives/79/)
 3. model可以不是单例，具体使用见上链接。
 
-> 5/27/2017 11:43:21 AM 最新用法见v 0.2.2
+> 5/27/2017 11:43:21 AM 最新用法见v 0.2.3
 
 #### v 0.0.6 ####
 

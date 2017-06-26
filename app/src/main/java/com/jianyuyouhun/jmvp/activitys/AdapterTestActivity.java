@@ -55,17 +55,6 @@ public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, A
         mPresenter.onBindModelView(mModel, this);
     }
 
-    private void initList(String s) {
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < s.length(); i++) {
-            String str = String.valueOf(s.charAt(i));
-            if (!str.equals(" ")) {
-                list.add(String.valueOf(s.charAt(i)));
-            }
-        }
-        adapter.setData(list);
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -90,8 +79,8 @@ public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, A
     }
 
     @Override
-    public void onDataSuccess(String s) {
-        mTextView.setText(s);
-        initList(s);
+    public void onDataSuccess(List<String> list, String msg) {
+        mTextView.setText(msg);
+        adapter.setData(list);
     }
 }

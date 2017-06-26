@@ -9,6 +9,8 @@ import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
+import java.util.List;
+
 /**
  * 测试presenter
  * Created by wangyu on 2017/3/17.
@@ -44,17 +46,18 @@ public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, A
 
     private void test(final AdapterTestView view) {
         view.showLoading();
-        mModel.doRequester(new OnResultListener<String>() {
+        mModel.doRequester(new OnResultListener<List<String>>() {
             @Override
-            public void onResult(int result, final String data) {
+            public void onResult(int result, final List<String> data) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         view.hideLoading();
-                        view.onDataSuccess(data);
+                        view.onDataSuccess(data, "success");
                     }
                 }, 1000);
             }
+
         });
     }
 

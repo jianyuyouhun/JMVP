@@ -22,6 +22,12 @@
 
 ### 版本变化 ###
 
+#### v 0.2.4 ####
+
+　　删除Activity/Fragment中的getPresenter方法，取代的是使用反射来初始化presenter，
+
+　　修复了一些已知bug
+
 #### v 0.2.3 ####
 
 　　全局消息机制进行封装，改到LightBroadcast中，使用方式见[LightBroadcast注释](https://github.com/jianyuyouhun/JMVP/blob/master/library/src/main/java/com/jianyuyouhun/jmvplib/app/broadcast/LightBroadcast.java)

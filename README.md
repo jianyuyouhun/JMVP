@@ -17,7 +17,7 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.2.3'
+	        compile 'com.github.jianyuyouhun:jmvp:0.2.4'
 	}
 
 ### 版本变化 ###

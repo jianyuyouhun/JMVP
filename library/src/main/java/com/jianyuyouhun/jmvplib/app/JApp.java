@@ -63,12 +63,12 @@ public abstract class JApp extends Application {
         mInstance = this;
         BuildConfig.setIsDebug(setDebugMode());
         isDebug = BuildConfig.isDebug();
+        initDebug();
         initDependencies();
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initLightBroadCast();
         initJApp();
-        initDebug();
     }
 
     /**

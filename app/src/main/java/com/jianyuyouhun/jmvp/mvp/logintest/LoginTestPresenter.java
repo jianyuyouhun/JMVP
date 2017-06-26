@@ -24,9 +24,15 @@ public class LoginTestPresenter extends BaseJPresenterImpl<LoginTestModel, Login
         String userName = getJView().getUserName();
         String password = getJView().getPassword();
         if (TextUtils.isEmpty(userName)) {
+            getJView().showError("请输入用户名");
             return;
         }
-        if (TextUtils.isEmpty(password) || password.length() < 6) {
+        if (TextUtils.isEmpty(password)){
+            getJView().showError("请输入密码");
+            return;
+        }
+        if (password.length() < 6) {
+            getJView().showError("请输入正确的密码");
             return;
         }
         mModel.doLogin(userName, password, new OnResultListener<String>() {

@@ -46,21 +46,13 @@ public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, A
 
     @NonNull
     @Override
-    protected AdapterTestPresenter getPresenter() {
-        return new AdapterTestPresenter();
-    }
-
-    @NonNull
-    @Override
     protected AdapterTestModel initModel() {
         return App.getInstance().getJModel(AdapterTestModel.class);
     }
 
-    @NonNull
     @Override
-    protected AdapterTestPresenter bindModelAndView() {
+    protected void bindModelAndView(AdapterTestPresenter mPresenter) {
         mPresenter.onBindModelView(mModel, this);
-        return mPresenter;
     }
 
     private void initList(String s) {

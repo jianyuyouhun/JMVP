@@ -42,7 +42,7 @@ public abstract class BaseJPresenterImpl<MajorManager extends BaseJModel, MajorV
         }
     }
 
-    protected boolean isAttach() {
+    public boolean isAttach() {
         return mModel != null && mViewRef.get() != null;
     }
 

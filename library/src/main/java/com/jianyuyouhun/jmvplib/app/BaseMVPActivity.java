@@ -8,6 +8,8 @@ import com.jianyuyouhun.jmvplib.app.exception.InitPresenterException;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
 
+import java.lang.reflect.ParameterizedType;
+
 /**
  * MVPActivity基类
  * Created by jianyuyouhun on 2017/3/17.
@@ -20,24 +22,28 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenterImpl,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = getPresenter();
-        if (mPresenter == null) {
+        Class<MajorPresenter> majorPresenterCls = (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            mPresenter = majorPresenterCls.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
             throw new InitPresenterException();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new InitPresenterException("请确保presenter拥有public的无参构造函数");
         }
         mModel = initModel();
-        mPresenter = bindModelAndView();
-        if (mPresenter == null) {
+        bindModelAndView(mPresenter);
+        if (!mPresenter.isAttach()) {
             throw new InitPresenterException("请为presenter绑定数据");
         }
         mPresenter.onCreate(this);
     }
 
     @NonNull
-    protected abstract MajorPresenter getPresenter();
-    @NonNull
     protected abstract MajorModel initModel();
-    @NonNull
-    protected abstract MajorPresenter bindModelAndView();
+
+    protected abstract void bindModelAndView(MajorPresenter mPresenter);
 
     @Override
     protected void onDestroy() {

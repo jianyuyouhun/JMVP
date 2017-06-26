@@ -3,7 +3,6 @@ package com.jianyuyouhun.jmvp.activitys;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,21 +48,13 @@ public class LoginTestActivity extends BaseMVPActivity<LoginTestPresenter, Login
 
     @NonNull
     @Override
-    protected LoginTestPresenter getPresenter() {
-        return new LoginTestPresenter();
-    }
-
-    @NonNull
-    @Override
     protected LoginTestModel initModel() {
         return App.getInstance().getJModel(LoginTestModel.class);
     }
 
-    @NonNull
     @Override
-    protected LoginTestPresenter bindModelAndView() {
+    protected void bindModelAndView(LoginTestPresenter mPresenter) {
         mPresenter.onBindModelView(mModel, this);
-        return mPresenter;
     }
 
     @Override
@@ -78,23 +69,12 @@ public class LoginTestActivity extends BaseMVPActivity<LoginTestPresenter, Login
 
     @Override
     public String getUserName() {
-        String userName = mUsernameText.getText().toString().trim();
-        if (TextUtils.isEmpty(userName)) {
-            showError("请输入用户名");
-        }
-        return userName;
+        return mUsernameText.getText().toString().trim();
     }
 
     @Override
     public String getPassword() {
-        String password = mPasswordText.getText().toString().trim();
-        if (TextUtils.isEmpty(password)) {
-            showToast("请输入密码");
-        }
-        if (password.length() < 6) {
-            showToast("请输入正确的密码");
-        }
-        return password;
+        return mPasswordText.getText().toString().trim();
     }
 
     @Override

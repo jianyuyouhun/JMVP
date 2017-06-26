@@ -47,21 +47,13 @@ public class HttpTestActivity extends BaseMVPActivity<HttpTestPresenter, HttpTes
 
     @NonNull
     @Override
-    protected HttpTestPresenter getPresenter() {
-        return new HttpTestPresenter();
-    }
-
-    @NonNull
-    @Override
     protected HttpTestModel initModel() {
         return App.getInstance().getJModel(HttpTestModel.class);
     }
 
-    @NonNull
     @Override
-    protected HttpTestPresenter bindModelAndView() {
+    protected void bindModelAndView(HttpTestPresenter mPresenter) {
         mPresenter.onBindModelView(mModel, this);
-        return mPresenter;
     }
 
     @Override

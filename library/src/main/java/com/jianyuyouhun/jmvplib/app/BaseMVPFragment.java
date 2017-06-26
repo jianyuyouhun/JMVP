@@ -1,11 +1,14 @@
 package com.jianyuyouhun.jmvplib.app;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.jianyuyouhun.jmvplib.app.exception.InitPresenterException;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+
+import java.lang.reflect.ParameterizedType;
 
 /**
  * MVPFragment基类
@@ -20,9 +23,16 @@ public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenterImpl,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = getPresenter();
-        if (mPresenter == null) {
+        @SuppressWarnings("unchecked") Class<MajorPresenter> majorPresenterCls =
+                (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            mPresenter = majorPresenterCls.newInstance();
+        } catch (java.lang.InstantiationException e) {
+            e.printStackTrace();
             throw new InitPresenterException();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new InitPresenterException("请确保" + majorPresenterCls.getSimpleName() + "拥有public的无参构造函数");
         }
         mModel = initModel();
         boolean isPresenterBindFinish = bindModelAndView();
@@ -32,7 +42,7 @@ public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenterImpl,
         mPresenter.onCreate(getBaseActivity());
     }
 
-    protected abstract MajorPresenter getPresenter();
+    @NonNull
     protected abstract MajorModel initModel();
     protected abstract boolean bindModelAndView();
 

@@ -22,7 +22,8 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenterImpl,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Class<MajorPresenter> majorPresenterCls = (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        @SuppressWarnings("unchecked") Class<MajorPresenter> majorPresenterCls =
+                (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         try {
             mPresenter = majorPresenterCls.newInstance();
         } catch (InstantiationException e) {

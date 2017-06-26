@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -32,7 +33,9 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isDestroy = false;
-        permissionRequester = new PermissionRequester();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester = new PermissionRequester();
+        }
     }
 
     /**
@@ -137,12 +140,16 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionRequester.onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        permissionRequester.onActivityResult(getBaseActivity(), requestCode, resultCode, data);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.onActivityResult(getBaseActivity(), requestCode, resultCode, data);
+        }
     }
 }

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 
@@ -20,6 +22,7 @@ import java.util.Map;
  * Created by wangyu on 2017/5/3.
  */
 
+@RequiresApi(Build.VERSION_CODES.M)
 public class PermissionRequester {
     @StringRes private int title;
     @StringRes private int message;

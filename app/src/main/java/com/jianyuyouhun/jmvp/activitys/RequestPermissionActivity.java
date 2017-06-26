@@ -1,13 +1,17 @@
 package com.jianyuyouhun.jmvp.activitys;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
+import com.jianyuyouhun.jmvplib.utils.AppHelper;
 import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
 import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
 
@@ -27,6 +31,9 @@ public class RequestPermissionActivity extends BaseActivity {
     @FindViewById(R.id.phone)
     private Button phone;
 
+    @FindViewById(R.id.tips)
+    private TextView mTips;
+
     private OnRequestPermissionResultListener requestListener = new OnRequestPermissionResultListener() {
         @Override
         public void onRequestSuccess(String permission, String permissionName) {
@@ -42,11 +49,20 @@ public class RequestPermissionActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        permissionRequester.setOnRequestPermissionResultListener(requestListener);
+        mTips.setText("Current SDK:" + AppHelper.getOsVersion());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.setOnRequestPermissionResultListener(requestListener);
+        } else {
+            showToast("当前版本小于Android 6.0 无需做动态权限申请");
+        }
         setListener();
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void setListener() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
         storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

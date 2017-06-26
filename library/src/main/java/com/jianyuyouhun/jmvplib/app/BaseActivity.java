@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
@@ -42,7 +43,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mIsDestroy = false;
         mIsFinish = false;
-        permissionRequester = new PermissionRequester();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester = new PermissionRequester();
+        }
         int layoutId = getLayoutResId();
         if (layoutId != 0) {
             setContentView(getLayoutResId());
@@ -132,13 +135,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionRequester.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        permissionRequester.onActivityResult(this, requestCode, resultCode, data);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.onActivityResult(this, requestCode, resultCode, data);
+        }
     }
 
     public void showProgressDialog() {

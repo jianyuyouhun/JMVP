@@ -1,9 +1,8 @@
 package com.jianyuyouhun.jmvp.app;
 
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
-import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
-import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
+import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;

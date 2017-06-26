@@ -37,7 +37,7 @@ public class HttpTestActivity extends BaseMVPActivity<HttpTestPresenter, HttpTes
                 mPresenter.beginPresent();
             }
         });
-        mWebView.getSettings().setDefaultTextEncodingName("UTF -8");
+        mWebView.getSettings().setDefaultTextEncodingName("UTF-8");
     }
 
     @Override

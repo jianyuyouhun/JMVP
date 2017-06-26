@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -18,6 +19,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
+import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
@@ -38,6 +41,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected static final boolean IS_DEBUG_MODE = BuildConfig.isDebug();
     protected PermissionRequester permissionRequester;
 
+    private OnGlobalMsgReceiveListener onGlobalMsgReceiveListener = new OnGlobalMsgReceiveListener() {
+        @Override
+        public void onReceiveGlobalMsg(Message msg) {
+            if (msg.what == MsgWhat.ALL_ACTIVITY_CLOSE_YOUR_SELF.getValue()) {
+                finish();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         ViewInjectUtil.inject(this);
+        LightBroadcast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener);
     }
 
     @LayoutRes
@@ -129,6 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LightBroadcast.getInstance().removeOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener);
         mIsDestroy = true;
     }
 

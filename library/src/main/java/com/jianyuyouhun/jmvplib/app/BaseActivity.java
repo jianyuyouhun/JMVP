@@ -44,6 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private OnGlobalMsgReceiveListener onGlobalMsgReceiveListener = new OnGlobalMsgReceiveListener() {
         @Override
         public void onReceiveGlobalMsg(Message msg) {
+            logD("onReceiveGlobalMsg:" + msg.what);
             if (msg.what == MsgWhat.ALL_ACTIVITY_CLOSE_YOUR_SELF.getValue()) {
                 finish();
             }

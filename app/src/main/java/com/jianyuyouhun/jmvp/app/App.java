@@ -1,6 +1,7 @@
 package com.jianyuyouhun.jmvp.app;
 
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
+import com.jianyuyouhun.jmvp.mvp.db.DataBaseModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
@@ -16,6 +17,12 @@ import java.util.List;
  */
 
 public class App extends JApp {
+
+    @Override
+    public void initCommonModels(List<BaseJModelImpl> models) {
+        super.initCommonModels(models);
+        models.add(new DataBaseModel());
+    }
 
     @Override
     protected void initModels(List<BaseJModelImpl> models) {

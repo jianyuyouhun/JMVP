@@ -2,6 +2,7 @@ package com.jianyuyouhun.jmvp.activitys;
 
 import android.Manifest;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -57,10 +58,16 @@ public class ImageLoadTestActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        permissionRequester.setOnRequestPermissionResultListener(onRequestPermissionResultListener);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.setOnRequestPermissionResultListener(onRequestPermissionResultListener);
+        }
         adapter = new TestBannerAdapter(getContext());
         autoBannerView.setAdapter(adapter);
-        permissionRequester.requestPermission(this, "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionRequester.requestPermission(this, "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        } else {
+            go();
+        }
     }
 
     private void go() {

@@ -1,5 +1,8 @@
 package com.jianyuyouhun.jmvplib.mvp.model;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 
 import java.util.HashMap;
@@ -15,7 +18,8 @@ import java.util.TimerTask;
 
 public class TimeCountDownModel extends BaseJModelImpl {
 
-    private static HashMap<String, PayTimerData> mPayTimerDataMap = new HashMap<>();
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private static HashMap<String, TimerData> mTimerDataMap = new HashMap<>();
 
     /**
      * 添加监听类
@@ -23,8 +27,8 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param tag      唯一标识  可以用页面类名
      * @param listener 监听回调变化
      */
-    public void addPayTimeChangeByTag(String tag, OnPayTimeChangeListener listener) {
-        addPayTimeChangeListerByOrderId(tag, tag, listener);
+    public void addTimeChangeByTag(String tag, OnTimeChangeListener listener) {
+        addTimeChangeListerByOrderId(tag, tag, listener);
 
     }
 
@@ -34,9 +38,9 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param tag 唯一标识  可以用页面类名
      */
     public void removePayTimeByTag(String tag) {
-        if (mPayTimerDataMap.containsKey(tag)) {
-            mPayTimerDataMap.get(tag).release();
-            mPayTimerDataMap.remove(tag);
+        if (mTimerDataMap.containsKey(tag)) {
+            mTimerDataMap.get(tag).release();
+            mTimerDataMap.remove(tag);
         }
 
     }
@@ -47,8 +51,8 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param tag 唯一标识
      */
     public void resetTime(String tag) {
-        if (mPayTimerDataMap.containsKey(tag)) {
-            mPayTimerDataMap.get(tag).resetTime();
+        if (mTimerDataMap.containsKey(tag)) {
+            mTimerDataMap.get(tag).resetTime();
         }
 
     }
@@ -60,14 +64,14 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param orderId  订单id
      * @param listener 监听
      */
-    public void addPayTimeChangeListerByOrderId(String tag, String orderId, OnPayTimeChangeListener listener) {
+    public void addTimeChangeListerByOrderId(String tag, String orderId, OnTimeChangeListener listener) {
 
-        if (mPayTimerDataMap.containsKey(tag)) {
-            mPayTimerDataMap.get(tag).addPayTimeChangeListener(orderId, listener);
+        if (mTimerDataMap.containsKey(tag)) {
+            mTimerDataMap.get(tag).addTimeChangeListener(orderId, listener);
         } else {
-            PayTimerData timerData = new PayTimerData();
-            timerData.addPayTimeChangeListener(orderId, listener);
-            mPayTimerDataMap.put(tag, timerData);
+            TimerData timerData = new TimerData();
+            timerData.addTimeChangeListener(orderId, listener);
+            mTimerDataMap.put(tag, timerData);
         }
     }
 
@@ -77,9 +81,9 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param tag     唯一标识  可以用页面类名  列表页使用
      * @param orderId 订单id
      */
-    public void removePayTimeChangeListenerByOrderId(String tag, String orderId) {
-        if (mPayTimerDataMap.containsKey(tag)) {
-            mPayTimerDataMap.get(tag).removePayTimeChangeListener(orderId);
+    public void removeTimeChangeListenerByOrderId(String tag, String orderId) {
+        if (mTimerDataMap.containsKey(tag)) {
+            mTimerDataMap.get(tag).removeTimeChangeListener(orderId);
         }
     }
 
@@ -124,30 +128,30 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @return timeStamp 秒
      */
     public int getTimeCurrentCountByTag(String tag) {
-        if (mPayTimerDataMap.containsKey(tag)) {
-            PayTimerData payTimerData = mPayTimerDataMap.get(tag);
-            int changCount = (int) ((System.currentTimeMillis() - payTimerData.count) / 1000);
+        if (mTimerDataMap.containsKey(tag)) {
+            TimerData timerData = mTimerDataMap.get(tag);
+            int changCount = (int) ((System.currentTimeMillis() - timerData.count) / 1000);
             return changCount;
         } else {
             return 0;
         }
     }
 
-    public class PayTimerData {
-        private HashMap<String, OnPayTimeChangeListener> onPayTimeChangeListenerHashMap = new HashMap<>();
+    public class TimerData {
+        private HashMap<String, OnTimeChangeListener> onTimeChangeListenerHashMap = new HashMap<>();
         private Timer timer;
-        private PayTimeTask payTimeTask;
+        private TimeTask timeTask;
         private long count;
 
-        public PayTimerData() {
+        public TimerData() {
             startTimer();
         }
 
         private void startTimer() {
             timer = new Timer();
-            payTimeTask = new PayTimeTask();
+            timeTask = new TimeTask();
             count = System.currentTimeMillis();
-            timer.schedule(payTimeTask, 1000, 1000);
+            timer.schedule(timeTask, 1000, 1000);
         }
 
         private void cancelTimer() {
@@ -155,8 +159,8 @@ public class TimeCountDownModel extends BaseJModelImpl {
                 timer.cancel();
                 timer = null;
             }
-            if (payTimeTask != null) {
-                payTimeTask = null;
+            if (timeTask != null) {
+                timeTask = null;
             }
         }
 
@@ -168,21 +172,21 @@ public class TimeCountDownModel extends BaseJModelImpl {
             cancelTimer();
         }
 
-        public void addPayTimeChangeListener(String orderId, OnPayTimeChangeListener listener) {
-            if (!onPayTimeChangeListenerHashMap.containsKey(orderId)) {
-                onPayTimeChangeListenerHashMap.put(orderId, listener);
+        public void addTimeChangeListener(String orderId, OnTimeChangeListener listener) {
+            if (!onTimeChangeListenerHashMap.containsKey(orderId)) {
+                onTimeChangeListenerHashMap.put(orderId, listener);
             }
         }
 
-        public void removePayTimeChangeListener(String orderId) {
-            if (onPayTimeChangeListenerHashMap.containsKey(orderId)) {
-                onPayTimeChangeListenerHashMap.remove(orderId);
+        public void removeTimeChangeListener(String orderId) {
+            if (onTimeChangeListenerHashMap.containsKey(orderId)) {
+                onTimeChangeListenerHashMap.remove(orderId);
             }
         }
 
 
         private void notifyTimeChange(int changCount) {
-            HashMap<String, OnPayTimeChangeListener> tempMap = new HashMap<>(onPayTimeChangeListenerHashMap);
+            HashMap<String, OnTimeChangeListener> tempMap = new HashMap<>(onTimeChangeListenerHashMap);
             Iterator iter = tempMap.entrySet().iterator();
             if (iter == null) {
                 return;
@@ -193,16 +197,16 @@ public class TimeCountDownModel extends BaseJModelImpl {
                 if (entry == null) {
                     continue;
                 }
-                OnPayTimeChangeListener listener = (OnPayTimeChangeListener) entry.getValue();
-                listener.onPayTimeChange(changCount);
+                OnTimeChangeListener listener = (OnTimeChangeListener) entry.getValue();
+                listener.onTimeChange(changCount);
             }
         }
 
-        public class PayTimeTask extends TimerTask {
+        public class TimeTask extends TimerTask {
 
             @Override
             public void run() {
-                getSuperHandler().post(new Runnable() {
+                handler.post(new Runnable() {
                     @Override
                     public void run() {
                         int changCount = (int) ((System.currentTimeMillis() - count) / 1000);
@@ -214,8 +218,8 @@ public class TimeCountDownModel extends BaseJModelImpl {
 
     }
 
-    public interface OnPayTimeChangeListener {
+    public interface OnTimeChangeListener {
 
-        void onPayTimeChange(int changeCount);
+        void onTimeChange(int changeCount);
     }
 }

@@ -186,9 +186,13 @@ public class JHttpClient {
         try {
             int code = httpURLConnection.getResponseCode();
             InputStream inputStream = getInputStream(httpURLConnection, code);
-            byte[] data = IOUtils.readInputStream(inputStream);
-            inputStream.close();
-            listener.onResult(code, data);
+            if (inputStream == null) {
+                listener.onResult(code, null);
+            } else {
+                byte[] data = IOUtils.readInputStream(inputStream);
+                inputStream.close();
+                listener.onResult(code, data);
+            }
         } catch (IOException e) {
             listener.onError(OnHttpResultListener.RESULT_CANNOT_PARSE_RESPONSE, e);
         }

@@ -10,18 +10,36 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
 public class HttpTestPresenter extends BaseJPresenterImpl<HttpTestModel, HttpTestView> {
 
-    public void doHttpTest() {
-        final HttpTestView view = getJView();
-        if (view != null) {
-            view.showDialog();
-            mModel.doHttpTest(new OnResultListener<String>() {
+    public void doHttpTest(boolean isPost) {
+        if (!isAttach()) {
+            throw new RuntimeException("Model已经为空");
+        }
+        String url = getJView().getUrl();
+        if (!(url.startsWith("http://") || url.startsWith("https://"))){
+            url = "http://" + url;
+        }
+        getJView().showDialog();
+        if (isPost) {
+            mModel.doPost(url, null, new OnResultListener<String>() {
                 @Override
                 public void onResult(int result, String data) {
-                    view.hideDialog();
+                    getJView().hideDialog();
                     if (result == RESULT_SUCCESS) {
-                        view.showHtml(data);
+                        getJView().showHtml(data);
                     } else {
-                        view.showError("no data");
+                        getJView().showError("no data");
+                    }
+                }
+            });
+        } else {
+            mModel.doGet(url, new OnResultListener<String>() {
+                @Override
+                public void onResult(int result, String data) {
+                    getJView().hideDialog();
+                    if (result == RESULT_SUCCESS) {
+                        getJView().showHtml(data);
+                    } else {
+                        getJView().showError("no data");
                     }
                 }
             });

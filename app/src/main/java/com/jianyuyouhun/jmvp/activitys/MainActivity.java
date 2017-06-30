@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.adapter_test)
     private Button adapterButton;
 
-    @FindViewById(R.id.http_test)
+    @FindViewById(R.id.http_get)
     private Button httpButton;
 
     @FindViewById(R.id.permission_test)

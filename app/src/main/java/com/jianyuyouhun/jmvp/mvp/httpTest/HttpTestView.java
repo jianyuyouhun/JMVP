@@ -11,4 +11,5 @@ public interface HttpTestView extends BaseJView{
     void showDialog();
     void hideDialog();
     void showHtml(String htmlString);
+    String getUrl();
 }

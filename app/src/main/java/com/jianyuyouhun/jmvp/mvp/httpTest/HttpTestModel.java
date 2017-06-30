@@ -6,7 +6,6 @@ import com.jianyuyouhun.jmvplib.utils.http.JHttpClient;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpRequest;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,11 +15,23 @@ import java.util.Map;
 
 public class HttpTestModel extends BaseJModelImpl {
 
-    public void doHttpTest(final OnResultListener<String> listener) {
-        Map<String, String> params = new HashMap<>();
+    public void doGet(String url, final OnResultListener<String> listener) {
         JHttpClient client = new JHttpFactory.ClientBuilder()
-                .setUrl("https://jianyuyouhun.com")
+                .setUrl(url)
                 .setMethod(JHttpRequest.METHOD_GET)
+                .build();
+        JHttpFactory.getInstance().execute(client, new OnResultListener<String>() {
+            @Override
+            public void onResult(int result, String data) {
+                listener.onResult(result, data);
+            }
+        });
+    }
+
+    public void doPost(String url, Map<String, String> params, final OnResultListener<String> listener) {
+        JHttpClient client = new JHttpFactory.ClientBuilder()
+                .setUrl(url)
+                .setMethod(JHttpRequest.METHOD_POST)
                 .setParams(params)
                 .build();
         JHttpFactory.getInstance().execute(client, new OnResultListener<String>() {

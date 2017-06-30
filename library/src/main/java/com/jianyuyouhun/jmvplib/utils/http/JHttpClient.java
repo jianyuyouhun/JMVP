@@ -53,11 +53,20 @@ public class JHttpClient {
 
     private void doGet() {
         try {
-            httpURLConnection = (HttpURLConnection) new URL(httpRequest.getUrl()).openConnection();
+            Map<String, String> params = httpRequest.getParams();
+            String url;
+            if (params != null && params.size() > 0)
+                url = httpRequest.getUrl() + "?" + changeParams(params);
+            else
+                url = httpRequest.getUrl();
+            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setConnectTimeout(httpRequest.getConnectTimeout());
             httpURLConnection.setReadTimeout(httpRequest.getReadTimeout());
             httpURLConnection.addRequestProperty("Accept-Encoding", "gzip");
+            if (httpRequest.getHeaders() != null) {
+                appendHeaders(httpURLConnection, httpRequest.getHeaders());
+            }
             httpURLConnection.connect();
             parseResult();
         } catch (IOException e) {

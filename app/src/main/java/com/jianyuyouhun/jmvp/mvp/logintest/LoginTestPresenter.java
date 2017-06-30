@@ -12,11 +12,6 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
 public class LoginTestPresenter extends BaseJPresenterImpl<LoginTestModel, LoginTestView> {
 
-    @Override
-    public void beginPresent() {
-
-    }
-
     public void doLogin() {
         if (getJView() == null) {
             return;

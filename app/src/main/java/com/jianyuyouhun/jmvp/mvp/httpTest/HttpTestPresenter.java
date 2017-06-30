@@ -9,8 +9,8 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  */
 
 public class HttpTestPresenter extends BaseJPresenterImpl<HttpTestModel, HttpTestView> {
-    @Override
-    public void beginPresent() {
+
+    public void doHttpTest() {
         final HttpTestView view = getJView();
         if (view != null) {
             view.showDialog();

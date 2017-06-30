@@ -7,7 +7,7 @@ package com.jianyuyouhun.jmvplib.app.exception;
 
 public class InitPresenterException extends RuntimeException {
     public InitPresenterException() {
-        this("请初始化对应的Presenter");
+        this("presenter初始化失败！");
     }
 
     public InitPresenterException(String detailMessage) {

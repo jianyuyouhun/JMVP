@@ -3,6 +3,7 @@ package com.jianyuyouhun.jmvplib.mvp;
 import android.content.Context;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjectUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -24,9 +25,8 @@ public abstract class BaseJPresenterImpl<MajorManager extends BaseJModel, MajorV
     public void onCreate(Context context) {
         this.context = context;
         isDestroy = false;
+        ModelInjectUtil.injectModel(this);
     }
-
-    public abstract void beginPresent();
 
     public void onBindModelView(MajorManager mModel, MajorView mView) {
         mViewRef = new WeakReference<>(mView);

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
 
 import java.util.ArrayList;
 import java.util.List;

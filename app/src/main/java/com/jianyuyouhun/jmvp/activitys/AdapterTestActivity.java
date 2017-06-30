@@ -12,9 +12,8 @@ import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestPresenter;
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, AdapterTestModel> implements AdapterTestView {
@@ -31,7 +30,7 @@ public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
-        mPresenter.beginPresent();
+        mPresenter.test();
     }
 
     private void initView() {

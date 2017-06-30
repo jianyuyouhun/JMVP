@@ -15,7 +15,7 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
-import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
 import com.jianyuyouhun.library.AutoBannerView;
 

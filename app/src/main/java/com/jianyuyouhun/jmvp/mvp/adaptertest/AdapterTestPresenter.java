@@ -34,26 +34,19 @@ public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, A
         handler.addOnGlobalMsgReceiveListener(handlerListener);
     }
 
-    @Override
-    public void beginPresent() {
-        final AdapterTestView view = getJView();
-        if (view != null) {
-            test(view);
-        } else {
-            testExceptionHandle();
+    public void test() {
+        if (!isAttach()) {
+            throw new RuntimeException("view已经为空了");
         }
-    }
-
-    private void test(final AdapterTestView view) {
-        view.showLoading();
+        getJView().showLoading();
         mModel.doRequester(new OnResultListener<List<String>>() {
             @Override
             public void onResult(int result, final List<String> data) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        view.hideLoading();
-                        view.onDataSuccess(data, "success");
+                        getJView().hideLoading();
+                        getJView().onDataSuccess(data, "success");
                     }
                 }, 1000);
             }
@@ -61,7 +54,7 @@ public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, A
         });
     }
 
-    private void testExceptionHandle() {
+    public void testExceptionHandle() {
         handler.post(new Runnable() {
             @Override
             public void run() {

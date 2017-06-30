@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
 /**
  * 首页

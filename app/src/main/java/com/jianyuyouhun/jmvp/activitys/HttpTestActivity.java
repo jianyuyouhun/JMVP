@@ -13,7 +13,7 @@ import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestPresenter;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
 /**
  * http测试页面
@@ -34,7 +34,7 @@ public class HttpTestActivity extends BaseMVPActivity<HttpTestPresenter, HttpTes
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.beginPresent();
+                mPresenter.doHttpTest();
             }
         });
         mWebView.getSettings().setDefaultTextEncodingName("UTF-8");

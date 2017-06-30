@@ -4,6 +4,7 @@ import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjectUtil;
 
 /**
  * model基类
@@ -17,6 +18,7 @@ public class BaseJModelImpl implements BaseJModel {
     @Override
     public void onModelCreate(JApp app) {
         superHandler = LightBroadcast.getInstance();
+        ModelInjectUtil.injectModel(this);
     }
 
     @Override

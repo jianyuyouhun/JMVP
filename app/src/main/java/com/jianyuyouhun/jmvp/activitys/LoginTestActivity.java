@@ -13,7 +13,7 @@ import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestPresenter;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
 /**
  * 登录测试activity

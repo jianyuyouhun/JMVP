@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jianyuyouhun.jmvp.R;
-import com.jianyuyouhun.jmvplib.utils.injecter.FindViewById;
-import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
 
 import java.util.List;
 

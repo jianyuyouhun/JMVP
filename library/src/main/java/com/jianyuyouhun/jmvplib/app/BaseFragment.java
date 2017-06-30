@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
 /**

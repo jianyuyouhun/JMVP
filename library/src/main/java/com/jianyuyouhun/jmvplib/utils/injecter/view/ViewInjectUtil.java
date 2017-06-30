@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.injecter;
+package com.jianyuyouhun.jmvplib.utils.injecter.view;
 
 import android.app.Activity;
 import android.app.Dialog;

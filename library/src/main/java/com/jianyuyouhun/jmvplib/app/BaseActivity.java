@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
-import com.jianyuyouhun.jmvplib.utils.injecter.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
 import java.util.List;

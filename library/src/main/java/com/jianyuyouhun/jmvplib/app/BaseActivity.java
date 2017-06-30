@@ -33,7 +33,6 @@ import java.util.List;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private boolean isMainActivityOn = false;
     protected ProgressDialog mProgressDialog;
     private boolean mIsDestroy;
     private boolean mIsFinish;
@@ -109,14 +108,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void showToast(String msg) {
         if (mIsDestroy) return;
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    public boolean isMainActivityOn() {
-        return isMainActivityOn;
-    }
-
-    public void setIsMainOn(boolean flag) {
-        isMainActivityOn = flag;
     }
 
     /**

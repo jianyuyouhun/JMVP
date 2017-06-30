@@ -1,7 +1,6 @@
 package com.jianyuyouhun.jmvplib.utils.injecter.model;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
 
 import java.lang.reflect.Field;
@@ -12,7 +11,7 @@ import java.lang.reflect.Modifier;
  * Created by wangyu on 2017/6/30.
  */
 
-public class ModelInjectUtil {
+public class ModelInjector {
 
     public static void injectModel(Object object) {
         Class<?> aClass = object.getClass();

@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
 /**
@@ -57,7 +57,7 @@ public abstract class BaseFragment extends Fragment {
         } else {
             view = inflater.inflate(getLayoutResId(), container, false);
         }
-        ViewInjectUtil.inject(this, view);
+        ViewInjector.inject(this, view);
         onCreateView(view, container, savedInstanceState);
         return view;
     }

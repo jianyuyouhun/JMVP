@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +146,7 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
         }
 
         public void initView() {
-            ViewInjectUtil.inject(this, itemView);
+            ViewInjector.inject(this, itemView);
         }
     }
 }

@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
  * Created by wangyu on 2017/4/5.
  */
 
-public class ViewInjectUtil {
+public class ViewInjector {
     /**
      * 注入View和OnClickListener，通常在Fragment和Adapter中使用
      *

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjectUtil;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class DemoRecyclerAdapter extends RecyclerView.Adapter<DemoRecyclerAdapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            ViewInjectUtil.inject(this, itemView);
+            ViewInjector.inject(this, itemView);
         }
     }
 }

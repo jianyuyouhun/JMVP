@@ -7,8 +7,10 @@ package com.jianyuyouhun.jmvplib.app;
 
 public enum MsgWhat {
 
-    /** 通知所有Activity关闭自己 */
-    ALL_ACTIVITY_CLOSE_YOUR_SELF(-1);
+    /** 通知所有BaseActivity关闭自己 */
+    ALL_ACTIVITY_CLOSE_YOUR_SELF(-1),
+    /** 通知所有BaseService关闭自己 */
+    ALL_SERVICE_STOP_YOUR_SELF(-2);
 
     private int value;
 

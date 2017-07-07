@@ -2,6 +2,7 @@ package com.jianyuyouhun.jmvplib.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -16,6 +17,9 @@ import com.jianyuyouhun.jmvplib.R;
 
 public class MaxHeightLinearLayout extends LinearLayout {
     private float maxHeight = -1;
+    private static final int MODE_SHIFT = 30;
+    private static final int MODE_MASK = 0x3 << MODE_SHIFT;
+
     public MaxHeightLinearLayout(Context context) {
         this(context, null);
     }
@@ -58,7 +62,9 @@ public class MaxHeightLinearLayout extends LinearLayout {
             heightSize = heightSize <= maxHeight ? heightSize
                     : (int) maxHeight;
         }
-        int maxHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize,
+        @IntRange(from = 0, to = (1 << MODE_SHIFT) - 1)
+        int heightSizeFormat = heightSize;
+        int maxHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSizeFormat,
                 heightMode);
         super.onMeasure(widthMeasureSpec, maxHeightMeasureSpec);
     }

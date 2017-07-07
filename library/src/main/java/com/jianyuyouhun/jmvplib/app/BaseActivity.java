@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
 
@@ -68,6 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         ViewInjector.inject(this);
+        ModelInjector.injectModel(this);
         LightBroadcast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener);
     }
 

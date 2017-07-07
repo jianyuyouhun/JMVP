@@ -11,6 +11,8 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.library.AutoBannerAdapter;
 
 import java.util.List;
@@ -26,10 +28,12 @@ public class TestBannerAdapter extends AutoBannerAdapter {
     private List<String> urls;
     private Context context;
 
-    private SdcardModel sdcardModel = App.getApp().getJModel(SdcardModel.class);
+    @Model
+    private SdcardModel sdcardModel;
 
     public TestBannerAdapter(Context context) {
         this.context = context;
+        ModelInjector.injectModel(this);
     }
 
     public void changeItems(@NonNull List<String> urls) {

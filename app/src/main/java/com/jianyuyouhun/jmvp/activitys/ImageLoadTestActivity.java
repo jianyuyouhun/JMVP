@@ -15,6 +15,7 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
 import com.jianyuyouhun.library.AutoBannerView;
@@ -35,7 +36,8 @@ public class ImageLoadTestActivity extends BaseActivity {
     @FindViewById(R.id.autobanner)
     private AutoBannerView autoBannerView;
 
-    private SdcardModel sdcardModel = App.getApp().getJModel(SdcardModel.class);
+    @Model
+    private SdcardModel sdcardModel;
 
     private ImageLoader imageLoader = ImageLoader.getInstance();
 

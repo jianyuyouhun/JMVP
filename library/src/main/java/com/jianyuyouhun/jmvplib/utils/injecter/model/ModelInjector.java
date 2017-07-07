@@ -1,5 +1,7 @@
 package com.jianyuyouhun.jmvplib.utils.injecter.model;
 
+import com.jianyuyouhun.jmvplib.app.BaseActivity;
+import com.jianyuyouhun.jmvplib.app.BaseFragment;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
@@ -32,13 +34,21 @@ public class ModelInjector {
 
                     Class<?> type = field.getType();
                     if (!BaseJModel.class.isAssignableFrom(type)) {
-                        throw new RuntimeException("@Model 注解只能应用到BaseJModelImpl的子类");
+                        throw new RuntimeException("@Model 不能在BaseJModel中使用");
+                    }
+
+                    if (!BaseActivity.class.isAssignableFrom(type)) {
+                        throw new RuntimeException("@Model 不能在BaseActivity中使用");
+                    }
+
+                    if (!BaseFragment.class.isAssignableFrom(type)) {
+                        throw new RuntimeException("@Model 不能在BaseFragment中使用");
                     }
                     @SuppressWarnings("unchecked")
                     BaseJModel baseManager = JApp.getInstance().getJModel((Class<? extends BaseJModel>) type);
 
                     if (baseManager == null) {
-                        throw new RuntimeException(type.getSimpleName() + "Model还未初始化！");
+                        throw new RuntimeException(type.getSimpleName() + " Model还未初始化！");
                     }
 
                     if (!field.isAccessible())

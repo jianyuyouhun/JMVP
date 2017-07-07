@@ -5,6 +5,7 @@ import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 
 /**
  * service 基类
@@ -16,6 +17,7 @@ public abstract class BaseService extends Service implements OnGlobalMsgReceiveL
     @Override
     public void onCreate() {
         super.onCreate();
+        ModelInjector.injectModel(this);
         LightBroadcast.getInstance().addOnGlobalMsgReceiveListener(this);
     }
 

@@ -17,7 +17,6 @@ public class BaseJModel {
 
     public void onModelCreate(JApp app) {
         superHandler = LightBroadcast.getInstance();
-        ModelInjector.injectModel(this);
     }
 
     public void onModelDestroy() {}

@@ -13,6 +13,7 @@ import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,6 +103,7 @@ public abstract class JApp extends Application {
         initModels(models);
         for (BaseJModel model : models) {
             long time = System.currentTimeMillis();
+            ModelInjector.injectModel(model);
             model.onModelCreate(this);
             Class<? extends BaseJModel> baseModelClass = model.getClass();
             String name = baseModelClass.getName();

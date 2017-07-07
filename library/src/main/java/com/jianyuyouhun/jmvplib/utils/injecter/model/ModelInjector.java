@@ -34,16 +34,9 @@ public class ModelInjector {
 
                     Class<?> type = field.getType();
                     if (!BaseJModel.class.isAssignableFrom(type)) {
-                        throw new RuntimeException("@Model 不能在BaseJModel中使用");
+                        throw new RuntimeException("@Model 只能在BaseJModel子类中使用");
                     }
 
-                    if (!BaseActivity.class.isAssignableFrom(type)) {
-                        throw new RuntimeException("@Model 不能在BaseActivity中使用");
-                    }
-
-                    if (!BaseFragment.class.isAssignableFrom(type)) {
-                        throw new RuntimeException("@Model 不能在BaseFragment中使用");
-                    }
                     @SuppressWarnings("unchecked")
                     BaseJModel baseManager = JApp.getInstance().getJModel((Class<? extends BaseJModel>) type);
 

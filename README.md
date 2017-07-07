@@ -22,6 +22,10 @@
 
 ### 版本变化 ###
 
+#### v 0.2.5(测试版) ####
+
+　　service中提供关闭广播
+
 #### v 0.2.4 ####
 
 　　删除Activity/Fragment中的getPresenter方法，取代的是使用反射来初始化presenter，

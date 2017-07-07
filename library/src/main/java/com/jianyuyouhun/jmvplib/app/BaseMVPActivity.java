@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.jianyuyouhun.jmvplib.app.exception.InitPresenterException;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
+import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
  * MVPActivity基类
  * Created by jianyuyouhun on 2017/3/17.
  */
-public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenterImpl, MajorModel extends BaseJModelImpl> extends BaseActivity {
+public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenter, MajorModel extends BaseJModel> extends BaseActivity {
 
     protected MajorPresenter mPresenter;
     protected MajorModel mModel;

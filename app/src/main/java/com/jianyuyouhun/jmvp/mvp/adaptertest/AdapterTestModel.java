@@ -3,7 +3,7 @@ package com.jianyuyouhun.jmvp.mvp.adaptertest;
 import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by wangyu on 2017/3/17.
  */
 
-public class AdapterTestModel extends BaseJModelImpl {
+public class AdapterTestModel extends BaseJModel {
 
     @Override
     public void onModelCreate(JApp app) {

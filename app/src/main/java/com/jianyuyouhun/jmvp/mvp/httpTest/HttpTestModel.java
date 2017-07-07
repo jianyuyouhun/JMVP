@@ -1,6 +1,6 @@
 package com.jianyuyouhun.jmvp.mvp.httpTest;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpClient;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by jianyuyouhun on 2017/4/26.
  */
 
-public class HttpTestModel extends BaseJModelImpl {
+public class HttpTestModel extends BaseJModel {
 
     public void doGet(String url, final OnResultListener<String> listener) {
         JHttpClient client = new JHttpFactory.ClientBuilder()

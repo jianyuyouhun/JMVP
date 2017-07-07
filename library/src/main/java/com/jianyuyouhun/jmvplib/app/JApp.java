@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.exception.ExceptionCaughtAdapter;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
 import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
@@ -53,7 +53,7 @@ public abstract class JApp extends Application {
      */
     private boolean mIsMainProcess = false;
 
-    private HashMap<String, BaseJModelImpl> modelsMap = new HashMap<>();
+    private HashMap<String, BaseJModel> modelsMap = new HashMap<>();
 
     @Override
     public void onCreate() {
@@ -97,20 +97,20 @@ public abstract class JApp extends Application {
     }
 
     private void initJApp() {
-        List<BaseJModelImpl> models = new ArrayList<>();
+        List<BaseJModel> models = new ArrayList<>();
         initCommonModels(models);
         initModels(models);
-        for (BaseJModelImpl model : models) {
+        for (BaseJModel model : models) {
             long time = System.currentTimeMillis();
             model.onModelCreate(this);
-            Class<? extends BaseJModelImpl> baseModelClass = model.getClass();
+            Class<? extends BaseJModel> baseModelClass = model.getClass();
             String name = baseModelClass.getName();
             modelsMap.put(name, model);
             // 打印初始化耗时
             long spendTime = System.currentTimeMillis() - time;
             Logger.e(TAG, baseModelClass.getSimpleName() + "启动耗时(毫秒)：" + spendTime);
         }
-        for (BaseJModelImpl model : models) {
+        for (BaseJModel model : models) {
             model.onAllModelCreate();
         }
         LightBroadcast.getInstance().registerModels(modelsMap);
@@ -120,7 +120,7 @@ public abstract class JApp extends Application {
      * 初始化通用model
      * @param models models
      */
-    public void initCommonModels(List<BaseJModelImpl> models) {
+    public void initCommonModels(List<BaseJModel> models) {
         models.add(new CacheModel());               // 缓存model
         models.add(new TimeCountDownModel());       // 倒计时model
         models.add(new PermissionModel());          // 权限忽略记录
@@ -131,7 +131,7 @@ public abstract class JApp extends Application {
      * 初始化功能model
      * @param models models
      */
-    protected abstract void initModels(List<BaseJModelImpl> models);
+    protected abstract void initModels(List<BaseJModel> models);
 
     /**
      * 初始化轻量级广播
@@ -145,7 +145,7 @@ public abstract class JApp extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public <Model extends BaseJModelImpl> Model getJModel(Class<Model> model) {
+    public <Model extends BaseJModel> Model getJModel(Class<Model> model) {
         return (Model) modelsMap.get(model.getName());
     }
 

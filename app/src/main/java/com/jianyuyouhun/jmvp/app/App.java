@@ -5,9 +5,7 @@ import com.jianyuyouhun.jmvp.mvp.db.DataBaseModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
-import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
-import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.List;
 
@@ -19,13 +17,13 @@ import java.util.List;
 public class App extends JApp {
 
     @Override
-    public void initCommonModels(List<BaseJModelImpl> models) {
+    public void initCommonModels(List<BaseJModel> models) {
         super.initCommonModels(models);
         models.add(new DataBaseModel());
     }
 
     @Override
-    protected void initModels(List<BaseJModelImpl> models) {
+    protected void initModels(List<BaseJModel> models) {
         models.add(new AdapterTestModel());
         models.add(new HttpTestModel());
         models.add(new LoginTestModel());

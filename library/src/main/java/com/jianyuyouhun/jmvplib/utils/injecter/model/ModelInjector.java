@@ -1,7 +1,7 @@
 package com.jianyuyouhun.jmvplib.utils.injecter.model;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -16,7 +16,7 @@ public class ModelInjector {
     public static void injectModel(Object object) {
         Class<?> aClass = object.getClass();
 
-        while (aClass != BaseJModelImpl.class && aClass != Object.class) {
+        while (aClass != BaseJModel.class && aClass != Object.class) {
             Field[] declaredFields = aClass.getDeclaredFields();
             if (declaredFields != null && declaredFields.length > 0) {
                 for (Field field : declaredFields) {
@@ -31,11 +31,11 @@ public class ModelInjector {
                     }
 
                     Class<?> type = field.getType();
-                    if (!BaseJModelImpl.class.isAssignableFrom(type)) {
+                    if (!BaseJModel.class.isAssignableFrom(type)) {
                         throw new RuntimeException("@Model 注解只能应用到BaseJModelImpl的子类");
                     }
                     @SuppressWarnings("unchecked")
-                    BaseJModelImpl baseManager = JApp.getInstance().getJModel((Class<? extends BaseJModelImpl>) type);
+                    BaseJModel baseManager = JApp.getInstance().getJModel((Class<? extends BaseJModel>) type);
 
                     if (baseManager == null) {
                         throw new RuntimeException(type.getSimpleName() + "Model还未初始化！");

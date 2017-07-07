@@ -5,7 +5,7 @@ import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by wangyu on 2017/3/17.
  */
 
-public class AdapterTestPresenter extends BaseJPresenterImpl<AdapterTestModel, AdapterTestView> {
+public class AdapterTestPresenter extends BaseJPresenter<AdapterTestModel, AdapterTestView> {
 
     private LightBroadcast handler;
 

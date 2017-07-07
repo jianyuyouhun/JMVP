@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class LightBroadcast {
 
-    private HashMap<String, BaseJModelImpl> modelsMap = new HashMap<>();
+    private HashMap<String, BaseJModel> modelsMap = new HashMap<>();
 
     private List<OnGlobalMsgReceiveListener> handlerListeners = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class LightBroadcast {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             for (String s : modelsMap.keySet()) {
-                BaseJModelImpl model = modelsMap.get(s);
+                BaseJModel model = modelsMap.get(s);
                 if (model.isOpenHandleMsg()) {
                     model.handleSuperMsg(msg);
                 }
@@ -59,7 +59,7 @@ public class LightBroadcast {
         }
     }
 
-    public static void init() {
+    public synchronized static void init() {
         if (hasInit) {
             return;
         }
@@ -69,7 +69,7 @@ public class LightBroadcast {
         hasInit = true;
     }
 
-    public void registerModels(HashMap<String, BaseJModelImpl> modelsMap) {
+    public void registerModels(HashMap<String, BaseJModel> modelsMap) {
         this.modelsMap = modelsMap;
     }
 

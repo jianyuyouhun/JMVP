@@ -3,15 +3,46 @@ package com.jianyuyouhun.jmvplib.mvp;
 import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 
 /**
- * BaseJModel接口
- * Created by jianyuyouhun on 2017/3/17.
+ * model基类
+ * Created by wangyu on 2017/4/18.
  */
 
-public interface BaseJModel {
-    void onModelCreate(JApp app);
-    void onAllModelCreate();
-    void handleSuperMsg(Message msg);
-    void onModelDestroy();
+public class BaseJModel {
+    private LightBroadcast superHandler;
+    private boolean isOpenHandleMsg = false;
+
+    public void onModelCreate(JApp app) {
+        superHandler = LightBroadcast.getInstance();
+        ModelInjector.injectModel(this);
+    }
+
+    public void onModelDestroy() {}
+
+    public void onAllModelCreate() {}
+
+    public void handleSuperMsg(Message msg) {}
+
+    public <MinorModel extends BaseJModel> MinorModel getModel(Class<MinorModel> model) {
+        return JApp.getInstance().getJModel(model);
+    }
+
+    public boolean isOpenHandleMsg() {
+        return isOpenHandleMsg;
+    }
+
+    public void openHandleMsg() {
+        isOpenHandleMsg = true;
+    }
+
+    public void closeHandleMsg() {
+        isOpenHandleMsg = false;
+    }
+
+    protected LightBroadcast getSuperHandler() {
+        return superHandler;
+    }
 }

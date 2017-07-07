@@ -1,6 +1,6 @@
 package com.jianyuyouhun.jmvp.mvp.httpTest;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
 /**
@@ -8,7 +8,7 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  * Created by jianyuyouhun on 2017/4/26.
  */
 
-public class HttpTestPresenter extends BaseJPresenterImpl<HttpTestModel, HttpTestView> {
+public class HttpTestPresenter extends BaseJPresenter<HttpTestModel, HttpTestView> {
 
     public void doHttpTest(boolean isPost) {
         if (!isAttach()) {

@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.utils.json.JsonUtil;
 
 import org.json.JSONArray;
@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by wangyu on 2017/4/25.
  */
 
-public class CacheModel extends BaseJModelImpl {
+public class CacheModel extends BaseJModel {
 
     private static final String JAPP_CACHE_NAME = "japp_cache_data";
 

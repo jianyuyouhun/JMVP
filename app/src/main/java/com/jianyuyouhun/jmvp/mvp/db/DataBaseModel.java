@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.utils.http.executor.SingleThreadPool;
 
 /**
@@ -12,7 +12,7 @@ import com.jianyuyouhun.jmvplib.utils.http.executor.SingleThreadPool;
  * Created by wangyu on 2017/6/26.
  */
 
-public class DataBaseModel extends BaseJModelImpl {
+public class DataBaseModel extends BaseJModel {
 
     private SingleThreadPool threadPool = new SingleThreadPool();
     private DataBaseSQLiteOpenHelper sqLiteOpenHelper;

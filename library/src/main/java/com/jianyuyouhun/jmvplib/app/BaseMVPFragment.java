@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.jianyuyouhun.jmvplib.app.exception.InitPresenterException;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
+import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -15,7 +15,7 @@ import java.lang.reflect.ParameterizedType;
  * Created by wangyu on 2017/4/25.
  */
 
-public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenterImpl, MajorModel extends BaseJModelImpl> extends BaseFragment {
+public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenter, MajorModel extends BaseJModel> extends BaseFragment {
 
     protected MajorPresenter mPresenter;
     protected MajorModel mModel;

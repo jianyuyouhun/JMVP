@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by wangyu on 2017/5/4.
  */
 
-public class PermissionModel extends BaseJModelImpl {
+public class PermissionModel extends BaseJModel {
 
     private static final String JAPP_CACHE_NAME = "japp_permission_cache";
 

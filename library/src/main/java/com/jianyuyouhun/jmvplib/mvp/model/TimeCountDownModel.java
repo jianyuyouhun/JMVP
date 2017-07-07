@@ -3,7 +3,7 @@ package com.jianyuyouhun.jmvplib.mvp.model;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,7 +16,7 @@ import java.util.TimerTask;
  * Created by wangyu on 2017/4/25.
  */
 
-public class TimeCountDownModel extends BaseJModelImpl {
+public class TimeCountDownModel extends BaseJModel {
 
     private Handler handler = new Handler(Looper.getMainLooper());
     private static HashMap<String, TimerData> mTimerDataMap = new HashMap<>();
@@ -28,7 +28,7 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param listener 监听回调变化
      */
     public void addTimeChangeByTag(String tag, OnTimeChangeListener listener) {
-        addTimeChangeListerByOrderId(tag, tag, listener);
+        addTimeChangeListenerById(tag, tag, listener);
 
     }
 
@@ -64,7 +64,7 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param orderId  订单id
      * @param listener 监听
      */
-    public void addTimeChangeListerByOrderId(String tag, String orderId, OnTimeChangeListener listener) {
+    public void addTimeChangeListenerById(String tag, String orderId, OnTimeChangeListener listener) {
 
         if (mTimerDataMap.containsKey(tag)) {
             mTimerDataMap.get(tag).addTimeChangeListener(orderId, listener);
@@ -81,7 +81,7 @@ public class TimeCountDownModel extends BaseJModelImpl {
      * @param tag     唯一标识  可以用页面类名  列表页使用
      * @param orderId 订单id
      */
-    public void removeTimeChangeListenerByOrderId(String tag, String orderId) {
+    public void removeTimeChangeListenerById(String tag, String orderId) {
         if (mTimerDataMap.containsKey(tag)) {
             mTimerDataMap.get(tag).removeTimeChangeListener(orderId);
         }

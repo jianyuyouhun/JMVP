@@ -4,14 +4,14 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.BaseJModelImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 /**
  * 存储管理
  * Created by wangyu on 2017/5/10.
  */
 
-public class SdcardModel extends BaseJModelImpl {
+public class SdcardModel extends BaseJModel {
 
     private static final String IMG_DIR = "/img/";
 

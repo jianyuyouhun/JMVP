@@ -2,7 +2,7 @@ package com.jianyuyouhun.jmvp.mvp.logintest;
 
 import android.text.TextUtils;
 
-import com.jianyuyouhun.jmvplib.mvp.BaseJPresenterImpl;
+import com.jianyuyouhun.jmvplib.mvp.BaseJPresenter;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
 /**
@@ -10,7 +10,7 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  * Created by wangyu on 2017/5/15.
  */
 
-public class LoginTestPresenter extends BaseJPresenterImpl<LoginTestModel, LoginTestView> {
+public class LoginTestPresenter extends BaseJPresenter<LoginTestModel, LoginTestView> {
 
     public void doLogin() {
         if (getJView() == null) {

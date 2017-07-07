@@ -35,10 +35,4 @@ public class App extends JApp {
         return (App) getInstance();
     }
 
-    @Override
-    protected void initDependencies() {
-        super.initDependencies();
-        JHttpFactory.init();
-        ImageLoader.getInstance().init(this);
-    }
 }

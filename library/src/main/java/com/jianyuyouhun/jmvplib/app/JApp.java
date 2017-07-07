@@ -11,6 +11,8 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
+import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +76,10 @@ public abstract class JApp extends Application {
     /**
      * 初始化第三方库（比如imageLoader等）
      */
-    protected void initDependencies() {}
+    protected void initDependencies() {
+        JHttpFactory.init();
+        ImageLoader.getInstance().init(this);
+    }
 
     /**
      * 设置调试模式

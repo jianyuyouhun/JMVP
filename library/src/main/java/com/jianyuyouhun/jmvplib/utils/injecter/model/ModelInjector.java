@@ -1,7 +1,5 @@
 package com.jianyuyouhun.jmvplib.utils.injecter.model;
 
-import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.app.BaseFragment;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 

@@ -2,6 +2,7 @@ package com.jianyuyouhun.jmvp.mvp.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
@@ -12,14 +13,14 @@ import com.jianyuyouhun.jmvplib.utils.http.executor.SingleThreadPool;
  * Created by wangyu on 2017/6/26.
  */
 
-public class DataBaseModel extends BaseJModel {
+public class DataBaseModel extends BaseJModel<App> {
 
     private SingleThreadPool threadPool = new SingleThreadPool();
     private DataBaseSQLiteOpenHelper sqLiteOpenHelper;
 
     public static final int GUEST_UID = 1001;
     @Override
-    public void onModelCreate(JApp app) {
+    public void onModelCreate(App app) {
         super.onModelCreate(app);
         initDataBase();
     }

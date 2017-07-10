@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by wangyu on 2017/4/25.
  */
 
-public class CacheModel extends BaseJModel {
+public class CacheModel extends BaseJModel<JApp> {
 
     private static final String JAPP_CACHE_NAME = "japp_cache_data";
 

@@ -11,7 +11,7 @@ import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
  * Created by wangyu on 2017/5/10.
  */
 
-public class SdcardModel extends BaseJModel {
+public class SdcardModel extends BaseJModel<JApp> {
 
     private static final String IMG_DIR = "/img/";
 

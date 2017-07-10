@@ -3,6 +3,7 @@ package com.jianyuyouhun.jmvplib.mvp.model;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.TimerTask;
  * Created by wangyu on 2017/4/25.
  */
 
-public class TimeCountDownModel extends BaseJModel {
+public class TimeCountDownModel extends BaseJModel<JApp> {
 
     private Handler handler = new Handler(Looper.getMainLooper());
     private static HashMap<String, TimerData> mTimerDataMap = new HashMap<>();

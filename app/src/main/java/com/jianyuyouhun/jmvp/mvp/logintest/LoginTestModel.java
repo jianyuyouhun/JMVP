@@ -1,6 +1,6 @@
 package com.jianyuyouhun.jmvp.mvp.logintest;
 
-import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 
@@ -9,10 +9,10 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  * Created by wangyu on 2017/5/15.
  */
 
-public class LoginTestModel extends BaseJModel {
+public class LoginTestModel extends BaseJModel<App> {
 
     @Override
-    public void onModelCreate(JApp app) {
+    public void onModelCreate(App app) {
         super.onModelCreate(app);
     }
 

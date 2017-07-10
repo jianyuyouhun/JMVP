@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by wangyu on 2017/5/4.
  */
 
-public class PermissionModel extends BaseJModel {
+public class PermissionModel extends BaseJModel<JApp> {
 
     private static final String JAPP_CACHE_NAME = "japp_permission_cache";
 

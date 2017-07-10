@@ -11,11 +11,11 @@ import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
  * Created by wangyu on 2017/4/18.
  */
 
-public class BaseJModel {
+public class BaseJModel<T extends JApp> {
     private LightBroadcast superHandler;
     private boolean isOpenHandleMsg = false;
 
-    public void onModelCreate(JApp app) {
+    public void onModelCreate(T app) {
         superHandler = LightBroadcast.getInstance();
     }
 

@@ -2,7 +2,7 @@ package com.jianyuyouhun.jmvp.mvp.adaptertest;
 
 import android.os.Message;
 
-import com.jianyuyouhun.jmvplib.app.JApp;
+import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
@@ -15,10 +15,10 @@ import java.util.List;
  * Created by wangyu on 2017/3/17.
  */
 
-public class AdapterTestModel extends BaseJModel {
+public class AdapterTestModel extends BaseJModel<App> {
 
     @Override
-    public void onModelCreate(JApp app) {
+    public void onModelCreate(App app) {
         super.onModelCreate(app);
         openHandleMsg();
     }

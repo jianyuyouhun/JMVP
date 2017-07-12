@@ -14,4 +14,13 @@
             <enum name="circle" value="2"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="ProportionLayout">
+        <attr name="scaleSize" format="float" />
+        <attr name="isAdaptive" format="boolean" />
+        <attr name="ppLayoutOrientation">
+            <enum name="HORIZONTAL" value="0" />
+            <enum name="VERTICAL" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

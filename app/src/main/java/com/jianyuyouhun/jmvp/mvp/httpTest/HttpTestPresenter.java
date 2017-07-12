@@ -12,7 +12,7 @@ public class HttpTestPresenter extends BaseJPresenter<HttpTestModel, HttpTestVie
 
     public void doHttpTest(boolean isPost) {
         if (!isAttach()) {
-            throw new RuntimeException("Model已经为空");
+            throw new RuntimeException("Model或者View已经为空");
         }
         String url = getJView().getUrl();
         if (!(url.startsWith("http://") || url.startsWith("https://"))){

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.adapter.TestBannerAdapter;
-import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
@@ -18,6 +17,7 @@ import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
+import com.jianyuyouhun.jmvplib.view.CircleImageView;
 import com.jianyuyouhun.library.AutoBannerView;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import java.util.List;
 public class ImageLoadTestActivity extends BaseActivity {
 
     @FindViewById(R.id.imageView)
-    private ImageView mImageView;
+    private CircleImageView mImageView;
 
     @FindViewById(R.id.autobanner)
     private AutoBannerView autoBannerView;

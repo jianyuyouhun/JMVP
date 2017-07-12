@@ -4,4 +4,14 @@
     <declare-styleable name="MaxHeightLinearLayout">
         <attr name="maxHeight" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_shape_style" format="enum">
+            <enum name="normal" value="1"/>
+            <enum name="circle" value="2"/>
+        </attr>
+    </declare-styleable>
 </resources>

@@ -23,4 +23,7 @@
             <enum name="VERTICAL" value="1" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="BufferView">
+        <attr name="mBackgroundColor" format="color"/>
+    </declare-styleable>
 </resources>

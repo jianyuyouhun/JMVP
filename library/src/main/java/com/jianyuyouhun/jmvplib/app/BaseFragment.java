@@ -34,6 +34,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isDestroy = false;
+        ModelInjector.injectModel(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             permissionRequester = new PermissionRequester();
         }
@@ -59,7 +60,6 @@ public abstract class BaseFragment extends Fragment {
             view = inflater.inflate(getLayoutResId(), container, false);
         }
         ViewInjector.inject(this, view);
-        ModelInjector.injectModel(this);
         onCreateView(view, container, savedInstanceState);
         return view;
     }

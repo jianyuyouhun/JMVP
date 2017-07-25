@@ -35,8 +35,8 @@ public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenter, Maj
             throw new InitPresenterException("请确保" + majorPresenterCls.getSimpleName() + "拥有public的无参构造函数");
         }
         mModel = initModel();
-        boolean isPresenterBindFinish = bindModelAndView();
-        if (!isPresenterBindFinish) {
+        bindModelAndView();
+        if (!mPresenter.isAttach()) {
             throw new InitPresenterException("请为" + mPresenter.getClass().getName() + "绑定数据");
         }
         mPresenter.onCreate(getBaseActivity());
@@ -44,7 +44,7 @@ public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenter, Maj
 
     @NonNull
     protected abstract MajorModel initModel();
-    protected abstract boolean bindModelAndView();
+    protected abstract void bindModelAndView();
 
     @Override
     public void onDestroy() {

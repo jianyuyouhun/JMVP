@@ -26,7 +26,8 @@ public abstract class BaseMVPFragment<MajorPresenter extends BaseJPresenter, Maj
         @SuppressWarnings("unchecked") Class<MajorPresenter> majorPresenterCls =
                 (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         try {
-            mPresenter = majorPresenterCls.newInstance();
+            if (mPresenter == null) //当应用重启重走生命周期的时候决定是否要重新初始化presenter
+                mPresenter = majorPresenterCls.newInstance();
         } catch (java.lang.InstantiationException e) {
             e.printStackTrace();
             throw new InitPresenterException();

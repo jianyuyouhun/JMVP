@@ -37,7 +37,7 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenter, Maj
         mModel = initModel();
         bindModelAndView(mPresenter);
         if (!mPresenter.isAttach()) {
-            throw new InitPresenterException("请为" + mPresenter.getClass().getName() + "绑定数据");
+            throw new InitPresenterException("请为" + majorPresenterCls.getSimpleName() + "绑定数据");
         }
         mPresenter.onCreate(this);
     }

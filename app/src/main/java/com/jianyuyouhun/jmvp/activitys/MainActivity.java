@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.jianyuyouhun.jmvp.R;
+import com.jianyuyouhun.jmvp.view.AutoScrollDialog;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
@@ -30,6 +31,9 @@ public class MainActivity extends BaseActivity {
 
     @FindViewById(R.id.login_test)
     private Button loginButton;
+
+    @FindViewById(R.id.dialog_test)
+    private Button mDialogTestButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +70,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(LoginTestActivity.class);
+            }
+        });
+        mDialogTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutoScrollDialog autoScrollDialog = new AutoScrollDialog(getActivity());
+                autoScrollDialog.show();
             }
         });
     }

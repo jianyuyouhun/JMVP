@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.ArrayList;
@@ -63,7 +62,6 @@ public class WindowHelperModel extends BaseJModel {
     private class OnGlobalLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
 
         private View decorView;
-        boolean isVisibleForLast = false;
 
         public IKeyBoardVisibleListener getListener() {
             return listener;
@@ -87,10 +85,7 @@ public class WindowHelperModel extends BaseJModel {
             //获得键盘高度
             int keyboardHeight = height - displayHeight;
             boolean visible = (double) displayHeight / height < 0.8;
-            if (visible != isVisibleForLast) {
-                listener.onSoftKeyBoardVisible(visible, keyboardHeight, displayHeight + rect.top);
-            }
-            isVisibleForLast = visible;
+            listener.onSoftKeyBoardVisible(visible, keyboardHeight, displayHeight + rect.top);
         }
     }
 }

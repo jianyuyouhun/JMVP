@@ -9,6 +9,7 @@ import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
 import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
+import com.jianyuyouhun.jmvplib.mvp.model.WindowHelperModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
@@ -127,6 +128,7 @@ public abstract class JApp extends Application {
         models.add(new TimeCountDownModel());       // 倒计时model
         models.add(new PermissionModel());          // 权限忽略记录
         models.add(new SdcardModel());              // sd管理model
+        models.add(new WindowHelperModel());        // 窗口变化管理器
     }
 
     /**

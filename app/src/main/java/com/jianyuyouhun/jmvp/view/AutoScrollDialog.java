@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jianyuyouhun.jmvp.R;
-import com.jianyuyouhun.jmvp.mvp.common.WindowHelperModel;
+import com.jianyuyouhun.jmvplib.mvp.model.WindowHelperModel;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;

@@ -1,11 +1,11 @@
-package com.jianyuyouhun.jmvp.mvp.common;
+package com.jianyuyouhun.jmvplib.mvp.model;
 
 import android.app.Activity;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.jianyuyouhun.jmvp.app.App;
+import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by wangyu on 2017/8/17.
  */
 
-public class WindowHelperModel extends BaseJModel<App> {
+public class WindowHelperModel extends BaseJModel {
 
     private List<OnGlobalLayoutListener> onGlobalLayoutListeners = new ArrayList<>();
     /**
@@ -30,11 +30,6 @@ public class WindowHelperModel extends BaseJModel<App> {
          * @param visibleHeight     可见窗体高度
          */
         void onSoftKeyBoardVisible(boolean visible , int windowBottom, int visibleHeight);
-    }
-
-    @Override
-    public void onModelCreate(App app) {
-        super.onModelCreate(app);
     }
 
     /**

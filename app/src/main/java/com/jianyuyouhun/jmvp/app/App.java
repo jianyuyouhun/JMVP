@@ -1,7 +1,7 @@
 package com.jianyuyouhun.jmvp.app;
 
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
-import com.jianyuyouhun.jmvp.mvp.common.WindowHelperModel;
+import com.jianyuyouhun.jmvplib.mvp.model.WindowHelperModel;
 import com.jianyuyouhun.jmvp.mvp.db.DataBaseModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
@@ -28,7 +28,6 @@ public class App extends JApp {
         models.add(new AdapterTestModel());
         models.add(new HttpTestModel());
         models.add(new LoginTestModel());
-        models.add(new WindowHelperModel());
     }
 
     public static App getApp() {

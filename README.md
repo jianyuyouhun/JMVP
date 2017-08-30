@@ -22,10 +22,18 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.2.4'
+	        compile 'com.github.jianyuyouhun:jmvp:0.2.6'
 	}
 
 ### 版本变化 ###
+
+#### v 0.2.6 ####
+
+　　Model和Presenter去除接口，新的实现类名字改为BaseJPresenter,BaseJModel(用于替换BaseJPresenterImpl等),项目进行了一些结构上的调整。默认引用JHttp，ImageLoader和LightBroadcast，如果不想装载的话，在Application中重写initDependencies()，进行对应的库的初始化。
+
+　　动态权限申请的调用进行了调整。避免了一些空指针的出现
+
+　　修复了一些其他bug
 
 #### v 0.2.5(测试版) ####
 

@@ -19,7 +19,7 @@ import java.util.List;
  * Created by wangyu on 2017-4-24
  */
 public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewHolder> extends BaseAdapter {
-    protected Context context;
+    private Context context;
     private List<Data> dataList = new ArrayList<>();
 
     public SimpleBaseAdapter(Context context) {
@@ -71,6 +71,11 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
         notifyDataSetChanged();
     }
 
+    public void addToPosition(int position, Data data) {
+        dataList.add(position, data);
+        notifyDataSetChanged();
+    }
+
     public void addToFirst(Data data) {
         dataList.add(0, data);
         notifyDataSetChanged();
@@ -85,6 +90,17 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
             return null;
         } else {
             return getItem(count - 1);
+        }
+    }
+    /**
+     * 获取适配器的第一项，如果适配器大小等于0，将返回null
+     */
+    public Data getFirstItem() {
+        int count = getCount();
+        if (count == 0) {
+            return null;
+        } else {
+            return getItem(0);
         }
     }
 
@@ -134,6 +150,10 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
     @NonNull
     protected abstract VH onNewViewHolder();
 
+    public Context getContext() {
+        return context;
+    }
+
     public class ViewHolder {
         private View itemView;
 
@@ -141,11 +161,11 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
             return itemView;
         }
 
-        public void setItemView(View itemView) {
+        public final void setItemView(View itemView) {
             this.itemView = itemView;
         }
 
-        public void initView() {
+        public final void initView() {
             ViewInjector.inject(this, itemView);
         }
     }

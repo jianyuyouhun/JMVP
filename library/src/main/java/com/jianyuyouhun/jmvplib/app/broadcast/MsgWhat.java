@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.app;
+package com.jianyuyouhun.jmvplib.app.broadcast;
 
 /**
  * 全局消息

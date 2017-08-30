@@ -22,7 +22,12 @@ public class NestScrollViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return isScrollAble && super.onInterceptTouchEvent(ev);
+        try {
+            return isScrollAble && super.onInterceptTouchEvent(ev);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

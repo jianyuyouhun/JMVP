@@ -127,10 +127,4 @@ public abstract class BaseListAdapter<Info> extends BaseAdapter {
         return oldItems;
     }
 
-    /**
-     * 销毁数据
-     */
-    public void clearDatas() {
-        mDatas = null;
-    }
 }

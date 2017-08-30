@@ -4,6 +4,7 @@ import android.app.Service;
 import android.os.Message;
 
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
+import com.jianyuyouhun.jmvplib.app.broadcast.MsgWhat;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 

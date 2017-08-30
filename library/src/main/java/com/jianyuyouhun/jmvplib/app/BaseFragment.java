@@ -35,9 +35,7 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         isDestroy = false;
         ModelInjector.injectModel(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester = new PermissionRequester();
-        }
+        permissionRequester = new PermissionRequester();
     }
 
     /**
@@ -142,16 +140,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
-        }
+        permissionRequester.onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.onActivityResult(getBaseActivity(), requestCode, resultCode, data);
-        }
+        permissionRequester.onActivityResult(getBaseActivity(), requestCode, resultCode, data);
     }
 }

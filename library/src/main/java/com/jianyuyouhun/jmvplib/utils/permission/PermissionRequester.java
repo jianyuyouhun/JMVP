@@ -24,7 +24,6 @@ import java.util.Map;
  * Created by wangyu on 2017/5/3.
  */
 
-@RequiresApi(Build.VERSION_CODES.M)
 public class PermissionRequester {
 
     @StringRes

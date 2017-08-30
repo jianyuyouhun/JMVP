@@ -50,19 +50,14 @@ public class RequestPermissionActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTips.setText("Current SDK:" + AppHelper.getOsVersion());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.setOnRequestPermissionResultListener(requestListener);
-        } else {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             showToast("当前版本小于Android 6.0 无需做动态权限申请");
         }
         setListener();
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     private void setListener() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return;
-        }
+        permissionRequester.setOnRequestPermissionResultListener(requestListener);
         storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

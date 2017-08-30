@@ -21,7 +21,9 @@ import android.widget.Toast;
 
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
+import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
@@ -56,9 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mIsDestroy = false;
         mIsFinish = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester = new PermissionRequester();
-        }
+        permissionRequester = new PermissionRequester();
         int layoutId = getLayoutResId();
         if (layoutId != 0) {
             setContentView(getLayoutResId());
@@ -143,17 +143,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-        }
+        permissionRequester.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.onActivityResult(this, requestCode, resultCode, data);
-        }
+        permissionRequester.onActivityResult(this, requestCode, resultCode, data);
     }
 
     public void showProgressDialog() {

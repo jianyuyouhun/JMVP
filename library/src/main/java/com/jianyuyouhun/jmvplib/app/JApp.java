@@ -71,7 +71,6 @@ public abstract class JApp extends Application {
         initDependencies();
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
-        initLightBroadCast();
         initJApp();
     }
 
@@ -79,6 +78,7 @@ public abstract class JApp extends Application {
      * 初始化第三方库（比如imageLoader等）
      */
     protected void initDependencies() {
+        LightBroadcast.init();
         JHttpFactory.init();
         ImageLoader.getInstance().init(this);
     }
@@ -136,13 +136,6 @@ public abstract class JApp extends Application {
      * @param models models
      */
     protected abstract void initModels(List<BaseJModel> models);
-
-    /**
-     * 初始化轻量级广播
-     */
-    private void initLightBroadCast() {
-        LightBroadcast.init();
-    }
 
     public static JApp getInstance() {
         return mInstance;

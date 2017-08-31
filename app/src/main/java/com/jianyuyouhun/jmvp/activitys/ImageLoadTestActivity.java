@@ -60,16 +60,10 @@ public class ImageLoadTestActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.setOnRequestPermissionResultListener(onRequestPermissionResultListener);
-        }
+        permissionRequester.setOnRequestPermissionResultListener(onRequestPermissionResultListener);
         adapter = new TestBannerAdapter(getContext());
         autoBannerView.setAdapter(adapter);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissionRequester.requestPermission(this, "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        } else {
-            go();
-        }
+        permissionRequester.requestPermission(this, "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     private void go() {

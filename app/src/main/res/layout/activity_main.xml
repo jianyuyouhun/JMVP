@@ -35,4 +35,9 @@
         android:text="dialog键盘测试"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/animator_view_test"
+        android:text="动效控件测试"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

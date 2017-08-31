@@ -40,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private long mLastClickTime;
     protected static final boolean IS_DEBUG_MODE = BuildConfig.isDebug();
     protected PermissionRequester permissionRequester;
+    private Toast mLastToast;
 
     private OnGlobalMsgReceiveListener onGlobalMsgReceiveListener = new OnGlobalMsgReceiveListener() {
         @Override
@@ -107,7 +108,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showToast(String msg) {
         if (mIsDestroy) return;
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        cancelToast();
+        mLastToast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        mLastToast.show();
+    }
+
+    private void cancelToast() {
+        if (mLastToast != null) {
+            mLastToast.cancel();
+        }
     }
 
     /**

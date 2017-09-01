@@ -27,6 +27,23 @@
 
 ### 版本变化 ###
 
+#### v 0.2.7 ####
+
+　　增加了长按事件的注解绑定，使用方法如下（绑定依然调用ViewInjector.inject(activity)...）
+
+    @OnLongClick({
+            R.id.dialog_test,
+            R.id.adapter_test,
+            R.id.image_load_test,
+            R.id.permission_test,
+            R.id.animator_view_test,
+            R.id.login_test,
+            R.id.http_get})
+    protected boolean onDialogLongClick(View view) {
+        showToast("别乱按");
+        return true;
+    }
+
 #### v 0.2.6 ####
 
 　　Model和Presenter去除接口，新的实现类名字改为BaseJPresenter,BaseJModel(用于替换BaseJPresenterImpl等),项目进行了一些结构上的调整。默认引用JHttp，ImageLoader和LightBroadcast，如果不想装载的话，在Application中重写initDependencies()，进行对应的库的初始化。

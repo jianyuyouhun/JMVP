@@ -6,6 +6,7 @@ import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.view.AutoScrollDialog;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.OnClick;
+import com.jianyuyouhun.jmvplib.utils.injecter.view.OnLongClick;
 
 /**
  * 首页
@@ -46,12 +47,25 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.dialog_test})
     protected void onDialogTestClick(View view) {
-        AutoScrollDialog autoScrollDialog = new AutoScrollDialog(getActivity());
-        autoScrollDialog.show();
+        new AutoScrollDialog(getActivity()).show();
     }
 
     @OnClick({R.id.animator_view_test})
     protected void onAnimatorViewClick(View view) {
         startActivity(AnimatorViewActivity.class);
     }
+
+    @OnLongClick({
+            R.id.dialog_test,
+            R.id.adapter_test,
+            R.id.image_load_test,
+            R.id.permission_test,
+            R.id.animator_view_test,
+            R.id.login_test,
+            R.id.http_get})
+    protected boolean onDialogLongClick(View view) {
+        showToast("别乱按");
+        return true;
+    }
+
 }

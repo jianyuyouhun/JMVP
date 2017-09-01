@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             app:sb_background="@color/white"
             app:sb_button_color="#f7f7f7"
-            app:sb_checked_color="@color/green"
+            app:sb_checked_color="@color/blueness"
             app:sb_uncheckcircle_color="@color/transparent"
             app:sb_checkline_color="@color/transparent"
             app:sb_border_width="2px"

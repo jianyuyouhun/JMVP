@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginTop="12dp"
+        app:waitMilliSecond="1000"
         app:dotMargin="2dp"
         app:dotGravity="right"/>
 </LinearLayout>

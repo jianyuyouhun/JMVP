@@ -53,7 +53,7 @@ public class LoginTestActivity extends BaseMVPActivity<LoginTestPresenter, Login
     }
 
     @Override
-    protected void bindModelAndView(LoginTestPresenter mPresenter) {
+    protected void bindModelAndView(LoginTestModel mModel, LoginTestPresenter mPresenter) {
         mPresenter.onBindModelView(mModel, this);
     }
 

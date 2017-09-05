@@ -50,7 +50,7 @@ public class AdapterTestActivity extends BaseMVPActivity<AdapterTestPresenter, A
     }
 
     @Override
-    protected void bindModelAndView(AdapterTestPresenter mPresenter) {
+    protected void bindModelAndView(AdapterTestModel mModel, AdapterTestPresenter mPresenter) {
         mPresenter.onBindModelView(mModel, this);
     }
 

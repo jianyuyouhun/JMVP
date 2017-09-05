@@ -17,7 +17,6 @@ import java.lang.reflect.ParameterizedType;
 public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenter, MajorModel extends BaseJModel> extends BaseActivity {
 
     protected MajorPresenter mPresenter;
-    protected MajorModel mModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,8 +33,8 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenter, Maj
             e.printStackTrace();
             throw new InitPresenterException("请确保" + majorPresenterCls.getSimpleName() + "拥有public的无参构造函数");
         }
-        mModel = initModel();
-        bindModelAndView(mPresenter);
+
+        bindModelAndView(initModel(), mPresenter);
         if (!mPresenter.isAttach()) {
             throw new InitPresenterException("请为" + majorPresenterCls.getSimpleName() + "绑定数据");
         }
@@ -45,7 +44,7 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenter, Maj
     @NonNull
     protected abstract MajorModel initModel();
 
-    protected abstract void bindModelAndView(MajorPresenter mPresenter);
+    protected abstract void bindModelAndView(MajorModel mModel, MajorPresenter mPresenter);
 
     @Override
     protected void onDestroy() {

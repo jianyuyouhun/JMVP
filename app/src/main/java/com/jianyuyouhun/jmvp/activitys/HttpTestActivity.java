@@ -70,7 +70,7 @@ public class HttpTestActivity extends BaseMVPActivity<HttpTestPresenter, HttpTes
     }
 
     @Override
-    protected void bindModelAndView(HttpTestPresenter mPresenter) {
+    protected void bindModelAndView(HttpTestModel mModel, HttpTestPresenter mPresenter) {
         mPresenter.onBindModelView(mModel, this);
     }
 

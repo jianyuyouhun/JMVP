@@ -1,19 +1,15 @@
-package com.jianyuyouhun.jmvplib.utils.permission;
+package com.jianyuyouhun.jmvplib.mvp.model.permission;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 
 import com.jianyuyouhun.jmvplib.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.app.JApp;
-import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 

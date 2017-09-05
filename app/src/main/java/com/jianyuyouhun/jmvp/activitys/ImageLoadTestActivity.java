@@ -2,7 +2,6 @@ package com.jianyuyouhun.jmvp.activitys;
 
 import android.Manifest;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -16,7 +15,7 @@ import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
-import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
+import com.jianyuyouhun.jmvplib.mvp.model.permission.OnRequestPermissionResultListener;
 import com.jianyuyouhun.jmvplib.view.CircleImageView;
 import com.jianyuyouhun.library.AutoBannerView;
 

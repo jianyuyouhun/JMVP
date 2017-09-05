@@ -1,7 +1,6 @@
 package com.jianyuyouhun.jmvp.activitys;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,7 @@ import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.utils.AppHelper;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
-import com.jianyuyouhun.jmvplib.utils.permission.OnRequestPermissionResultListener;
+import com.jianyuyouhun.jmvplib.mvp.model.permission.OnRequestPermissionResultListener;
 
 /**
  * 动态权限demo

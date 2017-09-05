@@ -6,7 +6,8 @@ import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.exception.ExceptionCaughtAdapter;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
-import com.jianyuyouhun.jmvplib.mvp.model.PermissionModel;
+import com.jianyuyouhun.jmvplib.mvp.model.network.NetworkModel;
+import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionModel;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.mvp.model.WindowHelperModel;
@@ -128,6 +129,7 @@ public abstract class JApp extends Application {
         models.add(new TimeCountDownModel());       // 倒计时model
         models.add(new PermissionModel());          // 权限忽略记录
         models.add(new SdcardModel());              // sd管理model
+        models.add(new NetworkModel());             // 网络状态管理器
         models.add(new WindowHelperModel());        // 窗口变化管理器
     }
 

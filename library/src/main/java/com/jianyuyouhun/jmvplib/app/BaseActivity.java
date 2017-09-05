@@ -24,7 +24,7 @@ import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
-import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
+import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
 
 import java.util.List;
 

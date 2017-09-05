@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.permission;
+package com.jianyuyouhun.jmvplib.mvp.model.permission;
 
 /**
  * 动态权限请求结果

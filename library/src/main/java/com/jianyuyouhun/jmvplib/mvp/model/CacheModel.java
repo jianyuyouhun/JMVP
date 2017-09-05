@@ -30,7 +30,7 @@ public class CacheModel extends BaseJModel<JApp> {
     private SharedPreferences.Editor spEditor;
 
     private String uId;
-    private String guestId = "";
+    private String guestId = "guest";
 
     @Override
     public void onModelCreate(JApp app) {
@@ -43,7 +43,6 @@ public class CacheModel extends BaseJModel<JApp> {
     @Override
     public void onAllModelCreate() {
         super.onAllModelCreate();
-        setGuestId("guest");
     }
 
     /**
@@ -59,14 +58,6 @@ public class CacheModel extends BaseJModel<JApp> {
      */
     public void onUserLogout() {
         this.uId = "";
-    }
-
-    /**
-     * 设置访客id
-     * @param guestId
-     */
-    public void setGuestId(@NonNull String guestId) {
-        this.guestId = guestId;
     }
 
     /**

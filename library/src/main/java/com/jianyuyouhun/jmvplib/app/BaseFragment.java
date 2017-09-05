@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -16,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
-import com.jianyuyouhun.jmvplib.utils.permission.PermissionRequester;
+import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
 
 /**
  * Fragment基类

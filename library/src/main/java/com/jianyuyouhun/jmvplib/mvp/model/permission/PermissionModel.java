@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.mvp.model;
+package com.jianyuyouhun.jmvplib.mvp.model.permission;
 
 import android.content.Context;
 import android.content.SharedPreferences;

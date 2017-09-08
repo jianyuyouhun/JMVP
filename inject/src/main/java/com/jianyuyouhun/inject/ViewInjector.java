@@ -1,9 +1,15 @@
-package com.jianyuyouhun.jmvplib.utils.injecter.view;
+package com.jianyuyouhun.inject;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jianyuyouhun.inject.annotation.FindViewById;
+import com.jianyuyouhun.inject.annotation.OnClick;
+import com.jianyuyouhun.inject.annotation.OnLongClick;
+import com.jianyuyouhun.inject.listener.InjectOnClickListener;
+import com.jianyuyouhun.inject.listener.InjectOnLongClickListener;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

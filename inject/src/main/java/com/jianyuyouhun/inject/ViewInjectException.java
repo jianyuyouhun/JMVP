@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.injecter.view;
+package com.jianyuyouhun.inject;
 
 public class ViewInjectException extends RuntimeException {
     private static final long serialVersionUID = -3957558668444768796L;

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.adapter.DemoListAdapter;
 import com.jianyuyouhun.jmvp.app.App;
@@ -12,7 +13,6 @@ import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestModel;
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestPresenter;
 import com.jianyuyouhun.jmvp.mvp.adaptertest.AdapterTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
 import java.util.List;
 

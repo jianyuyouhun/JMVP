@@ -2,11 +2,11 @@ package com.jianyuyouhun.jmvp.activitys;
 
 import android.view.View;
 
+import com.jianyuyouhun.inject.annotation.OnClick;
+import com.jianyuyouhun.inject.annotation.OnLongClick;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.view.AutoScrollDialog;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.OnClick;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.OnLongClick;
 
 /**
  * 首页

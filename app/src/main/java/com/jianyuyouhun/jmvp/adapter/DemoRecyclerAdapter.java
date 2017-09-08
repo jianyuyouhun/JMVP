@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jianyuyouhun.inject.ViewInjector;
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 
 import java.util.List;
 

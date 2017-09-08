@@ -4,6 +4,8 @@ import android.support.annotation.IntDef;
 
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 /**

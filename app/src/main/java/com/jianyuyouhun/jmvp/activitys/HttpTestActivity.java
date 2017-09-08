@@ -8,19 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestPresenter;
 import com.jianyuyouhun.jmvp.mvp.httpTest.HttpTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * http测试页面

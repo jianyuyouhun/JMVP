@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.injecter.view;
+package com.jianyuyouhun.inject.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

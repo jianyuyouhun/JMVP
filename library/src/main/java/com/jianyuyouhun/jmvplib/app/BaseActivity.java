@@ -18,12 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jianyuyouhun.inject.ViewInjector;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.MsgWhat;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
 
 import java.util.List;

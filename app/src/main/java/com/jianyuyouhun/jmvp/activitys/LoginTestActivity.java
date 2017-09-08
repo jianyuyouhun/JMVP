@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestModel;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestPresenter;
 import com.jianyuyouhun.jmvp.mvp.logintest.LoginTestView;
 import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 
 /**
  * 登录测试activity

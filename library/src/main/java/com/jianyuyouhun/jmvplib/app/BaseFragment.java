@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jianyuyouhun.inject.ViewInjector;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.ViewInjector;
 import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
 
 /**

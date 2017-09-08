@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.TextView;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 import com.jianyuyouhun.jmvplib.view.adapter.SimpleBaseAdapter;
 
 

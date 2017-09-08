@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.jianyuyouhun.jmvp.app.App;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;

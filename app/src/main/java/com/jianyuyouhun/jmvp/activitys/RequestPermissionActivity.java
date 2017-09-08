@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.utils.AppHelper;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 import com.jianyuyouhun.jmvplib.mvp.model.permission.OnRequestPermissionResultListener;
 
 /**

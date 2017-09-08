@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvplib.utils.injecter.view;
+package com.jianyuyouhun.inject.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 长按注解
- * Created by wangyu on 2017/9/1.
+ * 注解获取view
+ * Created by wangyu on 2017/4/5.
  */
+
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface OnLongClick {
-    int[] value();
+@Target({ElementType.FIELD})
+public @interface FindViewById {
+    int value();
 }

@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.utils.injecter.view.FindViewById;
 import com.suke.widget.SwitchButton;
 
 /**

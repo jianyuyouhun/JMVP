@@ -5,7 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.jianyuyouhun.jmvplib.app.BaseFragment;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * baseFragment的viewPagerAdapter
@@ -34,18 +35,25 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
      * @param position  指定位置
      * @return 指定位置的fragment对象
      */
-    protected BaseFragment getFragmentByPosition(int position) {
-        String name = makeFragmentName(viewGroup.getId(), position);
+    protected Fragment getFragmentByPosition(int position) {
+        String name = "";
+        Method targetMethod = null;
+        try {
+            targetMethod = FragmentPagerAdapter.class.getMethod("makeFragmentName", Integer.class, Long.class);
+            if (targetMethod != null) {
+                if (!targetMethod.isAccessible()) {
+                    targetMethod.setAccessible(true);
+                }
+                name = (String) targetMethod.invoke(viewGroup.getId(), position);
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         Fragment fragment = manager.findFragmentByTag(name);
-        return (BaseFragment) fragment;
-    }
-
-    /**
-     * 从fragmentPagerAdapter中复用过来
-     *
-     * @return fragmentName
-     */
-    private String makeFragmentName(int viewId, long id) {
-        return "android:switcher:" + viewId + ":" + id;
+        return fragment;
     }
 }

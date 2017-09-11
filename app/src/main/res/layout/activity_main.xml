@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jianyuyouhun.jmvp.activitys.MainActivity">
+    tools:context=".ui.activitys.MainActivity">
     <Button
         android:id="@+id/adapter_test"
         android:text="适配器测试"
@@ -40,4 +40,9 @@
         android:text="动效控件测试"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/view_pagers_test"
+        android:text="ViewPager测试"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

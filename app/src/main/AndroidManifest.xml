@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.MainActivity">
+        <activity android:name=".ui.activitys.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,25 +24,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitys.AdapterTestActivity"
+            android:name=".ui.activitys.AdapterTestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.HttpTestActivity"
+            android:name=".ui.activitys.HttpTestActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.jianyuyouhun.jmvplib.app.exception.ExceptionActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.RequestPermissionActivity"
+            android:name=".ui.activitys.RequestPermissionActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.ImageLoadTestActivity"
+            android:name=".ui.activitys.ImageLoadTestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.LoginTestActivity"
+            android:name=".ui.activitys.LoginTestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.AnimatorViewActivity"
+            android:name=".ui.activitys.AnimatorViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.ViewPagerActivity"
             android:screenOrientation="portrait"/>
     </application>
 

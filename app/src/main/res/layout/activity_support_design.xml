@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     android:orientation="vertical"
-    tools:context="com.jianyuyouhun.jmvp.activitys.MainActivity">
+    tools:context=".ui.activitys.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

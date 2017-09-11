@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.jianyuyouhun.jmvp.activitys.HttpTestActivity">
+              tools:context=".ui.activitys.HttpTestActivity">
 
     <EditText
         android:id="@+id/http_url_input"

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.jianyuyouhun.jmvplib.app.BuildConfig;
+import com.jianyuyouhun.jmvplib.BuildConfig;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 
@@ -24,7 +24,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     public static void showException(Throwable throwable) {
         JApp applicationContext = JApp.getInstance();
-        if (applicationContext != null && BuildConfig.isDebug()) {
+        if (applicationContext != null && BuildConfig.DEBUG) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             throwable.printStackTrace(new PrintStream(byteArrayOutputStream));
             String msg = new String(byteArrayOutputStream.toByteArray());

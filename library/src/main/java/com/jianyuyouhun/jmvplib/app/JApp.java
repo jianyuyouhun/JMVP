@@ -2,15 +2,16 @@ package com.jianyuyouhun.jmvplib.app;
 
 import android.app.Application;
 
+import com.jianyuyouhun.jmvplib.BuildConfig;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.exception.ExceptionCaughtAdapter;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 import com.jianyuyouhun.jmvplib.mvp.model.CacheModel;
-import com.jianyuyouhun.jmvplib.mvp.model.network.NetworkModel;
-import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionModel;
 import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.mvp.model.WindowHelperModel;
+import com.jianyuyouhun.jmvplib.mvp.model.network.NetworkModel;
+import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
@@ -23,10 +24,6 @@ import java.util.List;
 
 /**
  * app基类
- *
- * {@link #setDebugMode()}
- *
- * 设置调试模式，用于Logger打印日志的控制以及异常捕获页面的开启
  *
  * {@link #initDependencies()}
  * 初始化第三方框架
@@ -66,8 +63,7 @@ public abstract class JApp extends Application {
             return;
         }
         mInstance = this;
-        BuildConfig.setIsDebug(setDebugMode());
-        isDebug = BuildConfig.isDebug();
+        isDebug = BuildConfig.DEBUG;
         initDebug();
         initDependencies();
         String pidName = CommonUtils.getUIPName(this);
@@ -82,13 +78,6 @@ public abstract class JApp extends Application {
         LightBroadcast.init();
         JHttpFactory.init();
         ImageLoader.getInstance().init(this);
-    }
-
-    /**
-     * 设置调试模式
-     */
-    public boolean setDebugMode() {
-        return true;
     }
 
     public void initDebug() {

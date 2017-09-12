@@ -1,14 +1,18 @@
 package com.jianyuyouhun.jmvplib.mvp.model.network;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.ActivityCompat;
 
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
+import com.jianyuyouhun.jmvplib.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,8 @@ import java.util.List;
  */
 
 public class NetworkModel extends BaseJModel<JApp> {
+
+    private static final String TAG = NetworkModel.class.getSimpleName();
 
     /**
      * 上一次的网络连接类型
@@ -70,9 +76,13 @@ public class NetworkModel extends BaseJModel<JApp> {
     @Override
     public void onModelCreate(JApp app) {
         super.onModelCreate(app);
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        app.registerReceiver(broadcastReceiver, intentFilter);
+        if (ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_NETWORK_STATE) == PackageManager.PERMISSION_DENIED) {
+            Logger.w(TAG, "请配置ACCESS_NETWORK_STATE权限，否则无法监听网络状态变化");
+        } else {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            app.registerReceiver(broadcastReceiver, intentFilter);
+        }
     }
 
     /**

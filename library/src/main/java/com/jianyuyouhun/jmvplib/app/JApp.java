@@ -25,6 +25,9 @@ import java.util.List;
 /**
  * app基类
  *
+ * {@link #setIsDebug(boolean)}
+ * 用于修改正式包的调试模式
+ *
  * {@link #initDependencies()}
  * 初始化第三方框架
  *
@@ -69,6 +72,14 @@ public abstract class JApp extends Application {
         String pidName = CommonUtils.getUIPName(this);
         mIsMainProcess = pidName.equals(getPackageName());
         initJApp();
+    }
+
+    /**
+     * 可修改调试模式，用于正式包使用时控制Logger打印日志和其他开发需求
+     * @param isDebug  调试模式
+     */
+    public void setIsDebug(boolean isDebug) {
+        JApp.isDebug = isDebug;
     }
 
     /**

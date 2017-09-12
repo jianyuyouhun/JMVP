@@ -30,6 +30,7 @@ public class NetworkModel extends BaseJModel<JApp> {
      * 上一次的网络连接类型
      */
     private int lastConnectType = -1;
+    private boolean hasPermission = false;
     private List<OnNetworkChangeListener> onNetworkChangeListeners = new ArrayList<>();
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -77,8 +78,10 @@ public class NetworkModel extends BaseJModel<JApp> {
     public void onModelCreate(JApp app) {
         super.onModelCreate(app);
         if (ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_NETWORK_STATE) == PackageManager.PERMISSION_DENIED) {
+            hasPermission = false;
             Logger.w(TAG, "请配置ACCESS_NETWORK_STATE权限，否则无法监听网络状态变化");
         } else {
+            hasPermission = true;
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
             app.registerReceiver(broadcastReceiver, intentFilter);
@@ -89,6 +92,9 @@ public class NetworkModel extends BaseJModel<JApp> {
      * 添加网络变化监听器
      */
     public void addOnNetworkChangeListener(OnNetworkChangeListener onNetworkChangeListener) {
+        if (!hasPermission) {
+            throw new SecurityException("当前没有获取ACCESS_NETWORK_STATE权限，无法监听网络状态变化");
+        }
         onNetworkChangeListeners.add(onNetworkChangeListener);
     }
 

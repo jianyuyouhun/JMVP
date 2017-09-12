@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.jianyuyouhun.inject.ViewInjector;
-import com.jianyuyouhun.jmvplib.BuildConfig;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.MsgWhat;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
@@ -39,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean mIsDestroy;
     private boolean mIsFinish;
     private long mLastClickTime;
-    protected static final boolean IS_DEBUG_MODE = BuildConfig.DEBUG;
+    protected static final boolean IS_DEBUG_MODE = JApp.isDebug();
     protected PermissionRequester permissionRequester;
     private Toast mLastToast;
 

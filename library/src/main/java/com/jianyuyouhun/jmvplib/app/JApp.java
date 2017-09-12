@@ -143,9 +143,18 @@ public abstract class JApp extends Application {
         return mInstance;
     }
 
+    /**
+     * 获取后台常驻Model
+     * @param <Model>   Model类
+     * @return model
+     */
     @SuppressWarnings("unchecked")
     public <Model extends BaseJModel> Model getJModel(Class<Model> model) {
-        return (Model) modelsMap.get(model.getName());
+        Model result = (Model) modelsMap.get(model.getName());
+        if (result == null) {
+            throw new NullPointerException("无法获取到已注册的后台Model，请确保目标Model为后台常驻Model类型");
+        }
+        return result;
     }
 
     public static boolean isDebug() {

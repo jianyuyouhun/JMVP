@@ -22,16 +22,20 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.2.8'
+	        compile 'com.github.jianyuyouhun:jmvp:0.3.1'
 	}
 
 #### 注意事项
 
-　　由于内置了网络变化监听Model，需要在Manifest.xml中配置权限
+　　由于内置了网络变化监听Model，需要在Manifest.xml中配置权限才可使用该功能
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 ### 版本变化 ###
+
+#### v 0.3.1 ####
+
+　　BuildConfig删除，使用自带BuildConfig，JApp中可动态修改调试模式
 
 #### v 0.2.8 ####
 

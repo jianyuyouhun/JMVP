@@ -152,7 +152,7 @@ public abstract class JApp extends Application {
     public <Model extends BaseJModel> Model getJModel(Class<Model> model) {
         Model result = (Model) modelsMap.get(model.getName());
         if (result == null) {
-            throw new NullPointerException("无法获取到已注册的后台Model，请确保目标Model为后台常驻Model类型");
+            throw new NullPointerException("无法获取到已注册的" + model.getName() + "，请确保目标Model为后台常驻Model类型");
         }
         return result;
     }

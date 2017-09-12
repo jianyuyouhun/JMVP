@@ -22,10 +22,14 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.2.7'
+	        compile 'com.github.jianyuyouhun:jmvp:0.2.8'
 	}
 
 ### 版本变化 ###
+
+#### v 0.2.8 ####
+
+　　ViewInjector框架拆分，View注解绑定移出为独立框架，使用远程仓库依赖。[地址在此](https://github.com/jianyuyouhun/ViewInjector)
 
 #### v 0.2.7 ####
 

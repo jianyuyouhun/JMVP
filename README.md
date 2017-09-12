@@ -25,6 +25,12 @@
 	        compile 'com.github.jianyuyouhun:jmvp:0.2.8'
 	}
 
+#### 注意事项
+
+　　由于内置了网络变化监听Model，需要在Manifest.xml中配置权限
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 ### 版本变化 ###
 
 #### v 0.2.8 ####

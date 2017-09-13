@@ -1,12 +1,16 @@
 package com.jianyuyouhun.jmvp.ui.activitys;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.inject.annotation.OnClick;
 import com.jianyuyouhun.inject.annotation.OnLongClick;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.view.AutoScrollDialog;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
+import com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout;
 
 /**
  * 首页
@@ -15,9 +19,18 @@ import com.jianyuyouhun.jmvplib.app.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
+    @FindViewById(R.id.touch_enable_layout)
+    private TouchEnableChildLayout mAllLayout;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mAllLayout.setEnabled(true);
     }
 
     @OnClick({R.id.adapter_test})

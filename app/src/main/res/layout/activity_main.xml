@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/touch_enable_layout"
     tools:context=".ui.activitys.MainActivity">
-    <Button
-        android:id="@+id/adapter_test"
-        android:text="适配器测试"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/http_get"
-        android:text="http测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/permission_test"
-        android:text="动态权限测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/image_load_test"
-        android:text="图片加载测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/login_test"
-        android:text="登录测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/dialog_test"
-        android:text="dialog键盘测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/animator_view_test"
-        android:text="动效控件测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/view_pagers_test"
-        android:text="ViewPager测试"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/adapter_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="适配器测试"/>
+
+        <Button
+            android:id="@+id/http_get"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="http测试"/>
+
+        <Button
+            android:id="@+id/permission_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动态权限测试"/>
+
+        <Button
+            android:id="@+id/image_load_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="图片加载测试"/>
+
+        <Button
+            android:id="@+id/login_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登录测试"/>
+
+        <Button
+            android:id="@+id/dialog_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dialog键盘测试"/>
+
+        <Button
+            android:id="@+id/animator_view_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动效控件测试"/>
+
+        <Button
+            android:id="@+id/view_pagers_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ViewPager测试"/>
+    </LinearLayout>
+</com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout>

@@ -1,7 +1,6 @@
 package com.jianyuyouhun.jmvp.ui.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.jianyuyouhun.inject.annotation.FindViewById;
@@ -15,6 +14,7 @@ import com.jianyuyouhun.jmvplib.view.adapter.SimpleBaseAdapter;
  */
 
 public class DemoListAdapter extends SimpleBaseAdapter<String, DemoListAdapter.MyViewHolder> {
+
     public DemoListAdapter(Context context) {
         super(context);
     }
@@ -29,13 +29,7 @@ public class DemoListAdapter extends SimpleBaseAdapter<String, DemoListAdapter.M
         viewHolder.mTextView.setText(s);
     }
 
-    @NonNull
-    @Override
-    protected DemoListAdapter.MyViewHolder onNewViewHolder() {
-        return new MyViewHolder();
-    }
-
-    public class MyViewHolder extends SimpleBaseAdapter.ViewHolder {
+    public static class MyViewHolder extends SimpleBaseAdapter.ViewHolder {
         @FindViewById(R.id.list_item_text)
         private TextView mTextView;
     }

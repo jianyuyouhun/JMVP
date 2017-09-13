@@ -2,15 +2,14 @@ package com.jianyuyouhun.jmvplib.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-
 import com.jianyuyouhun.inject.ViewInjector;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +123,17 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
     public View getView(int position, View convertView, ViewGroup parent) {
         VH viewHolder;
         if (convertView == null) {
-            viewHolder = onNewViewHolder();
+            @SuppressWarnings("unchecked") Class<VH> viewHolderCls =
+                    (Class<VH>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            try {
+                viewHolder = viewHolderCls.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                throw new RuntimeException("初始化ViewHolder失败： 请确保" + viewHolderCls.getSimpleName() + "为static class 并拥有无参构造函数");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                throw new RuntimeException("请确保" + viewHolderCls.getSimpleName() + "拥有public的无参构造函数");
+            }
             convertView = LayoutInflater.from(context).inflate(getLayoutId(), parent, false);
             viewHolder.setItemView(convertView);
             viewHolder.initView();
@@ -148,25 +157,22 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
 
     protected abstract void bindView(VH viewHolder, Data data, int position);
 
-    @NonNull
-    protected abstract VH onNewViewHolder();
-
     public Context getContext() {
         return context;
     }
 
-    public class ViewHolder {
+    public static class ViewHolder {
         private View itemView;
 
-        public View getItemView() {
+        public final View getItemView() {
             return itemView;
         }
 
-        public final void setItemView(View itemView) {
+        final void setItemView(View itemView) {
             this.itemView = itemView;
         }
 
-        public final void initView() {
+        final void initView() {
             ViewInjector.inject(this, itemView);
         }
     }

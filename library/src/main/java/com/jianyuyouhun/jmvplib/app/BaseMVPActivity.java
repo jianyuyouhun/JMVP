@@ -22,7 +22,7 @@ public abstract class BaseMVPActivity<MajorPresenter extends BaseJPresenter, Maj
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         @SuppressWarnings("unchecked") Class<MajorPresenter> majorPresenterCls =
-                (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+                (Class<MajorPresenter>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];//第0个标识MajorPresenter，第1个表示MajorModel
         try {
             if (mPresenter == null) //当应用重启重走生命周期的时候决定是否要重新初始化presenter
                 mPresenter = majorPresenterCls.newInstance();

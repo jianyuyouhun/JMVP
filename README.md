@@ -27,6 +27,10 @@
 
 #### 注意事项
 
+　　项目Application继承JApp开发，必须实现initModels方法；
+
+　　setIsDebug方法用于修改当前japp的调试模式。可选择返回app的BuildConfig.DEBUG，这样日志打印策略就可以和app同步，返回false的话则看不到japp级别的日志
+
 　　由于内置了网络变化监听Model，需要在Manifest.xml中配置权限才可使用该功能
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

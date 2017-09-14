@@ -13,4 +13,5 @@
     <color name="yellow">#eeee00</color>
     <color name="orange">#ff8800</color>
     <color name="blueness">#09cc9f</color>
+    <color name="shadow">#1f000000</color>
 </resources>

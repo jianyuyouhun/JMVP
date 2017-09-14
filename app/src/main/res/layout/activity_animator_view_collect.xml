@@ -4,33 +4,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <com.suke.widget.SwitchButton
             android:id="@+id/switch_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:sb_background="@color/white"
+            app:sb_border_width="2px"
             app:sb_button_color="#f7f7f7"
             app:sb_checked_color="@color/blueness"
-            app:sb_uncheckcircle_color="@color/transparent"
             app:sb_checkline_color="@color/transparent"
-            app:sb_border_width="2px"
-            app:sb_shadow_radius="2dp"
             app:sb_shadow_offset="2dp"
-            app:sb_show_indicator="true"/>
+            app:sb_shadow_radius="2dp"
+            app:sb_show_indicator="true"
+            app:sb_uncheckcircle_color="@color/transparent"/>
+
         <TextView
             android:id="@+id/switch_state"
-            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textSize="16sp"/>
     </LinearLayout>
+
+    <com.jianyuyouhun.jmvplib.view.ShadowLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:mSlCornerRadius="48dp"
+        app:mSlOffsetX="1px"
+        app:mSlOffsetY="1px"
+        app:mSlShadowColor="@color/shadow"
+        app:mSlShadowRadius="1dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_shadow_oval"/>
+    </com.jianyuyouhun.jmvplib.view.ShadowLayout>
 </LinearLayout>

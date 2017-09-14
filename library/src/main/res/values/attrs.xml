@@ -26,4 +26,12 @@
     <declare-styleable name="BufferView">
         <attr name="mBackgroundColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="ShadowLayout">
+        <attr name="mSlCornerRadius" format="dimension"/>
+        <attr name="mSlShadowRadius" format="dimension"/>
+        <attr name="mSlShadowColor" format="color"/>
+        <attr name="mSlOffsetX" format="dimension"/>
+        <attr name="mSlOffsetY" format="dimension"/>
+    </declare-styleable>
 </resources>

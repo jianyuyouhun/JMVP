@@ -3,12 +3,15 @@ package com.jianyuyouhun.jmvp.ui.activitys;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.inject.annotation.OnClick;
 import com.jianyuyouhun.inject.annotation.OnLongClick;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.view.AutoScrollDialog;
+import com.jianyuyouhun.jmvp.view.HangupTipsView;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout;
 
@@ -22,6 +25,10 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.touch_enable_layout)
     private TouchEnableChildLayout mAllLayout;
 
+    HangupTipsView textView;
+    boolean hasShown = false;
+    ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_main;
@@ -30,7 +37,19 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAllLayout.setEnabled(true);
+        textView = new HangupTipsView(getActivity());
+        textView.setText("aklsjdlajdlad");
+        getWindow().addContentView(textView, lp);
+        hasShown = true;
+    }
+
+    @OnClick(R.id.hangup_test)
+    protected void onHangupClick(View view) {
+        if (textView.isShown()) {
+            textView.dismiss();
+        } else {
+            textView.show();
+        }
     }
 
     @OnClick({R.id.adapter_test})

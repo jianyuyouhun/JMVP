@@ -18,7 +18,8 @@ import android.widget.FrameLayout;
 import com.jianyuyouhun.jmvplib.R;
 
 /**
- * 阴影布局
+ * 阴影布局,引用自https://github.com/Devlight/ShadowLayout
+ *
  * Created by wangyu on 2017/9/14.
  */
 
@@ -62,16 +63,6 @@ public class ShadowLayout extends FrameLayout {
         int xPadding = (int) (mShadowRadius + Math.abs(mOffsetX));
         int yPadding = (int) (mShadowRadius + Math.abs(mOffsetY));
         setPadding(xPadding, yPadding, xPadding, yPadding);
-    }
-
-    @Override
-    protected int getSuggestedMinimumWidth() {
-        return 0;
-    }
-
-    @Override
-    protected int getSuggestedMinimumHeight() {
-        return 0;
     }
 
     @Override

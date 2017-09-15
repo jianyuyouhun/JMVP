@@ -41,15 +41,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:mSlCornerRadius="48dp"
+        app:mSlCornerRadius="1dp"
         app:mSlOffsetX="1px"
         app:mSlOffsetY="1px"
         app:mSlShadowColor="@color/shadow"
         app:mSlShadowRadius="1dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_shadow_oval"/>
+       <TextView
+           android:padding="16dp"
+           android:background="@color/white"
+           android:id="@+id/hangup_btn"
+           android:text="横幅测试"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"/>
     </com.jianyuyouhun.jmvplib.view.ShadowLayout>
 </LinearLayout>

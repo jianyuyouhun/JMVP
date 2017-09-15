@@ -58,10 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ViewPager测试"/>
-        <Button
-            android:id="@+id/hangup_test"
-            android:text="横幅测试"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout>

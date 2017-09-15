@@ -2,10 +2,14 @@ package com.jianyuyouhun.jmvp.ui.activitys;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
 import com.jianyuyouhun.inject.annotation.FindViewById;
+import com.jianyuyouhun.inject.annotation.OnClick;
 import com.jianyuyouhun.jmvp.R;
+import com.jianyuyouhun.jmvp.util.WindowHelper;
+import com.jianyuyouhun.jmvp.view.hangup.HangupTipsView;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.suke.widget.SwitchButton;
 
@@ -22,6 +26,8 @@ public class AnimatorViewActivity extends BaseActivity {
     @FindViewById(R.id.switch_state)
     private TextView mSwitchState;
 
+    private HangupTipsView mHangupTipsView;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_animator_view_collect;
@@ -30,6 +36,7 @@ public class AnimatorViewActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerHangup();
         mSwitchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
@@ -39,7 +46,22 @@ public class AnimatorViewActivity extends BaseActivity {
         refreshState(mSwitchButton.isChecked());
     }
 
+    private void registerHangup() {
+        if (mHangupTipsView == null) {
+            mHangupTipsView = new HangupTipsView(this);
+        }
+    }
+
     private void refreshState(boolean isChecked) {
         mSwitchState.setText(isChecked ? "选中了" : "未选中");
+    }
+
+    @OnClick(R.id.hangup_btn)
+    private void onHangupClick(View view) {
+        if (mHangupTipsView.isShown()) {
+            mHangupTipsView.dismiss(null);
+        } else {
+            mHangupTipsView.show(null);
+        }
     }
 }

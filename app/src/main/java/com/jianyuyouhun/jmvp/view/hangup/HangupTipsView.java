@@ -33,7 +33,7 @@ public class HangupTipsView extends LinearLayout {
 
     private ObjectAnimator objectAnimator = null;
 
-    private int timeSurplus = 5;
+    private int timeSurplus = 10;
 
     @FindViewById(R.id.tips_all_layout)
     private LinearLayout mAllLayout;
@@ -75,6 +75,15 @@ public class HangupTipsView extends LinearLayout {
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         //初始化后不首先获得窗口焦点。不妨碍设备上其他部件的点击、触摸事件。
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        try {
+            WindowHelper.getWindowManager().addView(this, layoutParams);
+            WindowHelper.getWindowManager().removeView(this);
+        } catch (Exception e) {
+            //当弹出横幅时遇上系统级弹窗（比如动态权限处理时的弹窗）时横幅会被强制关闭，
+            //此时再调用addView会出现view has been added的BadTokenException。而此时view实际上并没有在Window里面，调用remove也会崩溃
+            //目前还未能找到原因，所以加上try catch
+            e.printStackTrace();
+        }
     }
 
     private void registerListener() {
@@ -153,7 +162,7 @@ public class HangupTipsView extends LinearLayout {
 
     private void loopCountDown() {
         handler.removeCallbacks(countDownTask);
-        timeSurplus = 5;
+        timeSurplus = 10;
         if (!isShown) {
             show(new OnAnimationExecuteListener() {
                 @Override

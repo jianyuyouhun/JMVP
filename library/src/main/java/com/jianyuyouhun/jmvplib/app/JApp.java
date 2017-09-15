@@ -116,7 +116,6 @@ public abstract class JApp extends Application {
         for (BaseJModel model : models) {
             model.onAllModelCreate();
         }
-        LightBroadcast.getInstance().registerModels(modelsMap);
     }
 
     /**

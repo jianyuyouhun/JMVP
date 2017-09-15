@@ -68,7 +68,9 @@ public class ViewPagerActivity extends BaseMVPActivity<ViewPagersPresenter, View
     @NonNull
     @Override
     protected ViewPagersModel initModel() {
-        return App.getApp().getJModel(ViewPagersModel.class);
+        ViewPagersModel model = new ViewPagersModel();
+        model.onModelCreate(App.getApp());
+        return model;
     }
 
     @Override

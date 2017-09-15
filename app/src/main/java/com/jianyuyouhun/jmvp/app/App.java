@@ -1,10 +1,11 @@
 package com.jianyuyouhun.jmvp.app;
 
+import com.jianyuyouhun.jmvp.BuildConfig;
 import com.jianyuyouhun.jmvp.ui.mvp.adaptertest.AdapterTestModel;
-import com.jianyuyouhun.jmvp.ui.mvp.viewpager.ViewPagersModel;
 import com.jianyuyouhun.jmvp.ui.mvp.db.DataBaseModel;
 import com.jianyuyouhun.jmvp.ui.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.ui.mvp.logintest.LoginTestModel;
+import com.jianyuyouhun.jmvp.ui.mvp.viewpager.ViewPagersModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
@@ -28,11 +29,14 @@ public class App extends JApp {
         models.add(new AdapterTestModel());
         models.add(new HttpTestModel());
         models.add(new LoginTestModel());
-        models.add(new ViewPagersModel());
     }
 
     public static App getApp() {
         return (App) getInstance();
     }
 
+    @Override
+    public boolean setIsDebug() {
+        return BuildConfig.DEBUG;
+    }
 }

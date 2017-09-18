@@ -107,9 +107,9 @@ public class HangupTipsView extends LinearLayout {
             }
             return;
         }
-        WindowHelper.getWindowManager().addView(this, layoutParams);
-        setVisibility(VISIBLE);
         if (objectAnimator == null) {
+            WindowHelper.getWindowManager().addView(this, layoutParams);
+            setVisibility(VISIBLE);
             objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -getMeasuredHeight(), 0);
             objectAnimator.setDuration(500);
             objectAnimator.setInterpolator(new BounceInterpolator());

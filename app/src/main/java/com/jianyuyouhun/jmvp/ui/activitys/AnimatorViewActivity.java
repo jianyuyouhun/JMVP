@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.inject.annotation.OnClick;
 import com.jianyuyouhun.jmvp.R;
-import com.jianyuyouhun.jmvp.util.WindowHelper;
 import com.jianyuyouhun.jmvp.view.hangup.HangupTipsView;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.suke.widget.SwitchButton;

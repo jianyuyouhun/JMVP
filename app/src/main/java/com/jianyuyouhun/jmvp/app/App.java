@@ -1,11 +1,11 @@
 package com.jianyuyouhun.jmvp.app;
 
 import com.jianyuyouhun.jmvp.BuildConfig;
+import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvp.ui.mvp.adaptertest.AdapterTestModel;
-import com.jianyuyouhun.jmvp.ui.mvp.db.DataBaseModel;
+import com.jianyuyouhun.jmvp.app.server.db.DataBaseModel;
 import com.jianyuyouhun.jmvp.ui.mvp.httpTest.HttpTestModel;
 import com.jianyuyouhun.jmvp.ui.mvp.logintest.LoginTestModel;
-import com.jianyuyouhun.jmvp.ui.mvp.viewpager.ViewPagersModel;
 import com.jianyuyouhun.jmvplib.app.JApp;
 import com.jianyuyouhun.jmvplib.mvp.BaseJModel;
 
@@ -22,6 +22,7 @@ public class App extends JApp {
     public void initCommonModels(List<BaseJModel> models) {
         super.initCommonModels(models);
         models.add(new DataBaseModel());
+        models.add(new NotificationModel());
     }
 
     @Override

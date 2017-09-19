@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     android:layout_marginTop="12dp"
+    android:id="@+id/shadow_layout"
     app:mSlCornerRadius="48dp"
     app:mSlOffsetX="1dp"
     app:mSlOffsetY="1dp"
@@ -34,7 +35,6 @@
             android:maxLines="1"
             android:paddingLeft="12dp"
             android:paddingRight="10dp"
-            android:text="@string/msg_on_new_msg"
             android:textColor="#333333"
             android:textSize="15sp"/>
     </LinearLayout>

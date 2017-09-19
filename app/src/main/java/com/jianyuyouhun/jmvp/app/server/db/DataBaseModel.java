@@ -1,4 +1,4 @@
-package com.jianyuyouhun.jmvp.ui.mvp.db;
+package com.jianyuyouhun.jmvp.app.server.db;
 
 import android.database.sqlite.SQLiteDatabase;
 

@@ -8,8 +8,11 @@ import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.inject.annotation.OnClick;
 import com.jianyuyouhun.inject.annotation.OnLongClick;
 import com.jianyuyouhun.jmvp.R;
+import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvp.view.AutoScrollDialog;
+import com.jianyuyouhun.jmvp.view.hangup.HangupTipsView;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout;
 
 /**
@@ -22,6 +25,11 @@ public class MainActivity extends BaseActivity {
     @FindViewById(R.id.touch_enable_layout)
     private TouchEnableChildLayout mAllLayout;
 
+    @Model
+    private NotificationModel mNotificationModel;
+
+    private HangupTipsView mHangupTipsView;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_main;
@@ -30,6 +38,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerNotice();
+    }
+
+    /**
+     * 注册通知
+     */
+    private void registerNotice() {
+        if (mHangupTipsView == null) {
+            mHangupTipsView = new HangupTipsView(this);
+        }
+        mNotificationModel.registerNotificationAction(mHangupTipsView);
     }
 
     @OnClick({R.id.adapter_test})
@@ -86,4 +105,9 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mNotificationModel.unregisterNotificationAction(mHangupTipsView);
+    }
 }

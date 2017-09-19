@@ -19,21 +19,27 @@ import android.widget.TextView;
 import com.jianyuyouhun.inject.ViewInjector;
 import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
+import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvp.util.WindowHelper;
 import com.jianyuyouhun.jmvp.view.SimpleAnimationListener;
+import com.jianyuyouhun.jmvplib.view.ShadowLayout;
 
 /**
  * 横幅视图控件
  * Created by wangyu on 2017/9/13.
  */
 
-public class HangupTipsView extends LinearLayout {
+public class HangupTipsView extends LinearLayout implements NotificationModel.NotificationAction<String> {
 
     private boolean isShown = false;
 
     private ObjectAnimator objectAnimator = null;
 
     private int timeSurplus = 10;
+    private int TIME_COUNT = 5;
+
+    @FindViewById(R.id.shadow_layout)
+    private ShadowLayout mShadowLayout;
 
     @FindViewById(R.id.tips_all_layout)
     private LinearLayout mAllLayout;
@@ -162,7 +168,7 @@ public class HangupTipsView extends LinearLayout {
 
     private void loopCountDown() {
         handler.removeCallbacks(countDownTask);
-        timeSurplus = 10;
+        timeSurplus = TIME_COUNT;
         if (!isShown) {
             show(new OnAnimationExecuteListener() {
                 @Override
@@ -186,4 +192,19 @@ public class HangupTipsView extends LinearLayout {
             }
         }
     };
+
+
+    @Override
+    public void onNewMsg(String msgInfo, int timeCount) {
+        TIME_COUNT = timeCount;
+        timeSurplus = TIME_COUNT;
+        mContentText.setText(msgInfo);
+        mShadowLayout.invalidateShadow();
+        show(null);
+    }
+
+    @Override
+    public Class returnNoticeType() {
+        return String.class;
+    }
 }

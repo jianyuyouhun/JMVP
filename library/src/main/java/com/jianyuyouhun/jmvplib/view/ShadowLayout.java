@@ -97,6 +97,16 @@ public class ShadowLayout extends FrameLayout {
         mInvalidateShadowOnSizeChanged = invalidateShadowOnSizeChanged;
     }
 
+    @Override
+    public void invalidate() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+            setBackgroundDrawable(null);
+        } else {
+            setBackground(null);
+        }
+        super.invalidate();
+    }
+
     public void invalidateShadow() {
         mForceInvalidateShadow = true;
         requestLayout();

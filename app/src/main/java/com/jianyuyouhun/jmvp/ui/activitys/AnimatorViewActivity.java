@@ -13,7 +13,6 @@ import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.app.server.db.DataBaseModel;
 import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
-import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
 import com.suke.widget.SwitchButton;
 
@@ -64,12 +63,9 @@ public class AnimatorViewActivity extends BaseActivity {
         mSwitchState.setText(isChecked ? "选中了" : "未选中");
     }
 
-    boolean isString = false;
-
     @OnClick(R.id.hangup_btn)
     private void onHangupClick(View view) {
-        mNotificationModel.notifyNewMsg(isString ? "通知" : 1);
-        isString = !isString;
+        mNotificationModel.notifyNewMsg("通知");
     }
 
     @OnClick(R.id.search_btn)

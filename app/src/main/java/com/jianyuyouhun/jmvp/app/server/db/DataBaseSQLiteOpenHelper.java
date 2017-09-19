@@ -18,12 +18,20 @@ public class DataBaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        createUserTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    private void createUserTable(SQLiteDatabase db) {
+        db.execSQL("create table user(" +
+                " uid text," +
+                " user_name text," +
+                " user_age int[3]," +
+                " PRIMARY KEY(uid))");
     }
 
 }

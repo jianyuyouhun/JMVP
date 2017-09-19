@@ -30,7 +30,7 @@ public class CacheModel extends BaseJModel<JApp> {
     private SharedPreferences.Editor spEditor;
 
     private String uId;
-    private String guestId = "guest";
+    private String guestId = "1001";
 
     @Override
     public void onModelCreate(JApp app) {

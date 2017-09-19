@@ -38,7 +38,7 @@ public class TimeCountDownModel extends BaseJModel<JApp> {
      *
      * @param tag 唯一标识  可以用页面类名
      */
-    public void removePayTimeByTag(String tag) {
+    public void removeTimeByTag(String tag) {
         if (mTimerDataMap.containsKey(tag)) {
             mTimerDataMap.get(tag).release();
             mTimerDataMap.remove(tag);
@@ -189,9 +189,6 @@ public class TimeCountDownModel extends BaseJModel<JApp> {
         private void notifyTimeChange(int changCount) {
             HashMap<String, OnTimeChangeListener> tempMap = new HashMap<>(onTimeChangeListenerHashMap);
             Iterator iter = tempMap.entrySet().iterator();
-            if (iter == null) {
-                return;
-            }
             while (iter.hasNext()) {
                 Map.Entry entry = (Map.Entry) iter.next();
 

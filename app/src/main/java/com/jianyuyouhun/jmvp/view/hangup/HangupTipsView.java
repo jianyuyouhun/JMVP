@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.animation.AnticipateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jianyuyouhun.inject.ViewInjector;
 import com.jianyuyouhun.inject.annotation.FindViewById;
@@ -22,6 +24,7 @@ import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvp.util.WindowHelper;
 import com.jianyuyouhun.jmvp.view.SimpleAnimationListener;
+import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.view.ShadowLayout;
 
 /**
@@ -69,8 +72,14 @@ public class HangupTipsView extends LinearLayout implements NotificationModel.No
     }
 
     private void initLayoutParams() {
+        int type;
+        if (CommonUtils.getDeviceSdk() <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE;
+        } else {
+            type = WindowManager.LayoutParams.TYPE_TOAST;
+        }
         layoutParams = new WindowManager
-                .LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
+                .LayoutParams(type);
         //默认坐标居中，所以需要手动设置坐标
         layoutParams.x = 0;
         layoutParams.y = 0;

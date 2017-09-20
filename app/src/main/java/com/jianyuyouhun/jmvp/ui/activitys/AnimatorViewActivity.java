@@ -70,6 +70,9 @@ public class AnimatorViewActivity extends BaseActivity {
 
     @OnClick(R.id.search_btn)
     private void onSearch(View view) {
+        if (true) {
+            return;
+        }
         mDataBaseModel.submitDBTask(new DataBaseModel.DBTask<String>() {
             @Override
             public String runOnDBThread(SQLiteDatabase sqLiteDatabase) {

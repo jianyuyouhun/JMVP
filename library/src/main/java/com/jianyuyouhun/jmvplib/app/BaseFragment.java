@@ -112,6 +112,7 @@ public abstract class BaseFragment extends Fragment {
 
     public void dismissProgressDialog() {
         if (isDestroy) return;
+        if (mProgressDialog == null) return;
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }

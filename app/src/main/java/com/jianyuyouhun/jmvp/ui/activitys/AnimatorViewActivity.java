@@ -86,6 +86,7 @@ public class AnimatorViewActivity extends BaseActivity {
                     }
                     jsonArray.put(jsonObject);
                 }
+                cursor.close();
                 return jsonArray.toString();
             }
 

@@ -1,5 +1,7 @@
 package com.jianyuyouhun.jmvp.app;
 
+import android.content.Intent;
+
 import com.jianyuyouhun.jmvp.BuildConfig;
 import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvp.ui.mvp.adaptertest.AdapterTestModel;
@@ -17,6 +19,12 @@ import java.util.List;
  */
 
 public class App extends JApp {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        startService(new Intent(this, MainService.class));
+    }
 
     @Override
     public void initCommonModels(List<BaseJModel> models) {

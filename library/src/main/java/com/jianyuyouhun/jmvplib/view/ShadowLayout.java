@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -79,18 +80,20 @@ public class ShadowLayout extends FrameLayout {
         super.onLayout(changed, left, top, right, bottom);
         if (mForceInvalidateShadow) {
             mForceInvalidateShadow = false;
-            setBackgroundCompat(right - left, bottom - top);
+            int w = right - left;
+            int h = bottom - top;
+            if (w > 0 && h > 0) {
+                setBackgroundCompat(right - left, bottom - top);
+            } else {
+                setBackground(null);
+            }
         }
     }
 
     private void setBackgroundCompat(int w, int h) {
         Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mOffsetX, mOffsetY, mShadowColor, Color.TRANSPARENT);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackgroundDrawable(drawable);
-        } else {
-            setBackground(drawable);
-        }
+        setBackground(drawable);
     }
 
     public void setInvalidateShadowOnSizeChanged(boolean invalidateShadowOnSizeChanged) {
@@ -99,12 +102,17 @@ public class ShadowLayout extends FrameLayout {
 
     @Override
     public void invalidate() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackgroundDrawable(null);
-        } else {
-            setBackground(null);
-        }
+        setBackground(null);
         super.invalidate();
+    }
+
+    @Override
+    public void setBackground(Drawable background) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+            setBackgroundDrawable(background);
+        } else {
+            super.setBackground(background);
+        }
     }
 
     public void invalidateShadow() {

@@ -13,8 +13,7 @@ import java.util.List;
  * 使用方式
  * 1、初始化调用{@link #init()}
  * 2、获取实例调用{@link #getInstance()}
- * 3、在app运行时注册的model中启用监听，调openHandleMsg()，关闭调用closeHandleMsg();
- * 4、在其他任意位置启用监听，调用本实例的{@link #addOnGlobalMsgReceiveListener(OnGlobalMsgReceiveListener)}
+ * 3、在任意位置启用监听，调用本实例的{@link #addOnGlobalMsgReceiveListener(OnGlobalMsgReceiveListener)}
  *    当然，需要在离开的时候调用{@link #removeOnGlobalMsgReceiveListener(OnGlobalMsgReceiveListener)}
  *
  * Created by wangyu on 2017/5/27.

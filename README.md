@@ -22,7 +22,7 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.3.1'
+	        compile 'com.github.jianyuyouhun:jmvp:0.3.2'
 	}
 
 #### 注意事项
@@ -36,6 +36,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 ### 版本变化 ###
+
+#### v 0.3.2 ####
+
+　　增加阴影布局，LightBroadCast取消与model的依赖
 
 #### v 0.3.1 ####
 

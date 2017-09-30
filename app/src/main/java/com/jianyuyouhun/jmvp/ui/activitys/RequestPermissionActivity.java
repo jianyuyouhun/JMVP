@@ -35,12 +35,12 @@ public class RequestPermissionActivity extends BaseActivity {
 
     private OnRequestPermissionResultListener requestListener = new OnRequestPermissionResultListener() {
         @Override
-        public void onRequestSuccess(String permission, String permissionName) {
+        public void onRequestSuccess(String permission, String permissionName, boolean isNecessary) {
             showToast("成功获取" + permissionName + "权限");
         }
 
         @Override
-        public void onRequestFailed(String permission, String permissionName) {
+        public void onRequestFailed(String permission, String permissionName, boolean isNecessary) {
             showToast("获取" + permissionName + "权限失败");
         }
     };

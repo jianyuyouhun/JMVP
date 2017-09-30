@@ -6,6 +6,6 @@ package com.jianyuyouhun.jmvplib.mvp.model.permission;
  */
 
 public interface OnRequestPermissionResultListener {
-    void onRequestSuccess(String permission, String permissionName);
-    void onRequestFailed(String permission, String permissionName);
+    void onRequestSuccess(String permission, String permissionName, boolean isNecessary);
+    void onRequestFailed(String permission, String permissionName, boolean isNecessary);
 }

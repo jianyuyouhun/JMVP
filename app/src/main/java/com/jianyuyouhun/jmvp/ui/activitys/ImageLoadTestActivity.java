@@ -46,12 +46,12 @@ public class ImageLoadTestActivity extends BaseActivity {
 
     private OnRequestPermissionResultListener onRequestPermissionResultListener = new OnRequestPermissionResultListener() {
         @Override
-        public void onRequestSuccess(String permission, String permissionName) {
+        public void onRequestSuccess(String permission, String permissionName, boolean isNecessary) {
             go();
         }
 
         @Override
-        public void onRequestFailed(String permission, String permissionName) {
+        public void onRequestFailed(String permission, String permissionName, boolean isNecessary) {
             showToast("你没有获取" + permissionName + "权限");
         }
     };

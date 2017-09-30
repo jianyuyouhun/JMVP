@@ -39,6 +39,7 @@ public class PermissionRequester {
     private String permission;
     private int requestCode;
     private String permissionName;
+    private boolean isNecessary = false;//是否必须权限
 
     private OnRequestPermissionResultListener onRequestPermissionResultListener;
 
@@ -70,7 +71,11 @@ public class PermissionRequester {
     }
 
     public void requestPermission(final BaseActivity activity, final String permissionName, final String permission) {
-        requestPermission(activity, permissionName, permission, REQUEST_PERMISSION_CODE_DEFAULT);
+        requestPermission(activity, permissionName, permission, false);
+    }
+
+    public void requestPermission(final BaseActivity activity, final String permissionName, final String permission, boolean isNecessary) {
+        requestPermission(activity, permissionName, permission, isNecessary, REQUEST_PERMISSION_CODE_DEFAULT);
     }
 
     /**
@@ -78,16 +83,19 @@ public class PermissionRequester {
      * @param activity          activity
      * @param permissionName    权限名称
      * @param permission        权限
+     * @param isNecessary       是否是必须权限
      * @param code              请求码
      */
-    public void requestPermission(final BaseActivity activity, final String permissionName, final String permission,
+    public void requestPermission(final BaseActivity activity, final String permissionName,
+                                  final String permission, boolean isNecessary,
                                   int code) {
         this.permission = permission;
         this.permissionName = permissionName;
         this.requestCode = code;
+        this.isNecessary = isNecessary;
         if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
             if (onRequestPermissionResultListener == null) return;
-            onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
+            onRequestPermissionResultListener.onRequestSuccess(permission, permissionName, isNecessary);
         } else {
             //没有权限的时候直接尝试获取权限
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
@@ -107,11 +115,11 @@ public class PermissionRequester {
         if (requestCode == this.requestCode) {
             if (grantResults.length == 0) {
                 if (onRequestPermissionResultListener == null) return;
-                onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
+                onRequestPermissionResultListener.onRequestFailed(permission, permissionName, isNecessary);
             } else {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (onRequestPermissionResultListener == null) return;
-                    onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
+                    onRequestPermissionResultListener.onRequestSuccess(permission, permissionName, isNecessary);
                 } else {
                     if (permissionModel.getPermissionRecord(permission)) {//如果被禁止不在询问
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -128,17 +136,17 @@ public class PermissionRequester {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 if (onRequestPermissionResultListener == null) return;
-                                onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
+                                onRequestPermissionResultListener.onRequestFailed(permission, permissionName, isNecessary);
                             }
                         });
                         builder.show();
                     } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
                         permissionModel.putPermissionRecord(permission, true);
                         if (onRequestPermissionResultListener == null) return;
-                        onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
+                        onRequestPermissionResultListener.onRequestFailed(permission, permissionName, isNecessary);
                     } else {
                         if (onRequestPermissionResultListener == null) return;
-                        onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
+                        onRequestPermissionResultListener.onRequestFailed(permission, permissionName, isNecessary);
                     }
                 }
             }
@@ -156,10 +164,10 @@ public class PermissionRequester {
         if (requestCode == this.requestCode) {
             if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
                 if (onRequestPermissionResultListener == null) return;
-                onRequestPermissionResultListener.onRequestSuccess(permission, permissionName);
+                onRequestPermissionResultListener.onRequestSuccess(permission, permissionName, isNecessary);
             } else {
                 if (onRequestPermissionResultListener == null) return;
-                onRequestPermissionResultListener.onRequestFailed(permission, permissionName);
+                onRequestPermissionResultListener.onRequestFailed(permission, permissionName, isNecessary);
             }
             synchronizePermissionsState(activity);
         }

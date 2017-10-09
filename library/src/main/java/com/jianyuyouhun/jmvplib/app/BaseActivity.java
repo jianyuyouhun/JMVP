@@ -229,6 +229,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 启动Activity
+     * @param cls           需要启动的页面
+     * @param requestCode   请求码
+     */
+    public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
+        startActivityForResult(new Intent(this, cls), requestCode);
+    }
+
+    /**
      * 获取BaseActivity上下文
      *
      * @return BaseActivity上下文

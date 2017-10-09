@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jianyuyouhun.inject.ViewInjector;
-import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
+import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
 
 /**
  * Fragment基类
@@ -133,8 +133,18 @@ public abstract class BaseFragment extends Fragment {
         return intent;
     }
 
+    /**
+     * 启动页面
+     */
     public void startActivity(Class<? extends Activity> cls) {
         startActivity(new Intent(getBaseActivity(), cls));
+    }
+
+    /**
+     * 启动页面
+     */
+    public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
+        startActivityForResult(new Intent(getBaseActivity(), cls), requestCode);
     }
 
     @Override

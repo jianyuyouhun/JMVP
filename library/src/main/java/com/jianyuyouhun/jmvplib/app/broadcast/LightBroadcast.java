@@ -35,7 +35,7 @@ public class LightBroadcast {
         }
     };
 
-    public static LightBroadcast lightBroadcast;
+    private static LightBroadcast lightBroadcast;
 
     private LightBroadcast() {}
 

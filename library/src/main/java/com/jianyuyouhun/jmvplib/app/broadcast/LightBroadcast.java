@@ -25,7 +25,7 @@ public class LightBroadcast {
 
     private static boolean hasInit = false;
 
-    public Handler uiHandler = new Handler(Looper.getMainLooper()) {
+    private Handler uiHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

@@ -17,6 +17,9 @@ public interface OnResultListener<Info> {
     /** 无数据 */
     int RESULT_NO_DATA = -2;
 
+    /** 数据不是json */
+    int RESULT_TYPE_NO_JSON = -3;
+
     /**
      * 请求结果回调
      *

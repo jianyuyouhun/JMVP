@@ -2,8 +2,14 @@ package com.jianyuyouhun.jmvplib.utils.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
+import com.jianyuyouhun.jmvplib.utils.Logger;
+import com.jianyuyouhun.jmvplib.utils.http.autoresult.AutoResultListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +69,26 @@ public class JHttpFactory {
     public void execute(JHttpClient client, OnResultListener<String> onResultListener) {
         JHttpTask task = new JHttpTask(mainHandler, client, onResultListener);
         executor.execute(task);
+    }
+
+    public void execute(JHttpClient client, @NonNull final AutoResultListener listener) {
+        execute(client, new OnResultListener<String>() {
+            @Override
+            public void onResult(int result, String data) {
+                Logger.d("http", "response GET code = "+ result + ", content = %s" + data);
+                if (result == RESULT_SUCCESS) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(data);
+                        listener.onResult(result, jsonObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onResult(OnResultListener.RESULT_TYPE_NO_JSON, null);
+                    }
+                } else {
+                    listener.onResult(OnResultListener.RESULT_FAILED, null);
+                }
+            }
+        });
     }
 
     public void execute(JHttpClient client, OnProgressChangeListener onProgressChangeListener) {

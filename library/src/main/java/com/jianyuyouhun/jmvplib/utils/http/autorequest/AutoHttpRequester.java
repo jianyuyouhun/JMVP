@@ -46,17 +46,17 @@ public class AutoHttpRequester {
                     JSONObject jsonObject = new JSONObject(content);
                     int state = jsonObject.optInt("error", RESULT_SUCCESS);
                     if (autoResultListener != null) {
-                        autoResultListener.onHttpResult(state, jsonObject);
+                        autoResultListener.onResult(state, jsonObject);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     if (autoResultListener != null) {
-                        autoResultListener.onHttpResult(RESULT_EXCEPTION, null);
+                        autoResultListener.onResult(RESULT_EXCEPTION, null);
                     }
                 }
             } else {
                 if (autoResultListener != null) {
-                    autoResultListener.onHttpResult(RESULT_EXCEPTION, null);
+                    autoResultListener.onResult(RESULT_EXCEPTION, null);
                 }
             }
         }
@@ -65,7 +65,7 @@ public class AutoHttpRequester {
         public void onError(Exception exception) {
             exception.printStackTrace();
             if (autoResultListener != null) {
-                autoResultListener.onHttpResult(RESULT_EXCEPTION, null);
+                autoResultListener.onResult(RESULT_EXCEPTION, null);
             }
         }
     };

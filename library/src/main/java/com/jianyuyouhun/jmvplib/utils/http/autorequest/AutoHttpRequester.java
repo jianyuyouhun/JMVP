@@ -3,8 +3,8 @@ package com.jianyuyouhun.jmvplib.utils.http.autorequest;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
+import com.jianyuyouhun.jmvplib.utils.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -166,9 +166,9 @@ public class AutoHttpRequester {
 
     private void log(String msg, Object... args) {
         if (args.length > 0) {
-            Log.d("HTTP", String.format(msg, args));
+            Logger.d("HTTP", String.format(msg, args));
         } else {
-            Log.d("HTTP", msg);
+            Logger.d("HTTP", msg);
         }
     }
 

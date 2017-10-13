@@ -3,9 +3,9 @@ package com.jianyuyouhun.jmvplib.utils.http.autorequest;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
+import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.json.JsonUtil;
 
 import org.json.JSONArray;
@@ -86,14 +86,14 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
                 JSONObject parentJSONObject = getParentJSONObject(jsonObject, paths);
 
                 if (parentJSONObject == null) {
-                    Log.i(TAG, "第" + i + "个参数[" + name + "]在JSON中不存在～");
+                    Logger.i(TAG, "第" + i + "个参数[" + name + "]在JSON中不存在～");
                     continue;
                 }
 
                 // 最后一个json的key
                 String paramName = paths[paths.length - 1];
                 if (!parentJSONObject.has(paramName)) {
-                    Log.i(TAG, "第" + i + "个参数[" + name + "]在JSON中不存在！");
+                    Logger.i(TAG, "第" + i + "个参数[" + name + "]在JSON中不存在！");
                     continue;
                 }
                 if (parameterClass.isArray()) {
@@ -103,7 +103,7 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
 
                     JSONArray jsonArray = parentJSONObject.optJSONArray(paramName);
                     if (jsonArray == null) {
-                        Log.i(TAG, "第" + i + "个参数[" + name + "]不是一个Array～");
+                        Logger.i(TAG, "第" + i + "个参数[" + name + "]不是一个Array～");
                         continue;
                     }
 
@@ -127,7 +127,7 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
                         JSONArray jsonArray = parentJSONObject.optJSONArray(paramName);
 
                         if (jsonArray == null) {
-                            Log.i(TAG, "第" + i + "个参数[" + name + "]JSON中不是一个List～");
+                            Logger.i(TAG, "第" + i + "个参数[" + name + "]JSON中不是一个List～");
                             continue;
                         }
 

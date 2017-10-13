@@ -1,9 +1,7 @@
 package com.jianyuyouhun.jmvplib.utils.http.autorequest;
 
-import com.guijk.pharmacy.lib.http.IOUtils;
-import com.guijk.pharmacy.lib.http.IResponseHandler;
-import com.guijk.pharmacy.lib.http.OnProgressCallback;
-import com.guijk.pharmacy.lib.http.OnProgressListener;
+import com.jianyuyouhun.jmvplib.utils.IOUtils;
+import com.jianyuyouhun.jmvplib.utils.OnProgressCallback;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

@@ -8,10 +8,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * JSON路径 JSON_PATH
- * Created by zengdexing on 2017/8/16.
+ * Created by wangyu on 2017/8/16.
  */
 @Retention(RUNTIME)
 @Target(PARAMETER)
-public @interface JP {
+public @interface JsonPath {
     String value();
 }

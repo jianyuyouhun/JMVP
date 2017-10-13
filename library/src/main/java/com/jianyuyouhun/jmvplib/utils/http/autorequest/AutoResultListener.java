@@ -34,7 +34,7 @@ import java.util.Vector;
 
 /**
  * 自动结果解析
- * Created by zengdexing on 2017/8/16.
+ * Created by wangyu on 2017/8/16.
  */
 public abstract class AutoResultListener implements OnResultListener<JSONObject> {
 
@@ -79,7 +79,7 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
                 Class parameterClass = parameterTypes[i];
                 String name = getParameterName(parameterAnnotations[i]);
                 if (name == null) {
-                    throw new RuntimeException("第" + i + "个参数必须使用[JP]注解");
+                    throw new RuntimeException("第" + i + "个参数必须使用[JsonPath]注解");
                 }
                 // 当前 name 路径的上一个json
                 String[] paths = name.split("\\.");
@@ -236,8 +236,8 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
     private String getParameterName(Annotation[] annotations) {
         String result = null;
         for (Annotation annotation : annotations) {
-            if (annotation.annotationType() == JP.class) {
-                JP jsonPath = (JP) annotation;
+            if (annotation.annotationType() == JsonPath.class) {
+                JsonPath jsonPath = (JsonPath) annotation;
                 result = jsonPath.value();
                 break;
             }

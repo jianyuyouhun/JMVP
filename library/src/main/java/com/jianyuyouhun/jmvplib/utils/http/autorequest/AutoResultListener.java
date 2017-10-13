@@ -1,5 +1,7 @@
-package com.jianyuyouhun.jmvplib.utils.http.autoresult;
+package com.jianyuyouhun.jmvplib.utils.http.autorequest;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -12,6 +14,7 @@ import org.json.JSONObject;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -31,9 +34,12 @@ import java.util.Vector;
 
 /**
  * 自动结果解析
+ * Created by zengdexing on 2017/8/16.
  */
 public abstract class AutoResultListener implements OnResultListener<JSONObject> {
+
     private static final String TAG = "AutoResultListener";
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onResult(int code, JSONObject jsonObject) {
@@ -55,7 +61,7 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
             if (targetMethods.size() != 1) {
                 throw new RuntimeException("错误，使用AutoResultListener自动解析服务器返回结果，类方法有且只能有一个！");
             }
-            Method method = targetMethods.get(0);
+            final Method method = targetMethods.get(0);
             method.setAccessible(true);
 
             // 泛型参数类型
@@ -66,7 +72,7 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
 
             // 方法调用 参数
-            Object[] data = new Object[genericParameterTypes.length];
+            final Object[] data = new Object[genericParameterTypes.length];
 
             for (int i = 0; i < parameterTypes.length; i++) {
                 Object argData;
@@ -180,7 +186,18 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
                 }
                 data[i] = argData;
             }
-            method.invoke(this, data);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        method.invoke(AutoResultListener.this, data);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,9 +208,7 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
      *
      * @param rootJsonObject 服务器返回的json
      * @param paths          路径
-     *
      * @return 获取到的json数据 or null
-     *
      * @throws JSONException json类型不匹配
      */
     @Nullable
@@ -215,15 +230,14 @@ public abstract class AutoResultListener implements OnResultListener<JSONObject>
      * 获取参数注解的名称
      *
      * @param annotations 参数的注解
-     *
      * @return name or null
      */
     @Nullable
     private String getParameterName(Annotation[] annotations) {
         String result = null;
         for (Annotation annotation : annotations) {
-            if (annotation.annotationType() == JsonPath.class) {
-                JsonPath jsonPath = (JsonPath) annotation;
+            if (annotation.annotationType() == JP.class) {
+                JP jsonPath = (JP) annotation;
                 result = jsonPath.value();
                 break;
             }

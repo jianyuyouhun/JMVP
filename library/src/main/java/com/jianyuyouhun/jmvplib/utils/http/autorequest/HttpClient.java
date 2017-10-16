@@ -109,19 +109,6 @@ public class HttpClient {
     }
 
     /**
-     * 延时发起请求
-     *
-     * @param urlString        请求地址
-     * @param params           参数
-     * @param delay            延时时间
-     * @param iResponseHandler 请求回调
-     */
-    public static void postDelay(final String urlString, final Map<String, String> params,
-                                 int delay, final IResponseHandler iResponseHandler) {
-        post(urlString, params, iResponseHandler);
-    }
-
-    /**
      * application/x-www-form-urlencoded 方式 发起POST请求
      *
      * @param urlString        请求地址
@@ -195,7 +182,7 @@ public class HttpClient {
 
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
-                    IOUtils.copy(inputStream, outputStream, new HttpClient.OnProgressListenerOnUI(
+                    IOUtils.copy(inputStream, outputStream, new OnProgressListenerOnThread(
                             onProgressListener, data.length));
                     outputStream.close();
                     inputStream.close();
@@ -232,7 +219,7 @@ public class HttpClient {
 
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     fileInputStream = new FileInputStream(file);
-                    IOUtils.copy(fileInputStream, outputStream, new HttpClient.OnProgressListenerOnUI(
+                    IOUtils.copy(fileInputStream, outputStream, new OnProgressListenerOnThread(
                             onProgressListener, (int) file.length()));
                     outputStream.close();
 
@@ -263,12 +250,12 @@ public class HttpClient {
         return httpURLConnection;
     }
 
-    private static class OnProgressListenerOnUI implements OnProgressCallback {
+    private static class OnProgressListenerOnThread implements OnProgressCallback {
         OnProgressListener onProgressListener;
         int length;
         long lastUpdateTime = System.currentTimeMillis();
 
-        OnProgressListenerOnUI(OnProgressListener onProgressListener, int length) {
+        OnProgressListenerOnThread(OnProgressListener onProgressListener, int length) {
             super();
             this.onProgressListener = onProgressListener;
             this.length = length;

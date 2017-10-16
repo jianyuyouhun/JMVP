@@ -9,7 +9,7 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  * 登录presenter
  * Created by wangyu on 2017/5/15.
  */
-
+@Deprecated
 public class LoginTestPresenter extends BaseJPresenter<LoginTestModel, LoginTestView> {
 
     public void doLogin() {

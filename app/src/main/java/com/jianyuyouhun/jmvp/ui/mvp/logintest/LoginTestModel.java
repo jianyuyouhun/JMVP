@@ -8,7 +8,7 @@ import com.jianyuyouhun.jmvplib.mvp.OnResultListener;
  * 登录model
  * Created by wangyu on 2017/5/15.
  */
-
+@Deprecated
 public class LoginTestModel extends BaseJModel<App> {
 
     @Override

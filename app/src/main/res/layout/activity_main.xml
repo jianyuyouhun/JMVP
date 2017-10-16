@@ -39,7 +39,8 @@
             android:id="@+id/login_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="登录测试"/>
+            android:text="登录测试"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/dialog_test"

@@ -19,7 +19,7 @@ import com.jianyuyouhun.jmvplib.app.BaseMVPActivity;
  * 登录测试activity
  * Created by wangyu on 2017/5/15.
  */
-
+@Deprecated
 public class LoginTestActivity extends BaseMVPActivity<LoginTestPresenter, LoginTestModel> implements LoginTestView {
 
     @FindViewById(R.id.username)

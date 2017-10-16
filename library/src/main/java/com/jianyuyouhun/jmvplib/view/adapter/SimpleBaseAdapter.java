@@ -15,11 +15,13 @@ import java.util.List;
 
 
 /**
- * 模仿recyclerview的adapter做的封装
+ * 模仿RecyclerView的adapter做的封装
  * Created by wangyu on 2017-4-24
  */
 public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewHolder> extends BaseAdapter {
+
     private Context context;
+
     private List<Data> dataList = new ArrayList<>();
 
     public SimpleBaseAdapter(Context context) {
@@ -46,9 +48,8 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
         notifyDataSetChanged();
     }
 
-
     /**
-     * 获取要所有的数据
+     * 获取所有的数据
      *
      * @return 适配器数据源
      */
@@ -92,6 +93,7 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
             return getItem(count - 1);
         }
     }
+
     /**
      * 获取适配器的第一项，如果适配器大小等于0，将返回null
      */
@@ -119,12 +121,13 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
         return position;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         VH viewHolder;
         if (convertView == null) {
-            @SuppressWarnings("unchecked") Class<VH> viewHolderCls =
-                    (Class<VH>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            Class<VH> viewHolderCls = (Class<VH>) ((ParameterizedType) getClass()
+                    .getGenericSuperclass()).getActualTypeArguments()[1];
             try {
                 viewHolder = viewHolderCls.newInstance();
             } catch (InstantiationException e) {
@@ -136,7 +139,6 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
             }
             convertView = LayoutInflater.from(context).inflate(getLayoutId(), parent, false);
             viewHolder.setItemView(convertView);
-            viewHolder.initView();
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (VH) convertView.getTag();
@@ -157,7 +159,7 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
 
     protected abstract void bindView(VH viewHolder, Data data, int position);
 
-    public Context getContext() {
+    protected Context getContext() {
         return context;
     }
 
@@ -170,10 +172,8 @@ public abstract class SimpleBaseAdapter<Data, VH extends SimpleBaseAdapter.ViewH
 
         final void setItemView(View itemView) {
             this.itemView = itemView;
-        }
-
-        final void initView() {
             ViewInjector.inject(this, itemView);
         }
+
     }
 }

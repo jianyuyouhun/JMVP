@@ -19,7 +19,6 @@ import com.jianyuyouhun.jmvplib.R;
  * 如果你的每次刷新耗时已经超过了这个时间，那么在尽量优化所有绘制过程之后依然超过16.66ms/每次的情况下，可以开启双缓冲。
  * 双缓冲的原理是将所有绘制操作转为内存cpu处理然后生成一个bitmap，最后由gpu绘制这一个bitmap，
  * 而绘制bitmap本身是较为耗时的（相比于绘制文本、线条等），所以这点也是需要考虑的。
- * 知道双缓冲是门技术，知道何时开启双缓冲是门艺术。
  * Created by wangyu on 2017/6/8.
  */
 
@@ -78,7 +77,6 @@ public abstract class BufferView extends View {
 
     /**
      * 请使用{@link #onCustomDraw(Canvas)}
-     * @param canvas
      */
     @Deprecated
     @Override

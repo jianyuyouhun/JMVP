@@ -36,6 +36,7 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
      * @param position  指定位置，一般用于获取当前位置的fragment，其他的fragment可能已经被系统回收
      * @return 指定位置的fragment对象
      */
+    @SuppressWarnings("unchecked")
     @Nullable
     public Fragment getFragmentByPosition(int position) {
         String name = "";

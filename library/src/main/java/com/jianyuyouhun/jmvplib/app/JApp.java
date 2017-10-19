@@ -11,12 +11,12 @@ import com.jianyuyouhun.jmvplib.mvp.model.SdcardModel;
 import com.jianyuyouhun.jmvplib.mvp.model.TimeCountDownModel;
 import com.jianyuyouhun.jmvplib.mvp.model.WindowHelperModel;
 import com.jianyuyouhun.jmvplib.mvp.model.network.NetworkModel;
-import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionModel;
 import com.jianyuyouhun.jmvplib.utils.CommonUtils;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.http.JHttpFactory;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
+import com.jianyuyouhun.permission.library.EZPermission;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,6 +88,7 @@ public abstract class JApp extends Application {
         LightBroadcast.init();
         JHttpFactory.init();
         ImageLoader.getInstance().init(this);
+        EZPermission.Companion.init(this);
     }
 
     public void initDebug() {
@@ -125,7 +126,6 @@ public abstract class JApp extends Application {
     public void initCommonModels(List<BaseJModel> models) {
         models.add(new CacheModel());               // 缓存model
         models.add(new TimeCountDownModel());       // 倒计时model
-        models.add(new PermissionModel());          // 权限忽略记录
         models.add(new SdcardModel());              // sd管理model
         models.add(new NetworkModel());             // 网络状态管理器
         models.add(new WindowHelperModel());        // 窗口变化管理器

@@ -22,9 +22,9 @@ import com.jianyuyouhun.inject.ViewInjector;
 import com.jianyuyouhun.jmvplib.app.broadcast.LightBroadcast;
 import com.jianyuyouhun.jmvplib.app.broadcast.MsgWhat;
 import com.jianyuyouhun.jmvplib.app.broadcast.OnGlobalMsgReceiveListener;
-import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
 import com.jianyuyouhun.jmvplib.utils.Logger;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
+import com.jianyuyouhun.permission.library.EZPermission;
 
 import java.util.List;
 
@@ -39,7 +39,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean mIsFinish;
     private long mLastClickTime;
     protected static final boolean IS_DEBUG_MODE = JApp.isDebug();
-    protected PermissionRequester permissionRequester;
     private Toast mLastToast;
 
     private OnGlobalMsgReceiveListener onGlobalMsgReceiveListener = new OnGlobalMsgReceiveListener() {
@@ -57,7 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mIsDestroy = false;
         mIsFinish = false;
-        permissionRequester = new PermissionRequester();
         int layoutId = getLayoutResId();
         if (layoutId != 0) {
             setContentView(getLayoutResId());
@@ -150,13 +148,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionRequester.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        EZPermission.Companion.getInstance().onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        permissionRequester.onActivityResult(this, requestCode, resultCode, data);
+        EZPermission.Companion.getInstance().onActivityResult(this, requestCode, resultCode, data);
     }
 
     public void showProgressDialog() {

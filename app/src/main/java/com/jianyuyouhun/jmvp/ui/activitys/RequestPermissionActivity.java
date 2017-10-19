@@ -12,7 +12,9 @@ import com.jianyuyouhun.inject.annotation.FindViewById;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvplib.app.BaseActivity;
 import com.jianyuyouhun.jmvplib.utils.AppHelper;
-import com.jianyuyouhun.jmvplib.mvp.model.permission.OnRequestPermissionResultListener;
+import com.jianyuyouhun.permission.library.EZPermission;
+import com.jianyuyouhun.permission.library.OnRequestPermissionResultListener;
+import com.jianyuyouhun.permission.library.PRequester;
 
 /**
  * 动态权限demo
@@ -35,13 +37,13 @@ public class RequestPermissionActivity extends BaseActivity {
 
     private OnRequestPermissionResultListener requestListener = new OnRequestPermissionResultListener() {
         @Override
-        public void onRequestSuccess(String permission, String permissionName, boolean isNecessary) {
-            showToast("成功获取" + permissionName + "权限");
+        public void onRequestSuccess(String permission) {
+            showToast("成功获取" + permission + "权限");
         }
 
         @Override
-        public void onRequestFailed(String permission, String permissionName, boolean isNecessary) {
-            showToast("获取" + permissionName + "权限失败");
+        public void onRequestFailed(String permission) {
+            showToast("获取" + permission + "权限失败");
         }
     };
 
@@ -56,23 +58,34 @@ public class RequestPermissionActivity extends BaseActivity {
     }
 
     private void setListener() {
-        permissionRequester.setOnRequestPermissionResultListener(requestListener);
         storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                permissionRequester.requestPermission(getActivity(), "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                EZPermission.Companion.getInstance()
+                        .requestPermission(
+                                getActivity(),
+                                new PRequester(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                                requestListener);
             }
         });
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                permissionRequester.requestPermission(getActivity(), "相机", Manifest.permission.CAMERA);
+                EZPermission.Companion.getInstance()
+                        .requestPermission(
+                                getActivity(),
+                                new PRequester(Manifest.permission.CAMERA),
+                                requestListener);
             }
         });
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                permissionRequester.requestPermission(getActivity(), "电话", Manifest.permission.CALL_PHONE);
+                EZPermission.Companion.getInstance()
+                        .requestPermission(
+                                getActivity(),
+                                new PRequester(Manifest.permission.CALL_PHONE),
+                                requestListener);
             }
         });
     }

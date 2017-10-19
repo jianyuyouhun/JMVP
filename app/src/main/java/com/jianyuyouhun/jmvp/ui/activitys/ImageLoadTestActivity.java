@@ -15,9 +15,11 @@ import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadListener;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoadOptions;
 import com.jianyuyouhun.jmvplib.utils.imageloader.ImageLoader;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.Model;
-import com.jianyuyouhun.jmvplib.mvp.model.permission.OnRequestPermissionResultListener;
 import com.jianyuyouhun.jmvplib.view.CircleImageView;
 import com.jianyuyouhun.library.AutoBannerView;
+import com.jianyuyouhun.permission.library.EZPermission;
+import com.jianyuyouhun.permission.library.OnRequestPermissionResultListener;
+import com.jianyuyouhun.permission.library.PRequester;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,23 +48,26 @@ public class ImageLoadTestActivity extends BaseActivity {
 
     private OnRequestPermissionResultListener onRequestPermissionResultListener = new OnRequestPermissionResultListener() {
         @Override
-        public void onRequestSuccess(String permission, String permissionName, boolean isNecessary) {
+        public void onRequestSuccess(String permission) {
             go();
         }
 
         @Override
-        public void onRequestFailed(String permission, String permissionName, boolean isNecessary) {
-            showToast("你没有获取" + permissionName + "权限");
+        public void onRequestFailed(String permission) {
+            showToast("你没有获取存储权限");
         }
     };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        permissionRequester.setOnRequestPermissionResultListener(onRequestPermissionResultListener);
         adapter = new TestBannerAdapter(getContext());
         autoBannerView.setAdapter(adapter);
-        permissionRequester.requestPermission(this, "存储", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        EZPermission.Companion.getInstance()
+                .requestPermission(
+                        this,
+                        new PRequester(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        onRequestPermissionResultListener);
     }
 
     private void go() {

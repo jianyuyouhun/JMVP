@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jianyuyouhun.inject.ViewInjector;
-import com.jianyuyouhun.jmvplib.mvp.model.permission.PermissionRequester;
 import com.jianyuyouhun.jmvplib.utils.injecter.model.ModelInjector;
+import com.jianyuyouhun.permission.library.EZPermission;
 
 /**
  * Fragment基类
@@ -27,14 +27,12 @@ public abstract class BaseFragment extends Fragment {
     private boolean isDestroy = false;
     private long mInsertDt = System.currentTimeMillis();
     protected ProgressDialog mProgressDialog;
-    protected PermissionRequester permissionRequester;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isDestroy = false;
         ModelInjector.injectModel(this);
-        permissionRequester = new PermissionRequester();
     }
 
     /**
@@ -150,12 +148,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionRequester.onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
+        EZPermission.Companion.getInstance().onRequestPermissionsResult(getBaseActivity(), requestCode, permissions, grantResults);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        permissionRequester.onActivityResult(getBaseActivity(), requestCode, resultCode, data);
+        EZPermission.Companion.getInstance().onActivityResult(getBaseActivity(), requestCode, resultCode, data);
     }
 }

@@ -59,4 +59,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
     compile 'com.github.jianyuyouhun:ViewInjector:1.0'
+    compile 'com.github.jianyuyouhun:ezpermission:1.0'
 }

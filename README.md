@@ -22,7 +22,7 @@
 #### 第二步. 在module目录下的gradle中添加依赖 ####
 
 	dependencies {
-	        compile 'com.github.jianyuyouhun:jmvp:0.3.2'
+	        compile 'com.github.jianyuyouhun:jmvp:0.3.3'
 	}
 
 #### 注意事项
@@ -36,6 +36,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 ### 版本变化 ###
+
+#### v 0.3.3 ####
+
+　　抽离动态权限申请，详情请看https://github.com/jianyuyouhun/EZPermission/blob/master/README.md
 
 #### v 0.3.2 ####
 

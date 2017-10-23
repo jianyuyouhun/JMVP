@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.permission_test})
     protected void onPermissionClick(View view) {
-        startActivity(RequestPermissionActivity.class);
+        startActivity(RequestPermissionActivity.class, findViewById(R.id.permission_test), "a");
     }
 
     @OnClick({R.id.image_load_test})

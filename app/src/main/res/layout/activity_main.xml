@@ -27,6 +27,7 @@
             android:id="@+id/permission_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:transitionName="a"
             android:text="动态权限测试"/>
 
         <Button

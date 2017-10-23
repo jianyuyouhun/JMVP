@@ -2,10 +2,12 @@ package com.jianyuyouhun.jmvplib.app;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.provider.Settings;
@@ -16,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.jianyuyouhun.inject.ViewInjector;
@@ -54,6 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        openTransitions();
         mIsDestroy = false;
         mIsFinish = false;
         int layoutId = getLayoutResId();
@@ -68,6 +72,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         ViewInjector.inject(this);
         ModelInjector.injectModel(this);
         LightBroadcast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener);
+    }
+
+    private void openTransitions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        }
     }
 
     @LayoutRes
@@ -227,12 +238,45 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 启动页面
+     * @param cls               需要启动的界面
+     * @param transitionView    转场视图
+     * @param transitionName    转场动画标记
+     */
+    public void startActivity(Class<? extends Activity> cls, @NonNull View transitionView, @NonNull String transitionName) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions option = ActivityOptions
+                    .makeSceneTransitionAnimation(this, transitionView, transitionName);
+            startActivity(new Intent(this, cls), option.toBundle());
+        } else {
+            startActivity(cls);
+        }
+    }
+
+    /**
      * 启动Activity
      * @param cls           需要启动的页面
      * @param requestCode   请求码
      */
     public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
         startActivityForResult(new Intent(this, cls), requestCode);
+    }
+
+    /**
+     * 启动Activity
+     * @param cls               需要启动的页面
+     * @param transitionView    转场视图
+     * @param transitionName    转场动画标记
+     * @param requestCode       请求码
+     */
+    public void startActivityForResult(Class<? extends Activity> cls, @NonNull View transitionView, @NonNull String transitionName, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions option = ActivityOptions
+                    .makeSceneTransitionAnimation(this, transitionView, transitionName);
+            startActivityForResult(new Intent(this, cls), requestCode, option.toBundle());
+        } else {
+            startActivityForResult(cls, requestCode);
+        }
     }
 
     /**

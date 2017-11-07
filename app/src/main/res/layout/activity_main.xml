@@ -61,5 +61,11 @@
             android:layout_height="wrap_content"
             android:text="ViewPager测试"/>
 
+        <Button
+            android:id="@+id/view_line_chart_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="折线图测试"/>
+
     </LinearLayout>
 </com.jianyuyouhun.jmvplib.view.TouchEnableChildLayout>

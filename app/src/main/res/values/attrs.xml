@@ -6,4 +6,11 @@
         <attr name="innerColor" format="color"/>
         <attr name="startAngle" format="float"/>
     </declare-styleable>
+    <declare-styleable name="LineChartView">
+        <attr name="coordinatorTextSize" format="dimension"/>
+        <attr name="coordinatorTextColor" format="color"/>
+        <attr name="coordinatorXColor" format="color"/>
+        <attr name="coordinatorLineWidth" format="dimension"/>
+        <attr name="coordinatorYColor" format="color"/>
+    </declare-styleable>
 </resources>

@@ -91,6 +91,11 @@ public class MainActivity extends BaseActivity {
         startActivity(ViewPagerActivity.class);
     }
 
+    @OnClick(R.id.view_line_chart_test)
+    protected void onLineChartClick(View view) {
+        startActivity(LineChartActivity.class);
+    }
+
     @OnLongClick({
             R.id.dialog_test,
             R.id.adapter_test,

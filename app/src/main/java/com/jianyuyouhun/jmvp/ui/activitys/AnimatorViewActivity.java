@@ -65,7 +65,7 @@ public class AnimatorViewActivity extends BaseActivity {
 
     @OnClick(R.id.hangup_btn)
     private void onHangupClick(View view) {
-        mNotificationModel.notifyNewMsg("通知");
+        mNotificationModel.notifyNewMsg("通知", 10);
     }
 
     @OnClick(R.id.search_btn)

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.jianyuyouhun.inject.ViewInjector;
 import com.jianyuyouhun.inject.annotation.FindViewById;
+import com.jianyuyouhun.inject.annotation.OnClick;
 import com.jianyuyouhun.jmvp.R;
 import com.jianyuyouhun.jmvp.app.server.notification.NotificationModel;
 import com.jianyuyouhun.jmvp.util.WindowHelper;
@@ -32,7 +33,7 @@ import com.jianyuyouhun.jmvplib.view.ShadowLayout;
  * Created by wangyu on 2017/9/13.
  */
 
-public class HangupTipsView extends LinearLayout implements NotificationModel.NotificationAction<String> {
+public class HangupTipsView extends LinearLayout implements NotificationModel.NotificationAction<String>, View.OnClickListener {
 
     private boolean isShown = false;
 
@@ -213,7 +214,7 @@ public class HangupTipsView extends LinearLayout implements NotificationModel.No
     }
 
     @Override
-    public Class returnNoticeType() {
-        return String.class;
+    public void onClick(View v) {
+
     }
 }

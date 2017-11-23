@@ -1,6 +1,7 @@
 package com.jianyuyouhun.jmvplib.mvp.model.network;
 
 /**
+ *
  * Created by wangyu on 2017/9/5.
  */
 

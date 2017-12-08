@@ -3,16 +3,18 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
     <TextView
-        android:id="@+id/fragment_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"/>
-    <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/list_item_text1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="1px"
-        android:divider="@color/black"/>
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="left"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:padding="15dp"/>
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"/>
 </LinearLayout>
